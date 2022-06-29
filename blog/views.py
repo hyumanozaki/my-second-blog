@@ -30,27 +30,6 @@ Q1 = 10
 Q2 = 11
 Q3 = 12
 
-colaborador2='hyuma.nozaki@cosmotec.com.br'
-resultb = ''
-resultb2 = ''
-resultb3 = ''
-resultb4 = ''
-resultb5 = ''
-resultb6 = 0
-object_list = User.objects.all()
-for l in object_list:
-    resultb = l.username
-    resultb2 += resultb
-    resultb2 += ' '
-    resultb3 = str(l.id)
-    resultb4 += resultb3
-    resultb4 += ' '
-resultb2=resultb2.split()
-resultb4=resultb4.split()
-m=int(len(resultb2))
-for n in range(m):
-    if (str(resultb2[n])==colaborador2):
-        resultb6=int(resultb4[n])
 
 
 def post_edit(request, pk):
@@ -240,6 +219,30 @@ def homeC(request):
 
 @login_required
 def PDI2(request, name):
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     colaborador = name#request.GET['name']
 
     result = ''
@@ -404,6 +407,28 @@ def PDI2(request, name):
 @login_required
 def Logout2(request, name):
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
     MBO22TIME=[]
     MBO22TIME+=RHDT.objects.values_list('MBOTIME22').get(user=resultb6)
     MBO22TIME=int(MBO22TIME[0])
@@ -543,6 +568,29 @@ def Logout2(request, name):
 @login_required
 def Logout(request):
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     MBO22TIME=[]
     MBO22TIME+=RHDT.objects.values_list('MBOTIME22').get(user=resultb6)
     MBO22TIME=int(MBO22TIME[0])
@@ -646,6 +694,29 @@ def E1D2(request, name):
             result6=int(result4[j])
 
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     Elist=[]  
     Elist+=RHDT.objects.values_list('ADC22E1C').get(user=resultb6)
     Elist+=RHDT.objects.values_list('ADC22E1D').get(user=resultb6)
@@ -714,6 +785,29 @@ def E2D2(request, name):
         if (str(result2[j])==colaborador):
             result6=int(result4[j])
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     CE1=[]
     CE1+=ADC22.objects.values_list('ADC22E2').get(user=result6)
     CE2=''
@@ -760,6 +854,29 @@ def E2D2(request, name):
 
 def E1D(request, num):
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     Elist=[]  
     Elist+=RHDT.objects.values_list('ADC22E1C').get(user=resultb6)
     Elist+=RHDT.objects.values_list('ADC22E1D').get(user=resultb6)
@@ -801,6 +918,29 @@ def E1D(request, num):
     return render(request, 'blog/E1D.html', params)
 
 def E2D(request, num):
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
 
     Elist=[]  
     Elist+=RHDT.objects.values_list('ADC22E1C').get(user=resultb6)
@@ -847,6 +987,29 @@ def E2D(request, num):
 
 @login_required
 def ADC(request):
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
 
     porta=[]
     porta+=ADC22.objects.values_list('ADC22C').get(user=request.user)
@@ -925,6 +1088,29 @@ def ADC(request):
         
 def ADC2(request,name):
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     colaborador = name#request.GET['name']
 
     result = ''
@@ -994,6 +1180,29 @@ def ADC2(request,name):
 
 @login_required
 def PDI(request):
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
 
     porta=[]
     porta+=PDI22.objects.values_list('PDI22C').get(user=request.user)
@@ -1210,6 +1419,29 @@ def edit4(request, num):
     return render(request, 'blog/edit4.html', params)
 
 def G1D2(request, name):
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
     colaborador2=name
     params = {
         'form1': RHDT.objects.values_list('ADC22G1D').get(user=resultb6),
@@ -1220,6 +1452,29 @@ def G1D2(request, name):
 def G2D2(request, name):
     colaborador2=name
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     params = {
         'form1': RHDT.objects.values_list('ADC22G2D').get(user=resultb6),
         'avaliado' : colaborador2,
@@ -1228,6 +1483,29 @@ def G2D2(request, name):
 
 def G3D2(request, name):
     colaborador2=name
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
 
     params = {
         'form1': RHDT.objects.values_list('ADC22G3D').get(user=resultb6),
@@ -1238,6 +1516,29 @@ def G3D2(request, name):
 def G4D2(request, name):
     colaborador2=name
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     params = {
         'form1': RHDT.objects.values_list('ADC22G4D').get(user=resultb6),
         'avaliado' : colaborador2,
@@ -1246,6 +1547,29 @@ def G4D2(request, name):
 
 def G5D2(request, name):
     colaborador2=name
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
 
     params = {
         'form1': RHDT.objects.values_list('ADC22G5D').get(user=resultb6),
@@ -1256,6 +1580,29 @@ def G5D2(request, name):
 def G6D2(request, name):
     colaborador2=name
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     params = {
         'form1': RHDT.objects.values_list('ADC22G6D').get(user=resultb6),
         'avaliado' : colaborador2,
@@ -1264,6 +1611,29 @@ def G6D2(request, name):
 
 def G7D2(request, name):
     colaborador2=name
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
 
     params = {
         'form1': RHDT.objects.values_list('ADC22G7D').get(user=resultb6),
@@ -1274,12 +1644,57 @@ def G7D2(request, name):
 
 def G1D(request, num):
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     params = {
         'form1': RHDT.objects.values_list('ADC22G1D').get(user=resultb6)
             }
     return render(request, 'blog/G1D.html', params)
 
 def G2D(request, num):
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
 
 
     params = {
@@ -1289,6 +1704,28 @@ def G2D(request, num):
 
 def G3D(request, num):
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
 
     params = {
         'form1': RHDT.objects.values_list('ADC22G3D').get(user=resultb6)
@@ -1297,12 +1734,58 @@ def G3D(request, num):
 
 def G4D(request, num):
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     params = {
         'form1': RHDT.objects.values_list('ADC22G4D').get(user=resultb6)
             }
     return render(request, 'blog/G4D.html', params)
 
 def G5D(request, num):
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
 
     params = {
         'form1': RHDT.objects.values_list('ADC22G5D').get(user=resultb6)
@@ -1311,6 +1794,29 @@ def G5D(request, num):
 
 def G6D(request, num):
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     params = {
         'form1': RHDT.objects.values_list('ADC22G6D').get(user=resultb6)
             }
@@ -1318,12 +1824,58 @@ def G6D(request, num):
 
 def G7D(request, num):
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     params = {
         'form1': RHDT.objects.values_list('ADC22G7D').get(user=resultb6)
             }
     return render(request, 'blog/G7D.html', params)
 
 def editADC2(request, name):
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
 
     colaborador = name
     
@@ -1389,6 +1941,28 @@ def editADC2(request, name):
 
 def editADC(request, num):
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
 
     obj = ADC22.objects.get(user=request.user)
     if (request.method == 'POST'):
@@ -1417,6 +1991,7 @@ def editADC(request, num):
     return render(request, 'blog/editADC.html', params)
 
 def editPDI(request, num):
+
 
 
     obj = PDI22.objects.get(user=request.user)
@@ -1453,6 +2028,29 @@ def RH(request):
 
 @login_required
 def ES(request):
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
 
     Elist=[]  
     Elist+=RHDT.objects.values_list('ADC22E1C').get(user=resultb6)
@@ -1814,7 +2412,30 @@ def MBO22RH(request):
 
 @login_required
 def ADC22RHA(request):
-    
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     object_list = User.objects.all()
     AA=''
     BB=[]
