@@ -1,0 +1,33 @@
+{% load static %}
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+</head>
+<body>
+    <h1><font color="red">{{ UserID }}</font> bem vindo !!</h1>
+
+    <h5><td><a href="{% url 'RH' %}">volta para sala RH</a></td></h5>
+
+    {% csrf_token %}
+<table border="1">
+    <tr>
+        <td><font size="1"> </font></td>
+        <td style="width: 250px;"><font size="1">competencia</font></td>
+        <td><font size="1">auto avaliação</font></td>
+        <td><font size="1">avaliador</font></td>
+        <td style="width: 250px;"><font size="1">observação por avaliador</font></td>
+    </tr>
+    {% for i in time %}
+        {% if i == '#' %}
+        <tr><td  style="height:1px;"><font size="1"> </font></td>
+        {% else %}
+        <td><font size="1">{{i}}</font></td>
+        {% endif %}
+    {% endfor %}
+</table>
+
+</body>
+</html>

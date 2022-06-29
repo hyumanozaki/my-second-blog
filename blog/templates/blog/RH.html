@@ -1,0 +1,41 @@
+{% load static %}
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+</head>
+<body>
+ <h1><font color="red">{{ UserID }}</font> bem vindo !!</h1>
+
+ <p> 
+ <a href="{% url 'ES' %}">Employee Status</a>
+ </p>
+
+ <p> 
+   <a href="{% url 'MBO22RH' %}">MBO 2022 all employee</a>
+ </p>
+
+ <p> 
+   <a href="{% url 'ADC22RHA' %}">Avaliação de Competencia 2022 all employee</a>
+ </p>
+
+ <p> 
+   <a href="{% url 'PDI22RH' %}">Plano de Desenvolvimento Individual 2022 all employee</a>
+ </p>
+ <p> 
+   <a href="{% url 'MBO22DL' %}">MBO 2022 deadline control</a>
+ </p>
+
+
+ <p> 
+   <a href="{% url 'ADC22DL' %}">Avaliação de Competencia e Plano de Desenvolvimento Individual 2022 deadline control</a>
+ </p>
+
+
+
+ <h5><td><a href="{% url 'home' %}">volta para home</a></td></h5>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+{% load static %}
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" 
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+</head>
+    <body class="container">  
+        <form action="{% url 'ADC' %}" method="post">
+        {% csrf_token %}
+        <table border="1" >
+            <tr>
+                <td style="width: 200px;"><font size="1" color="blue">competencia geral</font></td>
+                <td style="width: 100px;"><font size="1" color="blue">auto avaliação</font></td>
+                <td style="width: 100px;"><font size="1" color="blue">avaliação por avaliador/a</font></td>
+                <td style="width: 700px;"><font size="1" color="blue">observação</font></td>
+            </tr>
+            <tr>
+                <td style="width: 200px;"><font size="1">{{data1.0}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data3.0}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data4.0}}</font></td>
+                <td style="width: 700px; height:50px;"><font size="1">{{data5.0}}</font></td>
+            </tr>
+            <tr>
+                <td style="width: 200px;"><font size="1">{{data1.1}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data3.1}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data4.1}}</font></td>
+                <td style="width: 700px; height:50px;"><font size="1">{{data5.1}}</font></td>
+            </tr>
+            <tr>
+                <td style="width: 200px;"><font size="1">{{data1.2}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data3.2}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data4.2}}</font></td>
+                <td style="width: 700px; height:50px;"><font size="1">{{data5.2}}</font></td>
+            </tr>
+            <tr>
+                <td style="width: 200px;"><font size="1">{{data1.3}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data3.3}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data4.3}}</font></td>
+                <td style="width: 700px; height:50px;"><font size="1">{{data5.3}}</font></td>
+            </tr>
+            <tr>
+                <td style="width: 200px;"><font size="1">{{data1.4}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data3.4}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data4.4}}</font></td>
+                <td style="width: 700px; height:50px;"><font size="1">{{data5.4}}</font></td>
+            </tr>
+            <tr>
+                <td style="width: 200px;"><font size="1">{{data1.5}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data3.5}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data4.5}}</font></td>
+                <td style="width: 700px; height:50px;"><font size="1">{{data5.5}}</font></td>
+            </tr>
+            <tr>
+                <td style="width: 200px;"><font size="1">{{data1.6}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data3.6}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data4.6}}</font></td>
+                <td style="width: 700px; height:50px;"><font size="1">{{data5.6}}</font></td>
+            </tr>
+        </table>
+        <br>
+        <table border="1" >
+            <tr>
+                <td style="width: 200px;"><font size="1" color="blue">competencia especifica</background-color></font></td>
+                <td style="width: 100px;"><font size="1" color="blue">auto avaliação</font></td>
+                <td style="width: 100px;"><font size="1" color="blue">avaliação por avaliador/a</font></td>
+                <td style="width: 700px;"><font size="1" color="blue">observação</font></td>
+
+            <tr>
+                <td style="width: 200px;"><font size="1">{{data6}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data9.0}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data10.0}}</font></td>
+                <td style="width: 700px; height:50px;"><font size="1">{{data11.0}}</font></td>
+            </tr>
+            <tr>
+                <td style="width: 200px;"><font size="1">{{data7}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data9.1}}</font></td>
+                <td style="width: 100px;"><font size="1">{{data10.1}}</font></td>
+                <td style="width: 700px; height:50px;"><font size="1">{{data11.1}}</font></td>
+            </tr>
+        </table>
+        <br><font size="2"><a href="{% url 'home' %}">volta para home</font></a>
+        {% if time == 0 %}
+            <br><td><font size="2" color="red">avaliação de competencia de {{UserID}}, clique Edit e faça sua avaliação de competencia, e depois clique "submeter para avaliador/a"</font></td>
+            <br><input type="submit" value="submeter para avaliador/a" class="btn btn-primary mt-2">
+            <font size="2"><a href="{% url 'editADC' user.id %}">Edit</font></a>
+        {% endif %}
+        {% if time == 1 %}
+        <br><td><font size="2" color="red">avaliação de competencia de {{UserID}}, já foi submetido para avaliador/a</font></td>
+        {% endif %}
+        </form>
+    </body>
+</html>

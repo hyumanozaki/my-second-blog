@@ -16,6 +16,9 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+TEMPLATE_DIR = os.path.join(BASE_DIR,"Template")
+
+MEDIA_DIR = os.path.join(BASE_DIR, "media")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -28,6 +31,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com',]
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+#EMAIL_BACKEND = 'sgbackend.SendGridBackend'
+#SENDGRID_API_KEY = "YOUR SENDGRID API KEY"
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'hyuma2331@gmail.com'
+EMAIL_HOST_PASSWORD = 'zvuaqtvfmlsmuslq'
+#EMAIL_HOST_PASSWORD = 'wine2331'
+EMAIL_USE_TLS = True
 
 # Application definition
 
@@ -56,7 +70,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +83,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
@@ -79,6 +94,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#        'NAME' : 'mydatabase',
+
     }
 }
 
@@ -121,6 +138,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STACIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = "/media/"
 
 
 # Default primary key field type

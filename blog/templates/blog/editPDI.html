@@ -1,0 +1,127 @@
+{% load static %}
+{% load widget_tweaks %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+</head>
+<body class="container">
+    <p><font size="2" color="red">{{UserID}}, selecione foco de competencia geral (min 2, max 3) e preencha ponto a desenvolver e PDI combinado com seu avaliador para cada competencia</font></p>
+    <p><font size="2" color="red">ALERTA, se sair da pagina sem clicar "salvar/voltar" em baixo, o sistem não salva sua alteração</font></p>
+    <form action="{% url 'editPDI' user.id %}" method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td style="width: 200px;"><font size="1" color="blue">competencia geral e especifica</font></td>
+                <td style="width: 100px;"><font size="1" color="blue">auto avaliação</font></td>
+                <td style="width: 100px;"><font size="1" color="blue">avaliação por avaliador/a</font></td>
+                <td style="width: 400px;"><font size="1" color="blue">ponto a desenvolver</font></td>
+                <td style="width: 400px;"><font size="1" color="blue">PDI(Plano de Devenvolvimento Individual)</font></td>
+            </tr>
+            <tr>
+                <td>
+                    <table border="1">
+                        <tr>
+                            <td style="height:178px;"><font size="1">{{form1.PDI22G1C}}</font></td>
+                        </tr>
+                        <tr>
+                            <td style="height:178px;"><font size="1">{{form1.PDI22G2C}}</font></td>
+                        </tr>
+                        <tr>
+                            <td style="height:178px;"><font size="1">{{form1.PDI22G3C}}</font></td>
+                        </tr>
+                        <tr>
+                            <td style="height:178px;"><font size="1">{{form2}}</font></td>
+                        </tr>
+                        <tr>
+                            <td style="height:178px;"><font size="1">{{form3}}</font></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="1">
+                        <tr>
+                            <td style="width: 270px; height:178px;"><font size="1">aparece quando volta</font></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 270px; height:178px;"><font size="1">aparece quando volta</font></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 270px; height:178px;"><font size="1">aparece quando volta</font></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 270px; height:178px;"><font size="1">aparece quando volta</font></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 270px; height:178px;"><font size="1">aparece quando volta</font></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="1">
+                        <tr>
+                            <td style="height: 178px;"><font size="1">aparece quando volta</font></td>
+                        </tr>
+                        <tr>
+                            <td style="height: 178px;"><font size="1">aparece quando volta</font></td>
+                        </tr>
+                        <tr>
+                            <td style="height: 178px;"><font size="1">aparece quando volta</font></td>
+                        </tr>
+                        <tr>
+                            <td style="height: 178px;"><font size="1">aparece quando volta</font></td>
+                        </tr>
+                        <tr>
+                            <td style="height: 178px;"><font size="1">aparece quando volta</font></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td><font size="1">{{form1.PDI22G1PD}}</font></td>
+                        </tr>
+                        <tr>
+                            <td><font size="1">{{form1.PDI22G2PD}}</font></td>
+                        </tr>
+                        <tr>
+                            <td><font size="1">{{form1.PDI22G3PD}}</font></td>
+                        </tr>
+                        <tr>
+                            <td><font size="1">{{form1.PDI22E1PD}}</font></td>
+                        </tr>
+                        <tr>
+                            <td><font size="1">{{form1.PDI22E2PD}}</font></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td><font size="1">{{form1.PDI22G1}}</font></td>
+                        </tr>
+                        <tr>
+                            <td><font size="1">{{form1.PDI22G2}}</font></td>
+                        </tr>
+                        <tr>
+                            <td><font size="1">{{form1.PDI22G3}}</font></td>
+                        </tr>
+                        <tr>
+                            <td><font size="1">{{form1.PDI22E1}}</font></td>
+                        </tr>
+                        <tr>
+                            <td><font size="1">{{form1.PDI22E2}}</font></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <tr><th><td>
+            <input type="submit" value="salvar/voltar" class="btn btn-primary mt-2">
+        </td></th></tr>
+    </form>
+</body>
+</html>

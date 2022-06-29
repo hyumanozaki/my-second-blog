@@ -1,0 +1,123 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+</head>
+<body class="container">
+    <td><font size="2" color="red">{{UserID}}, faça avaliação de {{avaliado}} e clique salvar/voltar. ALERTA : sem clicar salvar, sistema não salva sua alteração</font></td>
+    <form action="{% url 'editADC2' name=avaliado %}" method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td><font size="1"><center>competencia</center></font></td>
+            <td><font size="1"><center>detalhe de competencia</center></font></td>
+            <td><font size="1"><center>auto avaliação</center></font></td>
+        </tr>
+        <tr>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form1.0}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form1.1}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form1.2}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form1.3}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form1.4}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form1.5}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form1.6}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form11.0}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form11.1}}</font></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G1D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G2D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G3D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G4D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G5D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G6D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G7D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'E1D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'E2D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form2.0}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form2.1}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form2.2}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form2.3}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form2.4}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form2.5}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form2.6}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form2.7}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:238px;"><font size="1">{{form2.8}}</font></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <td style="height:100px;"><font size="1">{{ form3.as_p }}</font></td>
+            </td>
+        <tr><th><td><font size="1">
+                <input type="submit" value="salvar/voltar" class="btn btn-primary mt-2">
+            </font></td></th></tr>
+        </table>
+    </form>
+</body>
+</html>

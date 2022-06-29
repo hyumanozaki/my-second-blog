@@ -1,0 +1,43 @@
+{% load static %}
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+</head>
+<body>
+ <h1><font color="red">{{ UserID }}</font> bem vindo !!</h1>
+
+ <p> 
+ <a href="{% url 'Logout' %}">MBO para colaborador</a>
+ </p>
+
+ <p> 
+    <a href="{% url 'ADC' %}">avaliação de competencia para colaborador</a>
+ </p>
+
+ <p> 
+    <a href="{% url 'PDI' %}">PDI (Plano de Devenvolvimento Individual) para colaborador</a>
+ </p>
+<br>
+<br>
+<p>
+   <a href="{% url 'homeA' %}">MBO para avaliador</a>
+</p>
+<p> 
+   <a href="{% url 'homeB' %}">avaliação de competencia para avaliador</a>
+</p>
+<p> 
+   <a href="{% url 'homeC' %}">PDI (Plano de Devenvolvimento Individual) para avaliador</a>
+</p>
+<br>
+<br>
+{% if user.username == "hyuma.nozaki@cosmotec.com.br" %}
+<p>
+   <a href="{% url 'RH' %}">sala RH</a>
+</p>
+{% endif %}
+
+</body>
+</html>

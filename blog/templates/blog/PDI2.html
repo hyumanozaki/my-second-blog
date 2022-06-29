@@ -1,0 +1,82 @@
+{% load static %}
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" 
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+</head>
+<body class="container">  
+    <form action="{% url 'PDI2' name=avaliado %}" method="post">
+    {% csrf_token %}
+    <table border="1" >
+        <tr>
+            <td style="width: 200px;"><font size="1" color="blue">competencia geral</font></td>
+            <td style="width: 100px;"><font size="1" color="blue">auto avaliação</font></td>
+            <td style="width: 100px;"><font size="1" color="blue">avaliação por avaliador/a</font></td>
+            <td style="width: 400px;"><font size="1" color="blue">ponto a desenvolver</font></td>
+            <td style="width: 400px;"><font size="1" color="blue">PDI (Plano de Devenvolvimento Individual)</font></td>
+        </tr>
+        <tr>
+            <td style="width: 200px;"><font size="1">{{data1.0}}</font></td>
+            <td style="width: 100px;"><font size="1">{{data11}}</font></td>
+            <td style="width: 100px;"><font size="1">{{data12}}</font></td>
+            <td style="width: 400px; height:80px;"><font size="1">{{data1.1}}</font></td>
+            <td style="width: 400px; height:80px;"><font size="1">{{data1.2}}</font></td>
+        </tr>
+        <tr>
+            <td style="width: 200px;"><font size="1">{{data2.0}}</font></td>
+            <td style="width: 100px;"><font size="1">{{data21}}</font></td>
+            <td style="width: 100px;"><font size="1">{{data22}}</font></td>
+            <td style="width: 400px; height:80px;"><font size="1">{{data2.1}}</font></td>
+            <td style="width: 400px; height:80px;"><font size="1">{{data2.2}}</font></td>
+        </tr>
+        <tr>
+            <td style="width: 200px;"><font size="1">{{data3.0}}</font></td>
+            <td style="width: 100px;"><font size="1">{{data31}}</font></td>
+            <td style="width: 100px;"><font size="1">{{data32}}</font></td>
+            <td style="width: 400px; height:80px;"><font size="1">{{data3.1}}</font></td>
+            <td style="width: 400px; height:80px;"><font size="1">{{data3.2}}</font></td>
+        </tr>
+    </table>
+    <br>
+    <table border="1" >
+        <tr>
+            <td style="width: 200px;"><font size="1" color="blue">competencia especifica</background-color></font></td>
+            <td style="width: 100px;"><font size="1" color="blue">auto avaliação</font></td>
+            <td style="width: 100px;"><font size="1" color="blue">avaliação por avaliador/a</font></td>
+            <td style="width: 400px;"><font size="1" color="blue">ponto a desenvolver</font></td>
+            <td style="width: 400px;"><font size="1" color="blue">PDI (Plano de Devenvolvimento Individual)</font></td>
+        </tr>
+        <tr>
+            <td style="width: 200px;"><font size="1">{{data4.0}}</font></td>
+            <td style="width: 100px;"><font size="1">{{data41}}</font></td>
+            <td style="width: 100px;"><font size="1">{{data42}}</font></td>
+            <td style="width: 400px; height:80px;"><font size="1">{{data4.1}}</font></td>
+            <td style="width: 400px; height:80px;"><font size="1">{{data4.2}}</font></td>
+        </tr>
+        <tr>
+            <td style="width: 200px;"><font size="1">{{data5.0}}</font></td>
+            <td style="width: 100px;"><font size="1">{{data51}}</font></td>
+            <td style="width: 100px;"><font size="1">{{data52}}</font></td>
+            <td style="width: 400px; height:80px;"><font size="1">{{data5.1}}</font></td>
+            <td style="width: 400px; height:80px;"><font size="1">{{data5.2}}</font></td>
+        </tr>
+    </table>
+    {% if time == 0 %}
+        <br><td><font size="2" color="red">PDI de {{avaliado}}, {{UserID}}, espere atê que ele/ela submete PDI</font></td>
+    {% endif %}
+    {% if time == 1 %}
+    <p class="small"><font color="red">PDI de {{avaliado}}, {{UserID}}, cheque PDI acima e aprove ou peça ele/ela para corrigir se tiver algo errado</font></p>
+    <label><input type = "checkbox" name= "office" value = "aprovar">aprovar</label>
+    <label><input type = "checkbox" name= "office" value = "pede corrigir">pede corrigir</label>
+    <input type="submit" value="selecione aprovar ou pede corrigir e clique aqui">
+    {% endif %}
+    {% if time == 2 %}
+    <br><td><font size="2" color="red">PDI de {{UserID}}, já foi aprovado</font></td>
+    {% endif %}
+    <br><font size="2"><a href="{% url 'home' %}">volta para home</font></a>
+    </form>
+</body>
+</html>

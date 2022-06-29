@@ -1,0 +1,115 @@
+{% load static %}
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+</head>
+<body>
+    <h1><font color="red">{{ UserID }}</font> bem vindo !!</h1>
+    <h5><td><a href="{% url 'RH' %}">volta para sala RH</a></td></h5>
+    {% csrf_token %}
+    <table border="1">
+        <tr>
+            <td>mês</td>
+            <td>avaliação de competencia entregue</td>
+            <td>PDI entregue</td>
+        </tr>
+        <tr>
+            <td>janeiro</td>
+            <td>{{A1}}</td>
+            <td>{{B1}}</td>
+        </tr>
+        <tr>
+            <td>febereiro</td>
+            <td>{{A2}}</td>
+            <td>{{B2}}</td>
+
+        </tr>
+        <tr>
+            <td>março</td>
+            <td>{{A3}}</td>
+            <td>{{B3}}</td>
+        </tr>
+        <tr>
+            <td>abril</td>
+            <td>{{A4}}</td>
+            <td>{{B4}}</td>
+        </tr>
+        <tr>
+            <td>maio</td>
+            <td>{{A5}}</td>
+            <td>{{B5}}</td>
+        </tr>
+        </tr>
+            <td>junho</td>
+            <td>{{A6}}</td>
+            <td>{{B6}}</td>
+        </tr>
+        <tr>
+            <td>julho</td>
+            <td>{{A7}}</td>
+            <td>{{B7}}</td>
+        </tr>
+        <tr>
+            <td>agosto</td>
+            <td>{{A8}}</td>
+            <td>{{B8}}</td>
+        </tr>
+        <tr>
+            <td>setembro</td>
+            <td>{{A9}}</td>
+            <td>{{B9}}</td>
+        </tr>
+        <tr>
+            <td>outubro</td>
+            <td>{{A10}}</td>
+            <td>{{B10}}</td>
+        </tr>
+        <tr>
+            <td>novembro</td>
+            <td>{{A11}}</td>
+            <td>{{B11}}</td>
+        </tr>
+        <tr>
+            <td>dezembro</td>
+            <td>{{A12}}</td>
+            <td>{{B12}}</td>
+        </tr>
+        <tr bgcolor = "cccccc">
+            <td>feito total</td>
+            <td>{{AT}}</td>
+            <td>{{BT}}</td>
+        </tr>
+        <tr>
+            <td>ainda não foi feito</td>
+            <td>    
+                {% for i in BB1 %}
+                    <br>{{i}}
+                {% endfor %}
+            </td>
+            <td>    
+                {% for i in BB2 %}
+                    <br>{{i}}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>não tem avaliação de competencia/PDI</td>
+            <td>    
+                {% for i in CC1 %}
+                    <br>{{i}}
+                {% endfor %}
+            </td>
+            <td>    
+                {% for i in CC2 %}
+                    <br>{{i}}
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

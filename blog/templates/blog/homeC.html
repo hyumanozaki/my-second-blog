@@ -1,0 +1,19 @@
+{% load static %}
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+</head>
+<body>
+ <h1><font color="red">PDI {{ UserID }}</font> colaboradores do seu equipe </h1>
+
+<p> 
+   {% for item in C1 %}
+      <td><a href="{% url 'PDI2' name=item %}">{{item}}</a></td><br>
+   {% endfor %}
+</p>
+<h5><td><a href="{% url 'home' %}">volta para home</a></td></h5>
+</body>
+</html>

@@ -1,0 +1,107 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+   
+</head>
+<body class="container">
+    <p class="small"></p>
+    <td><font size="2" color="red">{{UserID}}, estabeleça suas metas (maximo 7) de 2022 e defina o peso. depois de mexer, clique "salvar/voltar" em baixo senão o sistema não salva sua alteração</font></td>
+    <form action="{% url 'edit' user.id %}" method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td><font size="1"><center>2022 janeiro</center></font></td>
+            <td><font size="1"><center>alinhamento 2022 maio</center></font></td>
+            <td><font size="1"><center>alinhamento 2022 setembro</center></font></td>
+            <td><font size="1"><center>avaliação 2023 janeiro</center></font></td>
+        </tr>
+        <tr>
+            <td style="height:100px;"><font size="1">{{ data1.as_p }}</font></td>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data2.0}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data2.1}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data2.2}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data2.3}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data2.4}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data2.5}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data2.6}}</font></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data3.0}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data3.1}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data3.2}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data3.3}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data3.4}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data3.5}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data3.6}}</font></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data4.0}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data4.1}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data4.2}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data4.3}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data4.4}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data4.5}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 270px; height:241px;"><font size="1">{{data4.6}}</font></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+        <tr><th><td>
+            <input type="submit" value="salvar/voltar" class="btn btn-primary mt-2">
+        </td></th></tr>
+    </form>
+</body>
+</html>
