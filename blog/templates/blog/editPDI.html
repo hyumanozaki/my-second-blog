@@ -1,5 +1,4 @@
 {% load static %}
-{% load widget_tweaks %}
 <!doctype html>
 <html lang="ja">
 <head>
@@ -9,17 +8,17 @@
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
 </head>
 <body class="container">
-    <p><font size="2" color="red">{{UserID}}, selecione foco de competencia geral (min 2, max 3) e preencha ponto a desenvolver e PDI combinado com seu avaliador para cada competencia</font></p>
-    <p><font size="2" color="red">ALERTA, se sair da pagina sem clicar "salvar/voltar" em baixo, o sistem não salva sua alteração</font></p>
+    <p><font size="2" color="green">{{UserID}}, selecione foco de competencia geral (min 2, max 3) e preencha ponto a desenvolver e PDI combinado com seu avaliador para cada competencia</font></p>
+    <p><font size="2" color="green">ALERTA, se sair da pagina sem clicar "salvar/voltar" em baixo, o sistem não salva sua alteração</font></p>
     <form action="{% url 'editPDI' user.id %}" method="post">
         {% csrf_token %}
         <table>
             <tr>
-                <td style="width: 200px;"><font size="1" color="blue">competencia geral e especifica</font></td>
-                <td style="width: 100px;"><font size="1" color="blue">auto avaliação</font></td>
-                <td style="width: 100px;"><font size="1" color="blue">avaliação por avaliador/a</font></td>
-                <td style="width: 400px;"><font size="1" color="blue">ponto a desenvolver</font></td>
-                <td style="width: 400px;"><font size="1" color="blue">PDI(Plano de Devenvolvimento Individual)</font></td>
+                <td style="width: 200px;"><font size="2" color="red">competencia (escolhe foco de competencia geral)</font></td>
+                <td style="width: 100px;"><font size="1">auto avaliação</font></td>
+                <td style="width: 100px;"><font size="1">avaliação por avaliador/a</font></td>
+                <td style="width: 400px;"><font size="2" color="red">ponto a desenvolver (faça aqui)</font></td>
+                <td style="width: 400px;"><font size="2" color="red">PDI(Plano de Devenvolvimento Individual)<br>(faça aqui)</font></td>
             </tr>
             <tr>
                 <td>

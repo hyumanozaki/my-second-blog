@@ -66,11 +66,11 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
     </table>
     {% if time == 0 %}
         <br><font size="2"><a href="{% url 'editPDI' user.id %}">Edit</font></a>
-        <br><td><font size="2" color="red">avaliação de competencia de {{UserID}}, clique Edit e faça sua avaliação de competencia, e depois clique "submeter para avaliador/a"</font></td>
+        <br><td><font size="2" color="red">PDI de {{UserID}}, clique Edit, escolhe competencia de foco, escreva seu ponto a desenvolver e PDI, e depois clique "submeter para avaliador/a"</font></td>
         <br><input type="submit" value="submeter para avaliador/a" class="btn btn-primary mt-2">
     {% endif %}
     {% if time == 1 %}
-    <br><td><font size="2" color="red">avaliação de competencia de {{UserID}}, já foi submetido para avaliador/a</font></td>
+    <br><td><font size="2" color="red">PDI {{UserID}}, já foi submetido para avaliador/a</font></td>
     {% endif %}
     <br><font size="2"><a href="{% url 'home' %}">volta para home</font></a>
     </form>

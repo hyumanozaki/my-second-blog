@@ -1,0 +1,925 @@
+{% load static %}
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+</head>
+<body>
+    <h5><td><a href="{% url 'RH' %}">volta para sala RH</a></td></h5>
+
+    {% csrf_token %}
+    <table border="1">
+        <tr bgcolor = "cccccc">
+            <td><font size="1">competencia geral</font></td>
+            <td><font size="1">media auto avaliação</font></td>
+            <td><font size="1">numero total de pessoa</font></td>
+            <td><font size="1">media avaliação avaliador</font></td>
+            <td><font size="1">numero total de pessoa</font></td>
+            <td><font size="1">numero de pessoa<br>de quem escolhe foco</font></td>
+            <td><font size="1">media auto avaliação<br>de quem escolhe foco</font></td>
+            <td><font size="1">media auto avaliação<br>de quem escolhe foco</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{G1}}</font></td>
+            <td><font size="1">{{G1C}}</font></td>
+            <td><font size="1">{{G1CN}}</font></td>
+            <td><font size="1">{{G1A}}</font></td>
+            <td><font size="1">{{G1AN}}</font></td>
+            <td><font size="1">{{G1F}}</font></td>
+            <td><font size="1">{{G1FC}}</font></td>
+            <td><font size="1">{{G1FA}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{G2}}</font></td>
+            <td><font size="1">{{G2C}}</font></td>
+            <td><font size="1">{{G2CN}}</font></td>
+            <td><font size="1">{{G2A}}</font></td>
+            <td><font size="1">{{G2AN}}</font></td>
+            <td><font size="1">{{G2F}}</font></td>
+            <td><font size="1">{{G2FC}}</font></td>
+            <td><font size="1">{{G2FA}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{G3}}</font></td>
+            <td><font size="1">{{G3C}}</font></td>
+            <td><font size="1">{{G3CN}}</font></td>
+            <td><font size="1">{{G3A}}</font></td>
+            <td><font size="1">{{G3AN}}</font></td>
+            <td><font size="1">{{G3F}}</font></td>
+            <td><font size="1">{{G3FC}}</font></td>
+            <td><font size="1">{{G3FA}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{G4}}</font></td>
+            <td><font size="1">{{G4C}}</font></td>
+            <td><font size="1">{{G4CN}}</font></td>
+            <td><font size="1">{{G4A}}</font></td>
+            <td><font size="1">{{G4AN}}</font></td>
+            <td><font size="1">{{G4F}}</font></td>
+            <td><font size="1">{{G4FC}}</font></td>
+            <td><font size="1">{{G4FA}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{G5}}</font></td>
+            <td><font size="1">{{G5C}}</font></td>
+            <td><font size="1">{{G5CN}}</font></td>
+            <td><font size="1">{{G5A}}</font></td>
+            <td><font size="1">{{G5AN}}</font></td>
+            <td><font size="1">{{G5F}}</font></td>
+            <td><font size="1">{{G5FC}}</font></td>
+            <td><font size="1">{{G5FA}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{G6}}</font></td>
+            <td><font size="1">{{G6C}}</font></td>
+            <td><font size="1">{{G6CN}}</font></td>
+            <td><font size="1">{{G6A}}</font></td>
+            <td><font size="1">{{G6AN}}</font></td>
+            <td><font size="1">{{G6F}}</font></td>
+            <td><font size="1">{{G6FC}}</font></td>
+            <td><font size="1">{{G6FA}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{G7}}</font></td>
+            <td><font size="1">{{G7C}}</font></td>
+            <td><font size="1">{{G7CN}}</font></td>
+            <td><font size="1">{{G7A}}</font></td>
+            <td><font size="1">{{G7AN}}</font></td>
+            <td><font size="1">{{G7F}}</font></td>
+            <td><font size="1">{{G7FC}}</font></td>
+            <td><font size="1">{{G7FA}}</font></td>
+        </tr>
+
+    </table>
+    <table border="1">
+        <tr bgcolor = "cccccc">
+            <td><font size="1">competencia especifica</font></td>
+            <td><font size="1">numero total de pessoa</font></td>
+            <td><font size="1">media auto avaliação</font></td>
+            <td><font size="1">media avaliação avaliador</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E1}}</font></td>
+            <td><font size="1">{{E1N}}</font></td>
+            <td><font size="1">{{E1C}}</font></td>
+            <td><font size="1">{{E1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E2}}</font></td>
+            <td><font size="1">{{E2N}}</font></td>
+            <td><font size="1">{{E2C}}</font></td>
+            <td><font size="1">{{E2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E3}}</font></td>
+            <td><font size="1">{{E3N}}</font></td>
+            <td><font size="1">{{E3C}}</font></td>
+            <td><font size="1">{{E3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E4}}</font></td>
+            <td><font size="1">{{E4N}}</font></td>
+            <td><font size="1">{{E4C}}</font></td>
+            <td><font size="1">{{E4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E5}}</font></td>
+            <td><font size="1">{{E5N}}</font></td>
+            <td><font size="1">{{E5C}}</font></td>
+            <td><font size="1">{{E5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E6}}</font></td>
+            <td><font size="1">{{E6N}}</font></td>
+            <td><font size="1">{{E6C}}</font></td>
+            <td><font size="1">{{E6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E7}}</font></td>
+            <td><font size="1">{{E7N}}</font></td>
+            <td><font size="1">{{E7C}}</font></td>
+            <td><font size="1">{{E7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E8}}</font></td>
+            <td><font size="1">{{E8N}}</font></td>
+            <td><font size="1">{{E8C}}</font></td>
+            <td><font size="1">{{E8A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E9}}</font></td>
+            <td><font size="1">{{E9N}}</font></td>
+            <td><font size="1">{{E9C}}</font></td>
+            <td><font size="1">{{E9A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E10}}</font></td>
+            <td><font size="1">{{E10N}}</font></td>
+            <td><font size="1">{{E10C}}</font></td>
+            <td><font size="1">{{E10A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E11}}</font></td>
+            <td><font size="1">{{E11N}}</font></td>
+            <td><font size="1">{{E11C}}</font></td>
+            <td><font size="1">{{E11A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{E12}}</font></td>
+            <td><font size="1">{{E12N}}</font></td>
+            <td><font size="1">{{E12C}}</font></td>
+            <td><font size="1">{{E12A}}</font></td>
+        </tr>
+
+    </table>
+
+
+
+    <table border="1">
+        <tr bgcolor = "cccccc">
+            <td><font size="1">{{G1}}</font></td>
+            <td><font size="1">numero total de pessoa</font></td>
+            <td><font size="1">media auto avaliação</font></td>
+            <td><font size="1">media avaliação avaliador</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D1}}</font></td>
+            <td><font size="1">{{D1N}}</font></td>
+            <td><font size="1">{{D1G1C}}</font></td>
+            <td><font size="1">{{D1G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D2}}</font></td>
+            <td><font size="1">{{D2N}}</font></td>
+            <td><font size="1">{{D2G1C}}</font></td>
+            <td><font size="1">{{D2G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D3}}</font></td>
+            <td><font size="1">{{D3N}}</font></td>
+            <td><font size="1">{{D3G1C}}</font></td>
+            <td><font size="1">{{D3G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D4}}</font></td>
+            <td><font size="1">{{D4N}}</font></td>
+            <td><font size="1">{{D4G1C}}</font></td>
+            <td><font size="1">{{D4G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D5}}</font></td>
+            <td><font size="1">{{D5N}}</font></td>
+            <td><font size="1">{{D5G1C}}</font></td>
+            <td><font size="1">{{D5G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D6}}</font></td>
+            <td><font size="1">{{D6N}}</font></td>
+            <td><font size="1">{{D6G1C}}</font></td>
+            <td><font size="1">{{D6G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D7}}</font></td>
+            <td><font size="1">{{D7N}}</font></td>
+            <td><font size="1">{{D7G1C}}</font></td>
+            <td><font size="1">{{D7G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D8}}</font></td>
+            <td><font size="1">{{D8N}}</font></td>
+            <td><font size="1">{{D8G1C}}</font></td>
+            <td><font size="1">{{D8G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D9}}</font></td>
+            <td><font size="1">{{D9N}}</font></td>
+            <td><font size="1">{{D9G1C}}</font></td>
+            <td><font size="1">{{D9G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D10}}</font></td>
+            <td><font size="1">{{D10N}}</font></td>
+            <td><font size="1">{{D10G1C}}</font></td>
+            <td><font size="1">{{D10G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D11}}</font></td>
+            <td><font size="1">{{D11N}}</font></td>
+            <td><font size="1">{{D11G1C}}</font></td>
+            <td><font size="1">{{D11G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D12}}</font></td>
+            <td><font size="1">{{D12N}}</font></td>
+            <td><font size="1">{{D12G1C}}</font></td>
+            <td><font size="1">{{D12G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D13}}</font></td>
+            <td><font size="1">{{D13N}}</font></td>
+            <td><font size="1">{{D13G1C}}</font></td>
+            <td><font size="1">{{D13G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D14}}</font></td>
+            <td><font size="1">{{D14N}}</font></td>
+            <td><font size="1">{{D14G1C}}</font></td>
+            <td><font size="1">{{D14G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D15}}</font></td>
+            <td><font size="1">{{D15N}}</font></td>
+            <td><font size="1">{{D15G1C}}</font></td>
+            <td><font size="1">{{D15G1A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D16}}</font></td>
+            <td><font size="1">{{D16N}}</font></td>
+            <td><font size="1">{{D16G1C}}</font></td>
+            <td><font size="1">{{D16G1A}}</font></td>
+        </tr>
+
+    </table>
+
+    <table border="1">
+        <tr bgcolor = "cccccc">
+            <td><font size="1">{{G2}}</font></td>
+            <td><font size="1">numero total de pessoa</font></td>
+            <td><font size="1">media auto avaliação</font></td>
+            <td><font size="1">media avaliação avaliador</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D1}}</font></td>
+            <td><font size="1">{{D1N}}</font></td>
+            <td><font size="1">{{D1G2C}}</font></td>
+            <td><font size="1">{{D1G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D2}}</font></td>
+            <td><font size="1">{{D2N}}</font></td>
+            <td><font size="1">{{D2G2C}}</font></td>
+            <td><font size="1">{{D2G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D3}}</font></td>
+            <td><font size="1">{{D3N}}</font></td>
+            <td><font size="1">{{D3G2C}}</font></td>
+            <td><font size="1">{{D3G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D4}}</font></td>
+            <td><font size="1">{{D4N}}</font></td>
+            <td><font size="1">{{D4G2C}}</font></td>
+            <td><font size="1">{{D4G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D5}}</font></td>
+            <td><font size="1">{{D5N}}</font></td>
+            <td><font size="1">{{D5G2C}}</font></td>
+            <td><font size="1">{{D5G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D6}}</font></td>
+            <td><font size="1">{{D6N}}</font></td>
+            <td><font size="1">{{D6G2C}}</font></td>
+            <td><font size="1">{{D6G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D7}}</font></td>
+            <td><font size="1">{{D7N}}</font></td>
+            <td><font size="1">{{D7G2C}}</font></td>
+            <td><font size="1">{{D7G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D8}}</font></td>
+            <td><font size="1">{{D8N}}</font></td>
+            <td><font size="1">{{D8G2C}}</font></td>
+            <td><font size="1">{{D8G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D9}}</font></td>
+            <td><font size="1">{{D9N}}</font></td>
+            <td><font size="1">{{D9G2C}}</font></td>
+            <td><font size="1">{{D9G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D10}}</font></td>
+            <td><font size="1">{{D10N}}</font></td>
+            <td><font size="1">{{D10G2C}}</font></td>
+            <td><font size="1">{{D10G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D11}}</font></td>
+            <td><font size="1">{{D11N}}</font></td>
+            <td><font size="1">{{D11G2C}}</font></td>
+            <td><font size="1">{{D11G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D12}}</font></td>
+            <td><font size="1">{{D12N}}</font></td>
+            <td><font size="1">{{D12G2C}}</font></td>
+            <td><font size="1">{{D12G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D13}}</font></td>
+            <td><font size="1">{{D13N}}</font></td>
+            <td><font size="1">{{D13G2C}}</font></td>
+            <td><font size="1">{{D13G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D14}}</font></td>
+            <td><font size="1">{{D14N}}</font></td>
+            <td><font size="1">{{D14G2C}}</font></td>
+            <td><font size="1">{{D14G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D15}}</font></td>
+            <td><font size="1">{{D15N}}</font></td>
+            <td><font size="1">{{D15G2C}}</font></td>
+            <td><font size="1">{{D15G2A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D16}}</font></td>
+            <td><font size="1">{{D16N}}</font></td>
+            <td><font size="1">{{D16G2C}}</font></td>
+            <td><font size="1">{{D16G2A}}</font></td>
+        </tr>
+
+    </table>
+
+
+    <table border="1">
+        <tr bgcolor = "cccccc">
+            <td><font size="1">{{G3}}</font></td>
+            <td><font size="1">numero total de pessoa</font></td>
+            <td><font size="1">media auto avaliação</font></td>
+            <td><font size="1">media avaliação avaliador</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D1}}</font></td>
+            <td><font size="1">{{D1N}}</font></td>
+            <td><font size="1">{{D1G3C}}</font></td>
+            <td><font size="1">{{D1G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D2}}</font></td>
+            <td><font size="1">{{D2N}}</font></td>
+            <td><font size="1">{{D2G3C}}</font></td>
+            <td><font size="1">{{D2G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D3}}</font></td>
+            <td><font size="1">{{D3N}}</font></td>
+            <td><font size="1">{{D3G3C}}</font></td>
+            <td><font size="1">{{D3G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D4}}</font></td>
+            <td><font size="1">{{D4N}}</font></td>
+            <td><font size="1">{{D4G3C}}</font></td>
+            <td><font size="1">{{D4G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D5}}</font></td>
+            <td><font size="1">{{D5N}}</font></td>
+            <td><font size="1">{{D5G3C}}</font></td>
+            <td><font size="1">{{D5G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D6}}</font></td>
+            <td><font size="1">{{D6N}}</font></td>
+            <td><font size="1">{{D6G3C}}</font></td>
+            <td><font size="1">{{D6G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D7}}</font></td>
+            <td><font size="1">{{D7N}}</font></td>
+            <td><font size="1">{{D7G3C}}</font></td>
+            <td><font size="1">{{D7G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D8}}</font></td>
+            <td><font size="1">{{D8N}}</font></td>
+            <td><font size="1">{{D8G3C}}</font></td>
+            <td><font size="1">{{D8G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D9}}</font></td>
+            <td><font size="1">{{D9N}}</font></td>
+            <td><font size="1">{{D9G3C}}</font></td>
+            <td><font size="1">{{D9G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D10}}</font></td>
+            <td><font size="1">{{D10N}}</font></td>
+            <td><font size="1">{{D10G3C}}</font></td>
+            <td><font size="1">{{D10G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D11}}</font></td>
+            <td><font size="1">{{D11N}}</font></td>
+            <td><font size="1">{{D11G3C}}</font></td>
+            <td><font size="1">{{D11G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D12}}</font></td>
+            <td><font size="1">{{D12N}}</font></td>
+            <td><font size="1">{{D12G3C}}</font></td>
+            <td><font size="1">{{D12G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D13}}</font></td>
+            <td><font size="1">{{D13N}}</font></td>
+            <td><font size="1">{{D13G3C}}</font></td>
+            <td><font size="1">{{D13G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D14}}</font></td>
+            <td><font size="1">{{D14N}}</font></td>
+            <td><font size="1">{{D14G3C}}</font></td>
+            <td><font size="1">{{D14G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D15}}</font></td>
+            <td><font size="1">{{D15N}}</font></td>
+            <td><font size="1">{{D15G3C}}</font></td>
+            <td><font size="1">{{D15G3A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D16}}</font></td>
+            <td><font size="1">{{D16N}}</font></td>
+            <td><font size="1">{{D16G3C}}</font></td>
+            <td><font size="1">{{D16G3A}}</font></td>
+        </tr>
+       
+    </table>
+
+    <table border="1">
+        <tr bgcolor = "cccccc">
+            <td><font size="1">{{G4}}</font></td>
+            <td><font size="1">numero total de pessoa</font></td>
+            <td><font size="1">media auto avaliação</font></td>
+            <td><font size="1">media avaliação avaliador</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D1}}</font></td>
+            <td><font size="1">{{D1N}}</font></td>
+            <td><font size="1">{{D1G4C}}</font></td>
+            <td><font size="1">{{D1G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D2}}</font></td>
+            <td><font size="1">{{D2N}}</font></td>
+            <td><font size="1">{{D2G4C}}</font></td>
+            <td><font size="1">{{D2G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D3}}</font></td>
+            <td><font size="1">{{D3N}}</font></td>
+            <td><font size="1">{{D3G4C}}</font></td>
+            <td><font size="1">{{D3G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D4}}</font></td>
+            <td><font size="1">{{D4N}}</font></td>
+            <td><font size="1">{{D4G4C}}</font></td>
+            <td><font size="1">{{D4G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D5}}</font></td>
+            <td><font size="1">{{D5N}}</font></td>
+            <td><font size="1">{{D5G4C}}</font></td>
+            <td><font size="1">{{D5G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D6}}</font></td>
+            <td><font size="1">{{D6N}}</font></td>
+            <td><font size="1">{{D6G4C}}</font></td>
+            <td><font size="1">{{D6G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D7}}</font></td>
+            <td><font size="1">{{D7N}}</font></td>
+            <td><font size="1">{{D7G4C}}</font></td>
+            <td><font size="1">{{D7G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D8}}</font></td>
+            <td><font size="1">{{D8N}}</font></td>
+            <td><font size="1">{{D8G4C}}</font></td>
+            <td><font size="1">{{D8G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D9}}</font></td>
+            <td><font size="1">{{D9N}}</font></td>
+            <td><font size="1">{{D9G4C}}</font></td>
+            <td><font size="1">{{D9G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D10}}</font></td>
+            <td><font size="1">{{D10N}}</font></td>
+            <td><font size="1">{{D10G4C}}</font></td>
+            <td><font size="1">{{D10G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D11}}</font></td>
+            <td><font size="1">{{D11N}}</font></td>
+            <td><font size="1">{{D11G4C}}</font></td>
+            <td><font size="1">{{D11G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D12}}</font></td>
+            <td><font size="1">{{D12N}}</font></td>
+            <td><font size="1">{{D12G4C}}</font></td>
+            <td><font size="1">{{D12G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D13}}</font></td>
+            <td><font size="1">{{D13N}}</font></td>
+            <td><font size="1">{{D13G4C}}</font></td>
+            <td><font size="1">{{D13G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D14}}</font></td>
+            <td><font size="1">{{D14N}}</font></td>
+            <td><font size="1">{{D14G4C}}</font></td>
+            <td><font size="1">{{D14G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D15}}</font></td>
+            <td><font size="1">{{D15N}}</font></td>
+            <td><font size="1">{{D15G4C}}</font></td>
+            <td><font size="1">{{D15G4A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D16}}</font></td>
+            <td><font size="1">{{D16N}}</font></td>
+            <td><font size="1">{{D16G4C}}</font></td>
+            <td><font size="1">{{D16GA}}</font></td>
+        </tr>
+
+    </table>
+
+    <table border="1">
+        <tr bgcolor = "cccccc">
+            <td><font size="1">{{G5}}</font></td>
+            <td><font size="1">numero total de pessoa</font></td>
+            <td><font size="1">media auto avaliação</font></td>
+            <td><font size="1">media avaliação avaliador</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D1}}</font></td>
+            <td><font size="1">{{D1N}}</font></td>
+            <td><font size="1">{{D1G5C}}</font></td>
+            <td><font size="1">{{D1G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D2}}</font></td>
+            <td><font size="1">{{D2N}}</font></td>
+            <td><font size="1">{{D2G5C}}</font></td>
+            <td><font size="1">{{D2G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D3}}</font></td>
+            <td><font size="1">{{D3N}}</font></td>
+            <td><font size="1">{{D3G5C}}</font></td>
+            <td><font size="1">{{D3G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D4}}</font></td>
+            <td><font size="1">{{D4N}}</font></td>
+            <td><font size="1">{{D4G5C}}</font></td>
+            <td><font size="1">{{D4G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D5}}</font></td>
+            <td><font size="1">{{D5N}}</font></td>
+            <td><font size="1">{{D5G5C}}</font></td>
+            <td><font size="1">{{D5G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D6}}</font></td>
+            <td><font size="1">{{D6N}}</font></td>
+            <td><font size="1">{{D6G5C}}</font></td>
+            <td><font size="1">{{D6G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D7}}</font></td>
+            <td><font size="1">{{D7N}}</font></td>
+            <td><font size="1">{{D7G5C}}</font></td>
+            <td><font size="1">{{D7G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D8}}</font></td>
+            <td><font size="1">{{D8N}}</font></td>
+            <td><font size="1">{{D8G5C}}</font></td>
+            <td><font size="1">{{D8G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D9}}</font></td>
+            <td><font size="1">{{D9N}}</font></td>
+            <td><font size="1">{{D9G5C}}</font></td>
+            <td><font size="1">{{D9G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D10}}</font></td>
+            <td><font size="1">{{D10N}}</font></td>
+            <td><font size="1">{{D10G5C}}</font></td>
+            <td><font size="1">{{D10G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D11}}</font></td>
+            <td><font size="1">{{D11N}}</font></td>
+            <td><font size="1">{{D11G5C}}</font></td>
+            <td><font size="1">{{D11G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D12}}</font></td>
+            <td><font size="1">{{D12N}}</font></td>
+            <td><font size="1">{{D12G5C}}</font></td>
+            <td><font size="1">{{D12G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D13}}</font></td>
+            <td><font size="1">{{D13N}}</font></td>
+            <td><font size="1">{{D13G5C}}</font></td>
+            <td><font size="1">{{D13G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D14}}</font></td>
+            <td><font size="1">{{D14N}}</font></td>
+            <td><font size="1">{{D14G5C}}</font></td>
+            <td><font size="1">{{D14G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D15}}</font></td>
+            <td><font size="1">{{D15N}}</font></td>
+            <td><font size="1">{{D15G5C}}</font></td>
+            <td><font size="1">{{D15G5A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D16}}</font></td>
+            <td><font size="1">{{D16N}}</font></td>
+            <td><font size="1">{{D16G5C}}</font></td>
+            <td><font size="1">{{D16G5A}}</font></td>
+        </tr>
+
+    </table>
+
+    <table border="1">
+        <tr bgcolor = "cccccc">
+            <td><font size="1">{{G6}}</font></td>
+            <td><font size="1">numero total de pessoa</font></td>
+            <td><font size="1">media auto avaliação</font></td>
+            <td><font size="1">media avaliação avaliador</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D1}}</font></td>
+            <td><font size="1">{{D1N}}</font></td>
+            <td><font size="1">{{D1G6C}}</font></td>
+            <td><font size="1">{{D1G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D2}}</font></td>
+            <td><font size="1">{{D2N}}</font></td>
+            <td><font size="1">{{D2G6C}}</font></td>
+            <td><font size="1">{{D2G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D3}}</font></td>
+            <td><font size="1">{{D3N}}</font></td>
+            <td><font size="1">{{D3G6C}}</font></td>
+            <td><font size="1">{{D3G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D4}}</font></td>
+            <td><font size="1">{{D4N}}</font></td>
+            <td><font size="1">{{D4G6C}}</font></td>
+            <td><font size="1">{{D4G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D5}}</font></td>
+            <td><font size="1">{{D5N}}</font></td>
+            <td><font size="1">{{D5G6C}}</font></td>
+            <td><font size="1">{{D5G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D6}}</font></td>
+            <td><font size="1">{{D6N}}</font></td>
+            <td><font size="1">{{D6G6C}}</font></td>
+            <td><font size="1">{{D6G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D7}}</font></td>
+            <td><font size="1">{{D7N}}</font></td>
+            <td><font size="1">{{D7G6C}}</font></td>
+            <td><font size="1">{{D7G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D8}}</font></td>
+            <td><font size="1">{{D8N}}</font></td>
+            <td><font size="1">{{D8G6C}}</font></td>
+            <td><font size="1">{{D8G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D9}}</font></td>
+            <td><font size="1">{{D9N}}</font></td>
+            <td><font size="1">{{D9G6C}}</font></td>
+            <td><font size="1">{{D9G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D10}}</font></td>
+            <td><font size="1">{{D10N}}</font></td>
+            <td><font size="1">{{D10G6C}}</font></td>
+            <td><font size="1">{{D10G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D11}}</font></td>
+            <td><font size="1">{{D11N}}</font></td>
+            <td><font size="1">{{D11G6C}}</font></td>
+            <td><font size="1">{{D11G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D12}}</font></td>
+            <td><font size="1">{{D12N}}</font></td>
+            <td><font size="1">{{D12G6C}}</font></td>
+            <td><font size="1">{{D12G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D13}}</font></td>
+            <td><font size="1">{{D13N}}</font></td>
+            <td><font size="1">{{D13G6C}}</font></td>
+            <td><font size="1">{{D13G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D14}}</font></td>
+            <td><font size="1">{{D14N}}</font></td>
+            <td><font size="1">{{D14G6C}}</font></td>
+            <td><font size="1">{{D14G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D15}}</font></td>
+            <td><font size="1">{{D15N}}</font></td>
+            <td><font size="1">{{D15G6C}}</font></td>
+            <td><font size="1">{{D15G6A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D16}}</font></td>
+            <td><font size="1">{{D16N}}</font></td>
+            <td><font size="1">{{D16G6C}}</font></td>
+            <td><font size="1">{{D16G6A}}</font></td>
+        </tr>
+
+    </table>
+
+    <table border="1">
+        <tr bgcolor = "cccccc">
+            <td><font size="1">{{G7}}</font></td>
+            <td><font size="1">numero total de pessoa</font></td>
+            <td><font size="1">media auto avaliação</font></td>
+            <td><font size="1">media avaliação avaliador</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D1}}</font></td>
+            <td><font size="1">{{D1N}}</font></td>
+            <td><font size="1">{{D1G7C}}</font></td>
+            <td><font size="1">{{D1G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D2}}</font></td>
+            <td><font size="1">{{D2N}}</font></td>
+            <td><font size="1">{{D2G7C}}</font></td>
+            <td><font size="1">{{D2G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D3}}</font></td>
+            <td><font size="1">{{D3N}}</font></td>
+            <td><font size="1">{{D3G7C}}</font></td>
+            <td><font size="1">{{D3G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D4}}</font></td>
+            <td><font size="1">{{D4N}}</font></td>
+            <td><font size="1">{{D4G7C}}</font></td>
+            <td><font size="1">{{D4G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D5}}</font></td>
+            <td><font size="1">{{D5N}}</font></td>
+            <td><font size="1">{{D5G7C}}</font></td>
+            <td><font size="1">{{D5G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D6}}</font></td>
+            <td><font size="1">{{D6N}}</font></td>
+            <td><font size="1">{{D6G7C}}</font></td>
+            <td><font size="1">{{D6G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D7}}</font></td>
+            <td><font size="1">{{D7N}}</font></td>
+            <td><font size="1">{{D7G7C}}</font></td>
+            <td><font size="1">{{D7G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D8}}</font></td>
+            <td><font size="1">{{D8N}}</font></td>
+            <td><font size="1">{{D8G7C}}</font></td>
+            <td><font size="1">{{D8G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D9}}</font></td>
+            <td><font size="1">{{D9N}}</font></td>
+            <td><font size="1">{{D9G7C}}</font></td>
+            <td><font size="1">{{D9G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D10}}</font></td>
+            <td><font size="1">{{D10N}}</font></td>
+            <td><font size="1">{{D10G7C}}</font></td>
+            <td><font size="1">{{D10G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D11}}</font></td>
+            <td><font size="1">{{D11N}}</font></td>
+            <td><font size="1">{{D11G7C}}</font></td>
+            <td><font size="1">{{D11G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D12}}</font></td>
+            <td><font size="1">{{D12N}}</font></td>
+            <td><font size="1">{{D12G7C}}</font></td>
+            <td><font size="1">{{D12G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D13}}</font></td>
+            <td><font size="1">{{D13N}}</font></td>
+            <td><font size="1">{{D13G7C}}</font></td>
+            <td><font size="1">{{D13G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D14}}</font></td>
+            <td><font size="1">{{D14N}}</font></td>
+            <td><font size="1">{{D14G7C}}</font></td>
+            <td><font size="1">{{D14G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D15}}</font></td>
+            <td><font size="1">{{D15N}}</font></td>
+            <td><font size="1">{{D15G7C}}</font></td>
+            <td><font size="1">{{D15G7A}}</font></td>
+        </tr>
+        <tr>
+            <td><font size="1">{{D16}}</font></td>
+            <td><font size="1">{{D16N}}</font></td>
+            <td><font size="1">{{D16G7C}}</font></td>
+            <td><font size="1">{{D16G7A}}</font></td>
+        </tr>
+
+    </table>
+
+
+</body>
+</html>

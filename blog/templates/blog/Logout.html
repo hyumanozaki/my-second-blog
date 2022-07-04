@@ -86,30 +86,30 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
             </tr>
         </table>
             {% if time == 1 %}  
-            Clique Edit e defina sua meta e peso%, e depois clique "submeter para avaliador"
-                <h5><td><a href="{% url 'edit' user.id %}">Edit</a></td></h5>
-                <tr><th><td>
+            <font size="2" color="red">Clique Edit e defina sua meta e peso%, e depois clique "submeter para avaliador"</font>
+            <br><td><a href="{% url 'edit' user.id %}"><font size="2">Edit</font></a></td>
+                <br><tr><th><td>
                     <input type="submit" value="submeter para avaliador" class="btn btn-primary mt-2">
                 </td></th></tr>   
             {% endif %}
             {% if time == 2 %}
-            Clique Edit e inputa primeiro alinhamento, e depois clique "submeter para avaliador"
-                <h5><td><a href="{% url 'edit2' user.id %}">Edit</a></td></h5>
-                <tr><th><td>
+            <font size="2" color="red">Clique Edit e inputa primeiro alinhamento, e depois clique "submeter para avaliador"</font>
+            <br><td><a href="{% url 'edit2' user.id %}"><font size="2">Edit</font></a></td>
+                <br><tr><th><td>
                     <input type="submit" value="submeter para avaliador" class="btn btn-primary mt-2">
                 </td></th></tr>     
             {% endif %}
             {% if time == 3 %}
-            Clique Edit e inputa segundo alinhamento, e depois clique "submeter para avaliador"
-                <h5><td><a href="{% url 'edit3' user.id %}">Edit</a></td></h5>
-                <tr><th><td>
+            <font size="2" color="red">Clique Edit e inputa segundo alinhamento, e depois clique "submeter para avaliador"</font>
+                <br><td><a href="{% url 'edit3' user.id %}"><font size="2">Edit</font></a></td>
+                <br><tr><th><td>
                     <input type="submit" value="submeter para avaliador" class="btn btn-primary mt-2">
                 </td></th></tr>     
             {% endif %}
             {% if time == 4 %}
-            Clique Edit e inputa avaliação e pontuação combinados com seu/sua avaliador/asegundo alinhamento, e depois clique "submeter para avaliador"
-                <h5><td><a href="{% url 'edit4' user.id %}">Edit</a></td></h5>
-                <tr><th><td>
+            <font size="2" color="red">Clique Edit e inputa avaliação e pontuação combinados com seu/sua avaliador/asegundo alinhamento, e depois clique "submeter para avaliador"</font>
+            <br><td><a href="{% url 'edit4' user.id %}"><font size="2">Edit</font></a></td>
+                <br><tr><th><td>
                     <input type="submit" value="submeter para avaliador" class="btn btn-primary mt-2">
                 </td></th></tr>      
             {% endif %}
@@ -117,12 +117,13 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
                 seu MBO já foi submetido
             {% endif %}
             {% if time == 5 %}  
-                <h5><td><a href="{% url 'edit' user.id %}">Edit</a></td></h5>
-                <tr><th><td>
-                    <input type="submit" value="submeter para avaliador" class="btn btn-primary mt-2"> <font color = "red">peso total não é 100%, entre EDIT e adjuste</font>
+                <font color = "red" size="2">peso total não é 100%, clique EDIT e adjuste</font>
+                <br><td><a href="{% url 'edit' user.id %}"><font size="2">Edit</font></a></td>
+                <br><tr><th><td>
+                    <input type="submit" value="submeter para avaliador" class="btn btn-primary mt-2">
                 </td></th></tr>   
             {% endif %}
-            <h5><td><a href="{% url 'home' %}">volta para home</a></td></h5>
+            <br><td><a href="{% url 'home' %}"><font size="2"> volta para home</font></a></td>
         </form>
         </body>
 </html>

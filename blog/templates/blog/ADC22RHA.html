@@ -7,7 +7,7 @@
 
 </head>
 <body>
-    <h1><font color="red">{{ UserID }}</font> bem vindo !!</h1>
+    <h1><font color="red">avaliação de competencia 2022 all employee</h1>
 
     <h5><td><a href="{% url 'RH' %}">volta para sala RH</a></td></h5>
 
@@ -18,7 +18,8 @@
         <td style="width: 250px;"><font size="1">competencia</font></td>
         <td><font size="1">auto avaliação</font></td>
         <td><font size="1">avaliador</font></td>
-        <td style="width: 250px;"><font size="1">observação por avaliador</font></td>
+        <td style="width: 350px;"><font size="1">observação por colaborador</font></td>
+        <td style="width: 350px;"><font size="1">observação por avaliador</font></td>
     </tr>
     {% for i in time %}
         {% if i == '#' %}

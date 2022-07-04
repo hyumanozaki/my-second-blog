@@ -9,7 +9,7 @@
    
 </head>
 <body class="container">
-    <p class="small">{{title}}</p>
+    <p class="small"><font size="2" color="blue">{{UserID}}</font><font size="2" color="red">, alinhe com seu/sua avaliador/a progresso de cada meta e preencha, ALERTA, clique "salvar/voltar" senão o sistema não salva sua alteração</font></p>
     <form action="{% url 'edit2' user.id %}" method="post">
     {% csrf_token %}
     <table>

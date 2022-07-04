@@ -53,6 +53,7 @@ urlpatterns = [
     path('MBO22RH',views.MBO22RH,name="MBO22RH"),
     path('MBO22DL',views.MBO22DL,name="MBO22DL"),
     path('ADC22DL',views.ADC22DL,name="ADC22DL"),
+    path('ADC22ESTA',views.ADC22ESTA,name="ADC22ESTA"),
     path('PDI22RH',views.PDI22RH,name="PDI22RH"),
     path('ADC22RHA',views.ADC22RHA,name="ADC22RHA"),
     #path('PDI22',views.PDI22,name="PDI22"),

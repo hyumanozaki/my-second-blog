@@ -10,12 +10,12 @@
 </head>
 <body class="container">
     <p class="small"></p>
-    <td><font size="2" color="red">{{UserID}}, estabeleça suas metas (maximo 7) de 2022 e defina o peso. depois de mexer, clique "salvar/voltar" em baixo senão o sistema não salva sua alteração</font></td>
+    <td><font size="2" color="blue">{{UserID}}, estabeleça suas metas (maximo 7) de 2022 e defina o peso. depois de mexer, clique "salvar/voltar" em baixo senão o sistema não salva sua alteração</font></td>
     <form action="{% url 'edit' user.id %}" method="post">
     {% csrf_token %}
     <table>
         <tr>
-            <td><font size="1"><center>2022 janeiro</center></font></td>
+            <td><font size="2" color="red"><center>2022 janeiro<br>(faça aqui)</center></font></td>
             <td><font size="1"><center>alinhamento 2022 maio</center></font></td>
             <td><font size="1"><center>alinhamento 2022 setembro</center></font></td>
             <td><font size="1"><center>avaliação 2023 janeiro</center></font></td>

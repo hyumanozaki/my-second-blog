@@ -17,25 +17,20 @@ class PostForm(forms.ModelForm):
 
 Achoice=[('0','aprovar'),('1','pede ele/ela para corrigir'),]
 
-class MBO22AForm(forms.Form):
-    choices=forms.ChoiceField(label='',choices=Achoice,widget=forms.RadioSelect())
-        
 
-class MBO22Q1Form(forms.ModelForm):
-    # パスワード入力：非表示対応
-    #password = forms.CharField(widget=forms.PasswordInput(),label="senha")
+class DeptForm(forms.ModelForm):
 
     class Meta():
-        # ユーザー認証
         model = MBO22
-        # フィールド指定
+        fields = ('DEPT',)
+        lables = {'DEPT':"escolhe seu departamento"}
+
+class MBO22Q1Form(forms.ModelForm):
+
+    class Meta():
+        model = MBO22
         fields = ('MBO22A1','MBO22AP','MBO22B1','MBO22BP','MBO22C1','MBO22CP','MBO22D1','MBO22DP','MBO22E1','MBO22EP','MBO22F1','MBO22FP','MBO22G1','MBO22GP')
-        #fields = ('MBO22A1','MBO22B1','MBO22C1','MBO22D1','MBO22E1','MBO22F1','MBO22G1','MBO22AP','MBO22BP','MBO22CP','MBO22DP','MBO22EP','MBO22FP','MBO22GP')
         labels = {'MBO22A1':"meta1",'MBO22B1':"meta2",'MBO22C1':"meta3",'MBO22D1':"meta4",'MBO22E1':"meta5",'MBO22F1':"meta6",'MBO22G1':"meta7",'MBO22AP':"peso% de meta1",'MBO22BP':"peso% de meta2",'MBO22CP':"peso% de meta3",'MBO22DP':"peso% de meta4",'MBO22EP':"peso% de meta5",'MBO22FP':"peso de meta6",'MBO22GP':"peso% de meta7"}
-         #fields = ('MBO22A1','MBO22B1','MBO22C1','MBO22D1','MBO22E1','MBO22F1','MBO22G1')
-        #fields = ('username','email','password')
-        # フィールド名指定
-        #labels = {'username':"Usuario",'email':"Email"}
 
 class MBO22Q2Form(forms.ModelForm):
 
@@ -58,14 +53,6 @@ class MBO22Q4Form(forms.ModelForm):
         fields = ('MBO22A4','MBO22AR','MBO22B4','MBO22BR','MBO22C4','MBO22CR','MBO22D4','MBO22DR','MBO22E4','MBO22ER','MBO22F4','MBO22FR','MBO22G4','MBO22GR')
         labels = {'MBO22A4':"meta1",'MBO22B4':"meta2",'MBO22C4':"meta3",'MBO22D4':"meta4",'MBO22E4':"meta5",'MBO22F4':"meta6",'MBO22G4':"meta7",'MBO22AR':"pontuação",'MBO22BR':"pontuação",'MBO22CR':"pontuação",'MBO22DR':"pontuação",'MBO22ER':"pontuação",'MBO22FR':"pontuação",'MBO22GR':"pontuação"}
 
-#class AddAccountForm(forms.ModelForm):
-#    class Meta():
-        # モデルクラスを指定
-#        model = Account
-#        fields = ('last_name','first_name',)
-#        labels = {'last_name':"苗字",'first_name':"名前",}
-#        fields = ('last_name','first_name','account_image',)
-#        labels = {'last_name':"苗字",'first_name':"名前",'account_image':"写真アップロード",}
 
 
 class ADC22CForm(forms.ModelForm):
@@ -73,9 +60,9 @@ class ADC22CForm(forms.ModelForm):
     class Meta ():
 
         model = ADC22
-        fields = ('ADC22G1C','ADC22G2C','ADC22G3C','ADC22G4C','ADC22G5C','ADC22G6C','ADC22G7C','ADC22E1C','ADC22E2C')
-        labels = {'ADC22G1C':"auto avaliação",'ADC22G2C':"auto avaliação",'ADC22G3C':"auto avaliação",'ADC22G4C':"auto avaliação",'ADC22G5C':"auto avaliação",'ADC22G6C':"auto avaliação",'ADC22G7C':"auto avaliação",'ADC22E1C':"auto avaliação",'ADC22E2C':"auto avaliação"}
-
+        fields = ('ADC22G1C','ADC22G1OC','ADC22G2C','ADC22G2OC','ADC22G3C','ADC22G3OC','ADC22G4C','ADC22G4OC','ADC22G5C','ADC22G5OC','ADC22G6C','ADC22G6OC','ADC22G7C','ADC22G7OC','ADC22E1C','ADC22E1OC','ADC22E2C','ADC22E2OC')
+        labels = {'ADC22G1C':"auto avaliação",'ADC22G1OC':"observação por colaborador",'ADC22G2C':"auto avaliação",'ADC22G2OC':"observação por colaborador",'ADC22G3C':"auto avaliação",'ADC22G3OC':"observação por colaborador",'ADC22G4C':"auto avaliação",'ADC22G4OC':"observação por colaborador",'ADC22G5C':"auto avaliação",'ADC22G5OC':"observação por colaborador",'ADC22G6C':"auto avaliação",'ADC22G6OC':"observação por colaborador",'ADC22G7C':"auto avaliação",'ADC22G7OC':"observação por colaborador",'ADC22E1C':"auto avaliação",'ADC22E1OC':"observação por colaborador",'ADC22E2C':"auto avaliação",'ADC22E2OC':"observação por colaborador"}
+        
 
 class ADC22AOForm(forms.ModelForm):
 

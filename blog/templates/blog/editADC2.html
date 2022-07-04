@@ -8,115 +8,208 @@
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
 </head>
 <body class="container">
-    <td><font size="2" color="red">{{UserID}}, faça avaliação de {{avaliado}} e clique salvar/voltar. ALERTA : sem clicar salvar, sistema não salva sua alteração</font></td>
+    <td><font size="2" color="green">{{UserID}}, faça avaliação e observação de {{avaliado}}. ALERTA: sempre clique "salvar" antes de voltar ou vê detalhe, senão você perde recorde de sua alteração</font></td>
     <form action="{% url 'editADC2' name=avaliado %}" method="post">
     {% csrf_token %}
     <table>
         <tr>
             <td><font size="1"><center>competencia</center></font></td>
-            <td><font size="1"><center>detalhe de competencia</center></font></td>
+            <td><font size="2" color="red"><center>detalhe de competencia<br>(veja aqui)</center></font></td>
             <td><font size="1"><center>auto avaliação</center></font></td>
+            <td><font size="2" color="red"><center>avaliação por avaliador/a<br>(faça aqui)</center></font></td>
+            <td><font size="1"><center>observação por colaborador/a</center></font></td>
+            <td><font size="2" color="red"><center>observação por avaliador/a<br>(faça aqui)</center></font></td>
         </tr>
         <tr>
             <td>
                 <table border="1">
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form1.0}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form1.0}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form1.1}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form1.1}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form1.2}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form1.2}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form1.3}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form1.3}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form1.4}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form1.4}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form1.5}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form1.5}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form1.6}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form1.6}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form11.0}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form11.0}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form11.1}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form11.1}}</font></td>
                     </tr>
                 </table>
             </td>
             <td>
                 <table border="1">
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G1D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                        <td style="width: 100px; height:179px;"><font size="1"><a href="{% url 'G1D2' name=avaliado %}">veja detalhe da competencia (já salvou?)</a></font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G2D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                        <td style="width: 100px; height:179px;"><font size="1"><a href="{% url 'G2D2' name=avaliado %}">veja detalhe da competencia (já salvou?)</a></font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G3D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                        <td style="width: 100px; height:179px;"><font size="1"><a href="{% url 'G3D2' name=avaliado %}">veja detalhe da competencia (já salvou?)</a></font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G4D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                        <td style="width: 100px; height:179px;"><font size="1"><a href="{% url 'G4D2' name=avaliado %}">veja detalhe da competencia (já salvou?)</a></font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G5D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                        <td style="width: 100px; height:179px;"><font size="1"><a href="{% url 'G5D2' name=avaliado %}">veja detalhe da competencia (já salvou?)</a></font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G6D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                        <td style="width: 100px; height:179px;"><font size="1"><a href="{% url 'G6D2' name=avaliado %}">veja detalhe da competencia (já salvou?)</a></font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'G7D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                        <td style="width: 100px; height:179px;"><font size="1"><a href="{% url 'G7D2' name=avaliado %}">veja detalhe da competencia (já salvou?)</a></font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'E1D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                        <td style="width: 100px; height:179px;"><font size="1"><a href="{% url 'E1D2' name=avaliado %}">veja detalhe da competencia (já salvou?)</a></font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1"><a href="{% url 'E2D2' name=avaliado %}">veja detalhe da competencia</a></font></td>
+                        <td style="width: 100px; height:179px;"><font size="1"><a href="{% url 'E2D2' name=avaliado %}">veja detalhe da competencia (já salvou?)</a></font></td>
                     </tr>
                 </table>
             </td>
             <td>
                 <table border="1">
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form2.0}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form2.0}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form2.1}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form2.1}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form2.2}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form2.2}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form2.3}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form2.3}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form2.4}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form2.4}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form2.5}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form2.5}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form2.6}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form2.6}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form2.7}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form2.7}}</font></td>
                     </tr>
                     <tr>
-                        <td style="width: 100px; height:238px;"><font size="1">{{form2.8}}</font></td>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form2.8}}</font></td>
+                    </tr>
+                </table>
+            </td>
+
+            <td>
+                <table border="1">
+                    <tr>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form3.ADC22G1A}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form3.ADC22G2A}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form3.ADC22G3A}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form3.ADC22G4A}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form3.ADC22G5A}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form3.ADC22G6A}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form3.ADC22G7A}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form3.ADC22E1A}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:179px;"><font size="1">{{form3.ADC22E2A}}</font></td>
+                    </tr>
+                </table>
+            </td>
+
+            <td>
+                <table border="1">
+                    <tr>
+                        <td style="width: 300px; height:179px;"><font size="1">{{form2B.0}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 300px; height:179px;"><font size="1">{{form2B.1}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 300px; height:179px;"><font size="1">{{form2B.2}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 300px; height:179px;"><font size="1">{{form2B.3}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 300px; height:179px;"><font size="1">{{form2B.4}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 300px; height:179px;"><font size="1">{{form2B.5}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 300px; height:179px;"><font size="1">{{form2B.6}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 300px; height:179px;"><font size="1">{{form2B.7}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 300px; height:179px;"><font size="1">{{form2B.8}}</font></td>
                     </tr>
                 </table>
             </td>
             <td>
-                <td style="height:100px;"><font size="1">{{ form3.as_p }}</font></td>
+                <table>
+                    <tr>
+                        <td style="width: 100px; height:10px;"><font size="1">{{form3.ADC22G1O}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:180px;"><font size="1">{{form3.ADC22G2O}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:180px;"><font size="1">{{form3.ADC22G3O}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:180px;"><font size="1">{{form3.ADC22G4O}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:180px;"><font size="1">{{form3.ADC22G5O}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:160px;"><font size="1">{{form3.ADC22G6O}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:160px;"><font size="1">{{form3.ADC22G7O}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:160px;"><font size="1">{{form3.ADC22E1O}}</font></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height:160px;"><font size="1">{{form3.ADC22E2O}}</font></td>
+                    </tr>
+                </table>
             </td>
-        <tr><th><td><font size="1">
-                <input type="submit" value="salvar/voltar" class="btn btn-primary mt-2">
-            </font></td></th></tr>
+            <input type="submit" value="salvar"><font size="3"><a href="{% url 'ADC2' name=avaliado %}"> voltar</a></font>
         </table>
     </form>
 </body>

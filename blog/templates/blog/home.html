@@ -7,30 +7,106 @@
 
 </head>
 <body>
- <h1><font color="red">{{ UserID }}</font> bem vindo !!</h1>
 
- <p> 
- <a href="{% url 'Logout' %}">MBO para colaborador</a>
- </p>
+<h1><font color="red">{{ UserID }}</font> bem vindo !!</h1>
+<form action="{% url 'home' %}" method="post">
+{% csrf_token %}
+{% if time == 0 %}
+   primeira escolhe seu departamento
+   {{dept}}
+   <br><input type="submit" value="escolhe seu departamento" class="btn btn-primary mt-2" name="office">
+   <br>assuntos regulatorios = pesquisa e desenvolvimento
+   <br>produção = operacional
+   <br>comerical express = customer service
+   </form>
+{% else %}
+   <p> 
+   <a>MBO para colaborador</a>
+   <a href="{% url 'Logout' %}">2022</a>
+   {% if MBO23TIME > 0 %}
+      <a href="{% url 'Logout' %}">2023</a>
+   {% else %}
+      <a>2023</a>
+   {% endif %}
+   {% if MBO24TIME > 0 %}
+      <a href="{% url 'Logout' %}">2024</a>
+   {% else %}
+      <a>2024</a>
+   {% endif %}
+   </p>
+   <p> 
+   <a>avaliação de competencia para colaborador</a>
+   <a href="{% url 'ADC' %}">2022</a>
+   {% if ADC23TIME > 0 %}
+      <a href="{% url 'ADC' %}">2023</a>
+   {% else %}
+      <a>2023</a>
+   {% endif %}
+   {% if ADC24TIME > 0 %}
+      <a href="{% url 'ADC' %}">2024</a>
+   {% else %}
+      <a>2024</a>
+   {% endif %}
+   </p>
+   <p> 
+   <a>PDI (Plano de Devenvolvimento Individual) para colaborador</a>
+   <a href="{% url 'PDI' %}">2022</a>
+   {% if ADC23TIME > 0 %}
+      <a href="{% url 'PDI' %}">2023</a>
+   {% else %}
+      <a>2023</a>
+   {% endif %}
+   {% if ADC24TIME > 0 %}
+      <a href="{% url 'PDI' %}">2024</a>
+   {% else %}
+      <a>2024</a>
+   {% endif %}
+   </p>
 
- <p> 
-    <a href="{% url 'ADC' %}">avaliação de competencia para colaborador</a>
- </p>
-
- <p> 
-    <a href="{% url 'PDI' %}">PDI (Plano de Devenvolvimento Individual) para colaborador</a>
- </p>
+ <br>
 <br>
-<br>
-<p>
-   <a href="{% url 'homeA' %}">MBO para avaliador</a>
-</p>
 <p> 
-   <a href="{% url 'homeB' %}">avaliação de competencia para avaliador</a>
-</p>
-<p> 
-   <a href="{% url 'homeC' %}">PDI (Plano de Devenvolvimento Individual) para avaliador</a>
-</p>
+   <a>MBO para avaliador</a>
+   <a href="{% url 'homeA' %}">2022</a>
+   {% if MBO23TIME > 0 %}
+      <a href="{% url 'homeA' %}">2023</a>
+   {% else %}
+      <a>2023</a>
+   {% endif %}
+   {% if MBO24TIME > 0 %}
+      <a href="{% url 'homeA' %}">2024</a>
+   {% else %}
+      <a>2024</a>
+   {% endif %}
+  </p>
+  <p> 
+   <a>avaliação de competencia para avaliador</a>
+    <a href="{% url 'homeB' %}">2022</a>
+    {% if ADC23TIME > 0 %}
+       <a href="{% url 'homeB' %}">2023</a>
+    {% else %}
+       <a>2023</a>
+    {% endif %}
+    {% if ADC24TIME > 0 %}
+       <a href="{% url 'homeB' %}">2024</a>
+    {% else %}
+       <a>2024</a>
+    {% endif %}
+   <p> 
+      <a>PDI (Plano de Devenvolvimento Individual) para avaliador</a>
+       <a href="{% url 'homeC' %}">2022</a>
+      {% if ADC23TIME > 0 %}
+         <a href="{% url 'homeC' %}">2023</a>
+      {% else %}
+         <a>2023</a>
+      {% endif %}
+      {% if ADC24TIME > 0 %}
+         <a href="{% url 'homeC' %}">2024</a>
+      {% else %}
+         <a>2024</a>
+      {% endif %}
+    </p>
+{% endif %}
 <br>
 <br>
 {% if user.username == "hyuma.nozaki@cosmotec.com.br" %}
