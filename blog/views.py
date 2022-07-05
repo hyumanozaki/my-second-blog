@@ -1979,6 +1979,7 @@ def editPDI(request, num):
     if (request.method == 'POST'):
         friend = PDI22Form(request.POST, instance=obj)
         friend.save()
+        return redirect(to='/PDI')
 
     params = {
         'UserID':request.user,
