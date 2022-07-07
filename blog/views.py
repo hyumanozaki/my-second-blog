@@ -35,7 +35,8 @@ Q3 = 12
 
 def upload(request):
     data='nothing'
-    f = open('C:/Users/hyuma.nozaki/djangoboys/psw.txt','r', encoding='UTF-8')
+#    f = open('C:/Users/hyuma.nozaki/djangoboys/psw.txt','r', encoding='UTF-8')
+    f = open('/Users/hyuma.nozaki/djangoboys/psw.txt','r', encoding='UTF-8')
     data = f.read()
     data = data.replace('\n',',')
     data = data.split(',')
