@@ -21,6 +21,7 @@ from datetime import datetime
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 import sys
+import os
 #import numpy as np
 #import pandas as pd
 #from user.models import User, Order
@@ -36,7 +37,11 @@ Q3 = 12
 def upload(request):
     data='nothing'
 #    f = open('C:/Users/hyuma.nozaki/djangoboys/psw.txt','r', encoding='UTF-8')
-    f = open('/Users/hyuma.nozaki/djangoboys/psw.txt','r', encoding='UTF-8')
+#    f = open('/Users/hyuma.nozaki/djangoboys/psw.txt','r', encoding='UTF-8')
+    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+    my_file = os.path.join(THIS_FOLDER,'psw.txt')
+    f = open(my_file,'r', encoding='UTF-8')
+#    f = open('psw.txt','r', encoding='UTF-8')
     data = f.read()
     data = data.replace('\n',',')
     data = data.split(',')
