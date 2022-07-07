@@ -4,7 +4,7 @@ from .models import Post
 from .models import MBO22,ADC22,RHDT,PDI22#, PDI22G
 #from .models import MBO
 from .forms import PostForm
-from .forms import MBO22Q1Form,MBO22Q2Form,MBO22Q3Form,MBO22Q4Form,ADC22CForm,ADC22AOForm,PDI22Form,DeptForm#PDI22GForm,PDI22EForm,PDI22GCForm
+from .forms import MBO22Q1Form,MBO22Q2Form,MBO22Q3Form,MBO22Q4Form,ADC22CForm,ADC22AOForm,PDI22Form,DeptForm,uploadForm, readForm
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.views.generic import TemplateView #テンプレートタグ
@@ -18,6 +18,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from datetime import datetime
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
+import sys
 #import numpy as np
 #import pandas as pd
 #from user.models import User, Order
@@ -29,6 +32,58 @@ Y1 = 2022
 Q1 = 10
 Q2 = 11
 Q3 = 12
+
+def upload(request):
+    data='nothing'
+    f = open('C:/Users/hyuma.nozaki/djangoboys/psw.txt','r', encoding='UTF-8')
+    data = f.read()
+    data = data.replace('\n',',')
+    data = data.split(',')
+    BB = len(data)
+    CC = int(BB/5)
+    if request.method == 'POST':
+        for i in range(CC) :
+            j=5*i
+            k=j+1
+            l=j+2
+            m=j+3
+            n=j+4
+            AA = User()
+            AA.username = data[j]
+            AA.email = data[k]
+            AA.first_name = data[l]
+            AA.last_name = data[m]
+            AA.password = data[n]
+            AA.save()
+#        class uploadview(CreateView):
+#            form_class = uploadForm
+#        template_name = "blog/upload.html"
+#    success_url = reverse_lazy("blog:RH")
+#        def form_valid(self,form):
+#            user = form.save()
+#            return redirect(to='/RH')
+    params = {"form":data,"BB":BB}
+    return render(request, 'blog/upload.html', params)
+
+#    if request.method == 'POST':
+#        read = readForm(request.POST, request.FILES)
+#        sys.stderr.write("*** file_upload *** aaa ***\n")
+#        handle(request.FILES['file'])
+#        file_obj = request.FILES['file']
+#        sys.stderr.write(file_obj.name + "\n")
+#    def handle(file_obj):
+#        sys.stderr.write("*** handle *** aaa ***\n")
+#        sys.stderr.write(file_obj.name + "\n")
+#        file_path = 'blog/' + file_obj.name
+#        sys.stderr.write(file_path + "\n")
+#        with open (file_path, 'b+') as destination:
+#            for chunk in file_obj.chunks():
+#                sys.stderr.write("*** handle *** ccc ***\n")
+#                destination.write(chunk)
+#                sys.stderr.wirte("*** handle *** eee ***\n")
+
+    
+
 
 
 def post_edit(request, pk):

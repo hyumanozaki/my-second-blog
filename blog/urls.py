@@ -56,6 +56,8 @@ urlpatterns = [
     path('ADC22ESTA',views.ADC22ESTA,name="ADC22ESTA"),
     path('PDI22RH',views.PDI22RH,name="PDI22RH"),
     path('ADC22RHA',views.ADC22RHA,name="ADC22RHA"),
+    path('upload',views.upload,name="upload"),
+#    path('upload',views.uploadview.as_view(),name="upload"),
     #path('PDI22',views.PDI22,name="PDI22"),
 
     #path('Logout/<int:num>',views.Logout,name="Logout"),

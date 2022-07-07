@@ -5,6 +5,20 @@ from .models import Post
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+class uploadForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ["username","email","password","first_name","last_name"]
+
+class readForm(forms.Form):
+    name = forms.CharField(max_length=50)
+    boss = forms.CharField(max_length=50)
+    FN = forms.CharField(max_length=50)
+    LN = forms.CharField(max_length=50)
+    PW = forms.CharField(max_length=50)
+
 
 # 例外処理
 from django.core.exceptions import ObjectDoesNotExist
