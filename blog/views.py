@@ -3405,19 +3405,23 @@ def home(request):
     ADC24TIME=[]
     ADC24TIME+=RHDT.objects.values_list('ADCTIME24').get(user=resultb6)
 
+    if request.user != colaborador2 :
+        obj = MBO22.objects.get(user=request.user)
+        if (request.method == 'POST'):
+            friend = DeptForm(request.POST, instance=obj)
+            friend.save()
 
-    obj = MBO22.objects.get(user=request.user)
-    if (request.method == 'POST'):
-        friend = DeptForm(request.POST, instance=obj)
-        friend.save()
 
-    dept=[]
-    dept+=MBO22.objects.values_list('DEPT').get(user=request.user)
-    dept1=str(dept[0])
-    if dept1 == '':
-        time=0
-    else:
-        time=1
+    if request.user != colaborador2 :
+        dept=[]
+        dept+=MBO22.objects.values_list('DEPT').get(user=request.user)
+        dept1=str(dept[0])
+        if dept1 == '':
+            time=0
+        else:
+            time=1
+    else :
+        time = 1
 
     params = {
         "UserID":request.user,
