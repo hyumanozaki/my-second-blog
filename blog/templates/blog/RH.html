@@ -8,6 +8,7 @@
 </head>
 <body>
  <h1><font color="red">sala RH</font></h1>
+ <h5><td><a href="{% url 'home' %}">volta para home</a></td></h5>
 
  <p> 
  Employee Status<a href="{% url 'ES' %}"> 2022</a> 2023<a> 2024</a>
@@ -38,10 +39,30 @@
  <p> 
    <a href="{% url 'upload' %}"> Upload usuarios</a>
  </p>
-   
+ <p> 
+    <a href="{% url 'upMBO' %}"> Upload MBO</a>
+ </p>
+ <p> 
+    <a href="{% url 'upADC' %}"> Upload ADC</a>
+ </p>
+ <p> 
+    <a href="{% url 'upPDI' %}"> Upload PDI</a>
+ </p>
+ <p> 
+    <a href="{% url 'upCE' %}"> Upload CE</a>
+ </p>
+ <p> 
+    <a href="{% url 'listMBO' %}"> listar MBO</a>
+ </p>
+ <p> 
+    <a href="{% url 'listADC' %}"> listar ADC</a>
+ </p>
+ <p> 
+    <a href="{% url 'listPDI' %}"> listar PDI</a>
+ </p>
 
 
- <h5><td><a href="{% url 'home' %}">volta para home</a></td></h5>
+
 
 </body>
 </html>

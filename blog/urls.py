@@ -57,6 +57,14 @@ urlpatterns = [
     path('PDI22RH',views.PDI22RH,name="PDI22RH"),
     path('ADC22RHA',views.ADC22RHA,name="ADC22RHA"),
     path('upload',views.upload,name="upload"),
+    path('upMBO',views.upMBO,name="upMBO"),
+    path('upADC',views.upADC,name="upADC"),
+    path('upPDI',views.upPDI,name="upPDI"),
+    path('upCE',views.upCE,name="upCE"),
+    path('listMBO',views.listMBO,name="listMBO"),
+    path('listADC',views.listADC,name="listADC"),
+    path('listPDI',views.listPDI,name="listPDI"),
+
 #    path('upload',views.uploadview.as_view(),name="upload"),
     #path('PDI22',views.PDI22,name="PDI22"),
 

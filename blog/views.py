@@ -36,12 +36,9 @@ Q3 = 12
 
 def upload(request):
     data='nothing'
-#    f = open('C:/Users/hyuma.nozaki/djangoboys/psw.txt','r', encoding='UTF-8')
-#    f = open('/Users/hyuma.nozaki/djangoboys/psw.txt','r', encoding='UTF-8')
     THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
     my_file = os.path.join(THIS_FOLDER,'psw.txt')
     f = open(my_file,'r', encoding='UTF-8')
-#    f = open('psw.txt','r', encoding='UTF-8')
     data = f.read()
     data = data.replace('\n',',')
     data = data.split(',')
@@ -56,40 +53,1358 @@ def upload(request):
             n=j+4
             AA = User()
             AA.username = data[j]
-            AA.email = data[k]
+            AA.password = data[k]
             AA.first_name = data[l]
             AA.last_name = data[m]
-            AA.password = data[n]
+            AA.email = data[n]
             AA.save()
-#        class uploadview(CreateView):
-#            form_class = uploadForm
-#        template_name = "blog/upload.html"
-#    success_url = reverse_lazy("blog:RH")
-#        def form_valid(self,form):
-#            user = form.save()
-#            return redirect(to='/RH')
+        object_list = User.objects.all()
+        for o in object_list:
+            add_user = User.objects.filter(username=o.username).first()
+            BB = MBO22()
+            BB.user = add_user
+            BB.save()
+            CC = ADC22()
+            CC.user = add_user
+            CC.save()
+            DD = PDI22()
+            DD.user = add_user
+            DD.save()
+        return redirect(to='/RH')
     params = {"form":data,"BB":BB}
     return render(request, 'blog/upload.html', params)
 
-#    if request.method == 'POST':
-#        read = readForm(request.POST, request.FILES)
-#        sys.stderr.write("*** file_upload *** aaa ***\n")
-#        handle(request.FILES['file'])
-#        file_obj = request.FILES['file']
-#        sys.stderr.write(file_obj.name + "\n")
-#    def handle(file_obj):
-#        sys.stderr.write("*** handle *** aaa ***\n")
-#        sys.stderr.write(file_obj.name + "\n")
-#        file_path = 'blog/' + file_obj.name
-#        sys.stderr.write(file_path + "\n")
-#        with open (file_path, 'b+') as destination:
-#            for chunk in file_obj.chunks():
-#                sys.stderr.write("*** handle *** ccc ***\n")
-#                destination.write(chunk)
-#                sys.stderr.wirte("*** handle *** eee ***\n")
+def upMBO(request):
+    data='nothing'
+    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+    my_file = os.path.join(THIS_FOLDER,'upM.txt')
+    f = open(my_file,'r', encoding='UTF-8')
+    data = f.read()
+    data = data.replace('\n','^')
+    data = data.split('^')
+    BB = len(data)
+    CC = int(BB)
+    object_list = User.objects.all()
+    if request.method == 'POST':
+        for i in range(CC) :
+            k=1
+            for j in object_list:
+                if data[i] == j.username:
+                    task = get_object_or_404(MBO22, user=j.id)
+                    task.MBO22A1=data[i+1]
+                    if data[i+2] != '#':
+                        task.MBO22B1=data[i+2]
+                        k+=1
+                        if data[i+3] != '#':
+                            task.MBO22C1=data[i+3]
+                            k+=1
+                            if data[i+4] != '#':
+                                task.MBO22D1=data[i+4]
+                                k+=1
+                                if data[i+5] != '#':
+                                    task.MBO22E1=data[i+5]
+                                    k+=1
+                                    if data[i+6] != '#':
+                                        task.MBO22F1=data[i+6]
+                                        k+=1
+                                        if data[i+7] != '#':
+                                            task.MBO22G1=data[i+7]
+                                            k+=1
+                    if k==1:
+                        task.MBO22AP=data[i+2+k]
+                    if k==2:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                    if k==3:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                        task.MBO22CP=data[i+2+k+2]
+                    if k==4:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                        task.MBO22CP=data[i+2+k+2]
+                        task.MBO22DP=data[i+2+k+3]
+                    if k==5:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                        task.MBO22CP=data[i+2+k+2]
+                        task.MBO22DP=data[i+2+k+3]
+                        task.MBO22EP=data[i+2+k+4]
+                    if k==6:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                        task.MBO22CP=data[i+2+k+2]
+                        task.MBO22DP=data[i+2+k+3]
+                        task.MBO22EP=data[i+2+k+4]
+                        task.MBO22FP=data[i+2+k+5]
+                    if k==7:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                        task.MBO22CP=data[i+2+k+2]
+                        task.MBO22DP=data[i+2+k+3]
+                        task.MBO22EP=data[i+2+k+4]
+                        task.MBO22FP=data[i+2+k+5]
+                        task.MBO22GP=data[i+2+k+6]
+                    task.save()
+                    break                  
+        return redirect(to='/RH')
+    params = {"form":data,"BB":BB}
+    return render(request, 'blog/upMBO.html', params)
 
-    
 
+
+def upADC(request):
+    data='nothing'
+    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+    my_file = os.path.join(THIS_FOLDER,'upA.txt')
+    f = open(my_file,'r', encoding='UTF-8')
+    data = f.read()
+    data = data.replace('\n','^')
+    data = data.split('^')
+    BB = len(data)
+    CC = int(BB/28)
+    object_list = User.objects.all()
+    if request.method == 'POST':
+        for i in range(CC) :
+            k=1
+            l=i*28
+            for j in object_list:
+                if data[l] == j.username:
+                    task = get_object_or_404(ADC22, user=j.id)
+                    for m in range(18):
+                        if data[l+m+1]=='None':
+                            data[l+1+m]=1.0
+                    task.ADC22G1C=float(data[l+1])
+                    task.ADC22G2C=float(data[l+2])
+                    task.ADC22G3C=float(data[l+3])
+                    task.ADC22G4C=float(data[l+4])
+                    task.ADC22G5C=float(data[l+5])
+                    task.ADC22G6C=float(data[l+6])
+                    task.ADC22G7C=float(data[l+7])
+                    task.ADC22E1C=float(data[l+8])
+                    task.ADC22E2C=float(data[l+9])
+                    task.ADC22G1A=float(data[l+10])
+                    task.ADC22G2A=float(data[l+11])
+                    task.ADC22G3A=float(data[l+12])
+                    task.ADC22G4A=float(data[l+13])
+                    task.ADC22G5A=float(data[l+14])
+                    task.ADC22G6A=float(data[l+15])
+                    task.ADC22G7A=float(data[l+16])
+                    task.ADC22E1A=float(data[l+17])
+                    task.ADC22E2A=float(data[l+18])
+                    task.ADC22G1O=data[l+19]
+                    task.ADC22G2O=data[l+20]
+                    task.ADC22G3O=data[l+21]
+                    task.ADC22G4O=data[l+22]
+                    task.ADC22G5O=data[l+23]
+                    task.ADC22G6O=data[l+24]
+                    task.ADC22G7O=data[l+25]
+                    task.ADC22E1O=data[l+26]
+                    task.ADC22E2O=data[l+27]
+                    task.save()
+                    break                  
+        return redirect(to='/RH')
+    params = {"form":data,"BB":BB}
+    return render(request, 'blog/upADC.html', params)
+
+
+def upPDI(request):
+    data='nothing'
+    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+    my_file = os.path.join(THIS_FOLDER,'upP.txt')
+    f = open(my_file,'r', encoding='UTF-8')
+    data = f.read()
+    data = data.replace('\n','^')
+    data = data.split('^')
+    BB = len(data)
+    CC = int(BB/14)
+    object_list = User.objects.all()
+    if request.method == 'POST':
+        for i in range(CC) :
+            k=1
+            l=i*14
+            for j in object_list:
+                if data[l] == j.username:
+                    task = get_object_or_404(PDI22, user=j.id)
+                    task.PDI22G1C=data[l+1]
+                    task.PDI22G2C=data[l+2]
+                    task.PDI22G3C=data[l+3]
+                    task.PDI22G1PD=data[l+4]
+                    task.PDI22G2PD=data[l+5]
+                    task.PDI22G3PD=data[l+6]
+                    task.PDI22E1PD=data[l+7]
+                    task.PDI22E2PD=data[l+8]
+                    task.PDI22G1=data[l+9]
+                    task.PDI22G2=data[l+10]
+                    task.PDI22G3=data[l+11]
+                    task.PDI22E1=data[l+12]
+                    task.PDI22E2=data[l+13]
+
+                    task.save()
+                    break                  
+        return redirect(to='/RH')
+    params = {"form":data,"BB":BB}
+    return render(request, 'blog/upPDI.html', params)
+
+
+def upCE(request):
+    object_list = User.objects.all()
+    if request.method == 'POST':
+        for i in object_list:
+            task = get_object_or_404(ADC22, user=i.id)
+            task.ADC22E1=i.first_name
+            task.ADC22E2=i.last_name
+            task.save()
+        return redirect(to='/RH')
+    return render(request, 'blog/upCE.html')
+
+def listMBO(request):
+    object_list = User.objects.all()
+    data=''
+    for i in object_list:
+        data+=i.username
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22A1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22B1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22C1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22D1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22E1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22F1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22G1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22AP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22BP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22CP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22DP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22EP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22FP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22GP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22A2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22B2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22C2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22D2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22E2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22F2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22G2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22A3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22B3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22C3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22D3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22E3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22F3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22G3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22A4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22B4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22C4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22D4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22E4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22F4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22G4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22AR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22BR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22CR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22DR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22ER').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22FR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22GR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23A1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23B1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23C1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23D1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23E1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23F1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23G1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23AP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23BP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23CP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23DP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23EP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23FP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23GP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23A2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23B2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23C2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23D2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23E2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23F2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23G2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23A3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23B3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23C3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23D3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23E3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23F3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23G3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23A4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23B4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23C4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23D4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23E4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23F4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23G4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23AR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23BR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23CR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23DR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23ER').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23FR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23GR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+    data = data.replace('\n','')
+    data = data.split('^')
+    params={"data":data}
+    return render(request, 'blog/listMBO.html',params)
+
+def listADC(request):
+    object_list = User.objects.all()
+    data=''
+    for i in object_list:
+        data+=i.username
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G3C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G4C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G5C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G6C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G7C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G1A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G2A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G3A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G4A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G5A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G6A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G7A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G1OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G2OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G3OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G4OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G5OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G6OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G7OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA+=ADC22.objects.values_list('ADC22G1O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G2O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G3O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G4O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G5O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G6O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G7O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E1OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E2OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E1O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E2O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G3C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G4C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G5C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G6C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G7C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G1A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G2A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G3A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G4A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G5A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G6A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G7A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G1OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G2OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G3OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G4OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G5OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G6OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G7OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA+=ADC22.objects.values_list('ADC23G1O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G2O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G3O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G4O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G5O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G6O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G7O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E1A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E2A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E1OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E2OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E1O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E2O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'       
+    data = data.replace('\n','')
+    data = data.split('^')
+    params={"data":data}
+    return render(request, 'blog/listMBO.html',params)
+
+
+def listPDI(request):
+    object_list = User.objects.all()
+    data=''
+    for i in object_list:
+        data+=i.username
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G1PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G2PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G3C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G3PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E1PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E2PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G1PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G2PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G3C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G3PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E1PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E2PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+    data = data.replace('\n','')
+    data = data.split('^')
+    params={"data":data}
+    return render(request, 'blog/listPDI.html',params)
 
 
 def post_edit(request, pk):
