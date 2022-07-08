@@ -61,15 +61,17 @@ def upload(request):
         object_list = User.objects.all()
         for o in object_list:
             add_user = User.objects.filter(username=o.username).first()
-            BB = MBO22()
-            BB.user = add_user
-            BB.save()
-            CC = ADC22()
-            CC.user = add_user
-            CC.save()
-            DD = PDI22()
-            DD.user = add_user
-            DD.save()
+            if o.username != 'hyumanozaki':
+                if o.username != 'hyuma.nozaki@cosmotec.com.br':
+                    BB = MBO22()
+                    BB.user = add_user
+                    BB.save()
+                    CC = ADC22()
+                    CC.user = add_user
+                    CC.save()
+                    DD = PDI22()
+                    DD.user = add_user
+                    DD.save()
         return redirect(to='/RH')
     params = {"form":data,"BB":BB}
     return render(request, 'blog/upload.html', params)
@@ -2013,6 +2015,7 @@ def Logout(request):
         else :
             time=0
 
+
     if (request.method == 'POST'):
         if (time==1):
             ptotal = MBO22.objects.values_list('MBO22AP').get(user=request.user)+MBO22.objects.values_list('MBO22BP').get(user=request.user)+MBO22.objects.values_list('MBO22CP').get(user=request.user)+MBO22.objects.values_list('MBO22DP').get(user=request.user)+MBO22.objects.values_list('MBO22EP').get(user=request.user)+MBO22.objects.values_list('MBO22FP').get(user=request.user)+MBO22.objects.values_list('MBO22GP').get(user=request.user)
@@ -2052,7 +2055,6 @@ def Logout(request):
             recipient_list = [request.user.email]  # 宛先リスト
             send_mail(subject, message, from_email, recipient_list)
             return render(request, "blog/Logout.html", context=params)
-
     
     params = {"UserID":request.user,"data1":MBO22.objects.values_list('MBO22A1','MBO22B1','MBO22C1','MBO22D1','MBO22E1','MBO22F1','MBO22G1').get(user=request.user),"data2":MBO22.objects.values_list('MBO22AP','MBO22BP','MBO22CP','MBO22DP','MBO22EP','MBO22FP','MBO22GP').get(user=request.user),"data3":MBO22.objects.values_list('MBO22A2','MBO22B2','MBO22C2','MBO22D2','MBO22E2','MBO22F2','MBO22G2').get(user=request.user),"data4":MBO22.objects.values_list('MBO22A3','MBO22B3','MBO22C3','MBO22D3','MBO22E3','MBO22F3','MBO22G3').get(user=request.user),"data5":MBO22.objects.values_list('MBO22A4','MBO22B4','MBO22C4','MBO22D4','MBO22E4','MBO22F4','MBO22G4').get(user=request.user),"data6":MBO22.objects.values_list('MBO22AR','MBO22BR','MBO22CR','MBO22DR','MBO22ER','MBO22FR','MBO22GR').get(user=request.user),"data7":request.user.email,"time":time,"time2":porta}
     return render(request, "blog/Logout.html",context=params)
@@ -3405,23 +3407,20 @@ def home(request):
     ADC24TIME=[]
     ADC24TIME+=RHDT.objects.values_list('ADCTIME24').get(user=resultb6)
 
-    if request.user != colaborador2 :
-        obj = MBO22.objects.get(user=request.user)
-        if (request.method == 'POST'):
-            friend = DeptForm(request.POST, instance=obj)
-            friend.save()
+    obj = MBO22.objects.get(user=request.user)
+    if (request.method == 'POST'):
+        friend = DeptForm(request.POST, instance=obj)
+        friend.save()
 
-
-    if request.user == colaborador2 :
-        time=1
+    dept=[]
+    dept+=MBO22.objects.values_list('DEPT').get(user=request.user)
+    dept1=str(dept[0])
+    if dept1 == '':
+        time=0
     else:
-        dept=[]
-        dept+=MBO22.objects.values_list('DEPT').get(user=request.user)
-        dept1=str(dept[0])
-        if dept1 == '':
-            time=0
-        else:
-            time=1
+        time=1
+
+
 
     params = {
         "UserID":request.user,

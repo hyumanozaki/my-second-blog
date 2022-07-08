@@ -8,8 +8,8 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 
 </head>
     <body class="container">  
+    <form action="{% url 'Logout' %}" method="post">
         <p class="small">MBO2022 de {{UserID}} / avaliador : {{data7}}</p>
-        <form action="{% url 'Logout' %}" method="post">
         {% csrf_token %}
         <table border="1" >
             <tr>
@@ -85,6 +85,9 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
                 <td style="height: 60px;"><font size="1">{{ data6.6 }}</font></td>
             </tr>
         </table>
+
+
+
             {% if time == 1 %}  
             <font size="2" color="red">Clique Edit e defina sua meta e peso%, e depois clique "submeter para avaliador"</font>
             <br><td><a href="{% url 'edit' user.id %}"><font size="2">Edit</font></a></td>
@@ -125,5 +128,5 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
             {% endif %}
             <br><td><a href="{% url 'home' %}"><font size="2"> volta para home</font></a></td>
         </form>
-        </body>
+    </body>
 </html>
