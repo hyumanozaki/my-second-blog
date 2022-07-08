@@ -58,6 +58,8 @@ def upload(request):
             AA.last_name = data[m]
             AA.email = data[n]
             AA.save()
+            AA.set_password(str(data[k]))
+            AA.save()
         object_list = User.objects.all()
         for o in object_list:
             add_user = User.objects.filter(username=o.username).first()
@@ -71,7 +73,8 @@ def upload(request):
                     CC.save()
                     DD = PDI22()
                     DD.user = add_user
-                    DD.save()
+                    DD.save()                   
+
         return redirect(to='/RH')
     params = {"form":data,"BB":BB}
     return render(request, 'blog/upload.html', params)
