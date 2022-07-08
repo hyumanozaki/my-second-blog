@@ -3412,7 +3412,9 @@ def home(request):
             friend.save()
 
 
-    if request.user != colaborador2 :
+    if request.user == colaborador2 :
+        time=1
+    else:
         dept=[]
         dept+=MBO22.objects.values_list('DEPT').get(user=request.user)
         dept1=str(dept[0])
@@ -3420,8 +3422,6 @@ def home(request):
             time=0
         else:
             time=1
-    else :
-        time = 1
 
     params = {
         "UserID":request.user,
