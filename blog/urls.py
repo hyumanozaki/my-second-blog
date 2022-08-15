@@ -29,6 +29,7 @@ urlpatterns = [
     path('upADC',views.upADC,name="upADC"),
     path('upPDI',views.upPDI,name="upPDI"),
     path('upCE',views.upCE,name="upCE"),
+    path('upcomp',views.upcomp,name="upcomp"),
     path('listAE',views.listAE,name="listAE"),
     path('listMBO',views.listMBO,name="listMBO"),
     path('listADC',views.listADC,name="listADC"),
