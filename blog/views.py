@@ -22,1436 +22,15 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 import sys
 import os
+import xlsxwriter
+import io
+import openpyxl as op
+from apscheduler.schedulers.background import BackgroundScheduler
 #import numpy as np
 #import pandas as pd
 #from user.models import User, Order
 
 User = get_user_model()
-
-
-Y1 = 2022
-Q1 = 10
-Q2 = 11
-Q3 = 12
-
-def upload(request):
-    data='nothing'
-    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-    my_file = os.path.join(THIS_FOLDER,'psw.txt')
-    f = open(my_file,'r', encoding='UTF-8')
-    data = f.read()
-    data = data.replace('\n',',')
-    data = data.split(',')
-    BB = len(data)
-    CC = int(BB/5)
-    if request.method == 'POST':
-        for i in range(CC) :
-            j=5*i
-            k=j+1
-            l=j+2
-            m=j+3
-            n=j+4
-            AA = User()
-            AA.username = data[j]
-            AA.password = data[k]
-            AA.first_name = data[l]
-            AA.last_name = data[m]
-            AA.email = data[n]
-            AA.save()
-            AA.set_password(str(data[k]))
-            AA.save()
-        object_list = User.objects.all()
-        for o in object_list:
-            add_user = User.objects.filter(username=o.username).first()
-            if o.username != 'hyumanozaki':
-                if o.username != 'hyuma.nozaki@cosmotec.com.br':
-                    BB = MBO22()
-                    BB.user = add_user
-                    BB.save()
-                    CC = ADC22()
-                    CC.user = add_user
-                    CC.save()
-                    DD = PDI22()
-                    DD.user = add_user
-                    DD.save()                   
-
-        return redirect(to='/RH')
-    params = {"form":data,"BB":BB}
-    return render(request, 'blog/upload.html', params)
-
-def upMBO(request):
-    data='nothing'
-    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-    my_file = os.path.join(THIS_FOLDER,'upM.txt')
-    f = open(my_file,'r', encoding='UTF-8')
-    data = f.read()
-    data = data.replace('\n','^')
-    data = data.split('^')
-    BB = len(data)
-    CC = int(BB)
-    object_list = User.objects.all()
-    if request.method == 'POST':
-        for i in range(CC) :
-            k=1
-            for j in object_list:
-                if data[i] == j.username:
-                    task = get_object_or_404(MBO22, user=j.id)
-                    task.MBO22A1=data[i+1]
-                    if data[i+2] != '#':
-                        task.MBO22B1=data[i+2]
-                        k+=1
-                        if data[i+3] != '#':
-                            task.MBO22C1=data[i+3]
-                            k+=1
-                            if data[i+4] != '#':
-                                task.MBO22D1=data[i+4]
-                                k+=1
-                                if data[i+5] != '#':
-                                    task.MBO22E1=data[i+5]
-                                    k+=1
-                                    if data[i+6] != '#':
-                                        task.MBO22F1=data[i+6]
-                                        k+=1
-                                        if data[i+7] != '#':
-                                            task.MBO22G1=data[i+7]
-                                            k+=1
-                    if k==1:
-                        task.MBO22AP=data[i+2+k]
-                    if k==2:
-                        task.MBO22AP=data[i+2+k]
-                        task.MBO22BP=data[i+2+k+1]
-                    if k==3:
-                        task.MBO22AP=data[i+2+k]
-                        task.MBO22BP=data[i+2+k+1]
-                        task.MBO22CP=data[i+2+k+2]
-                    if k==4:
-                        task.MBO22AP=data[i+2+k]
-                        task.MBO22BP=data[i+2+k+1]
-                        task.MBO22CP=data[i+2+k+2]
-                        task.MBO22DP=data[i+2+k+3]
-                    if k==5:
-                        task.MBO22AP=data[i+2+k]
-                        task.MBO22BP=data[i+2+k+1]
-                        task.MBO22CP=data[i+2+k+2]
-                        task.MBO22DP=data[i+2+k+3]
-                        task.MBO22EP=data[i+2+k+4]
-                    if k==6:
-                        task.MBO22AP=data[i+2+k]
-                        task.MBO22BP=data[i+2+k+1]
-                        task.MBO22CP=data[i+2+k+2]
-                        task.MBO22DP=data[i+2+k+3]
-                        task.MBO22EP=data[i+2+k+4]
-                        task.MBO22FP=data[i+2+k+5]
-                    if k==7:
-                        task.MBO22AP=data[i+2+k]
-                        task.MBO22BP=data[i+2+k+1]
-                        task.MBO22CP=data[i+2+k+2]
-                        task.MBO22DP=data[i+2+k+3]
-                        task.MBO22EP=data[i+2+k+4]
-                        task.MBO22FP=data[i+2+k+5]
-                        task.MBO22GP=data[i+2+k+6]
-                    task.save()
-                    break                  
-        return redirect(to='/RH')
-    params = {"form":data,"BB":BB}
-    return render(request, 'blog/upMBO.html', params)
-
-
-
-def upADC(request):
-    data='nothing'
-    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-    my_file = os.path.join(THIS_FOLDER,'upA.txt')
-    f = open(my_file,'r', encoding='UTF-8')
-    data = f.read()
-    data = data.replace('\n','^')
-    data = data.split('^')
-    BB = len(data)
-    CC = int(BB/28)
-    object_list = User.objects.all()
-    if request.method == 'POST':
-        for i in range(CC) :
-            k=1
-            l=i*28
-            for j in object_list:
-                if data[l] == j.username:
-                    task = get_object_or_404(ADC22, user=j.id)
-                    for m in range(18):
-                        if data[l+m+1]=='None':
-                            data[l+1+m]=1.0
-                    task.ADC22G1C=float(data[l+1])
-                    task.ADC22G2C=float(data[l+2])
-                    task.ADC22G3C=float(data[l+3])
-                    task.ADC22G4C=float(data[l+4])
-                    task.ADC22G5C=float(data[l+5])
-                    task.ADC22G6C=float(data[l+6])
-                    task.ADC22G7C=float(data[l+7])
-                    task.ADC22E1C=float(data[l+8])
-                    task.ADC22E2C=float(data[l+9])
-                    task.ADC22G1A=float(data[l+10])
-                    task.ADC22G2A=float(data[l+11])
-                    task.ADC22G3A=float(data[l+12])
-                    task.ADC22G4A=float(data[l+13])
-                    task.ADC22G5A=float(data[l+14])
-                    task.ADC22G6A=float(data[l+15])
-                    task.ADC22G7A=float(data[l+16])
-                    task.ADC22E1A=float(data[l+17])
-                    task.ADC22E2A=float(data[l+18])
-                    task.ADC22G1O=data[l+19]
-                    task.ADC22G2O=data[l+20]
-                    task.ADC22G3O=data[l+21]
-                    task.ADC22G4O=data[l+22]
-                    task.ADC22G5O=data[l+23]
-                    task.ADC22G6O=data[l+24]
-                    task.ADC22G7O=data[l+25]
-                    task.ADC22E1O=data[l+26]
-                    task.ADC22E2O=data[l+27]
-                    task.save()
-                    break                  
-        return redirect(to='/RH')
-    params = {"form":data,"BB":BB}
-    return render(request, 'blog/upADC.html', params)
-
-
-def upPDI(request):
-    data='nothing'
-    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-    my_file = os.path.join(THIS_FOLDER,'upP.txt')
-    f = open(my_file,'r', encoding='UTF-8')
-    data = f.read()
-    data = data.replace('\n','^')
-    data = data.split('^')
-    BB = len(data)
-    CC = int(BB/14)
-    object_list = User.objects.all()
-    if request.method == 'POST':
-        for i in range(CC) :
-            k=1
-            l=i*14
-            for j in object_list:
-                if data[l] == j.username:
-                    task = get_object_or_404(PDI22, user=j.id)
-                    task.PDI22G1C=data[l+1]
-                    task.PDI22G2C=data[l+2]
-                    task.PDI22G3C=data[l+3]
-                    task.PDI22G1PD=data[l+4]
-                    task.PDI22G2PD=data[l+5]
-                    task.PDI22G3PD=data[l+6]
-                    task.PDI22E1PD=data[l+7]
-                    task.PDI22E2PD=data[l+8]
-                    task.PDI22G1=data[l+9]
-                    task.PDI22G2=data[l+10]
-                    task.PDI22G3=data[l+11]
-                    task.PDI22E1=data[l+12]
-                    task.PDI22E2=data[l+13]
-
-                    task.save()
-                    break                  
-        return redirect(to='/RH')
-    params = {"form":data,"BB":BB}
-    return render(request, 'blog/upPDI.html', params)
-
-
-def upCE(request):
-    object_list = User.objects.all()
-    if request.method == 'POST':
-        for i in object_list:
-            task = get_object_or_404(ADC22, user=i.id)
-            task.ADC22E1=i.first_name
-            task.ADC22E2=i.last_name
-            task.save()
-        return redirect(to='/RH')
-    return render(request, 'blog/upCE.html')
-
-def listMBO(request):
-    object_list = User.objects.all()
-    data=''
-    for i in object_list:
-        data+=i.username
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22A1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22B1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22C1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22D1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22E1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22F1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22G1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22AP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22BP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22CP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22DP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22EP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22FP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22GP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22A2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22B2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22C2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22D2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22E2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22F2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22G2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22A3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22B3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22C3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22D3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22E3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22F3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22G3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22A4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22B4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22C4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22D4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22E4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22F4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22G4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22AR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22BR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22CR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22DR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22ER').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22FR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO22GR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23A1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23B1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23C1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23D1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23E1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23F1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23G1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23AP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23BP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23CP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23DP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23EP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23FP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23GP').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23A2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23B2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23C2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23D2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23E2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23F2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23G2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23A3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23B3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23C3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23D3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23E3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23F3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23G3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23A4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23B4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23C4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23D4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23E4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23F4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23G4').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23AR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23BR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23CR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23DR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23ER').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23FR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=MBO22.objects.values_list('MBO23GR').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-    data = data.replace('\n','')
-    data = data.split('^')
-    params={"data":data}
-    return render(request, 'blog/listMBO.html',params)
-
-def listADC(request):
-    object_list = User.objects.all()
-    data=''
-    for i in object_list:
-        data+=i.username
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G1C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G2C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G3C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G4C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G5C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G6C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G7C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G1A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G2A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G3A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G4A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G5A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G6A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G7A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G1OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G2OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G3OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G4OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G5OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G6OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G7OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA+=ADC22.objects.values_list('ADC22G1O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G2O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G3O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G4O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G5O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G6O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22G7O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22E1OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22E2OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22E1O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC22E2O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G1C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G2C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G3C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G4C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G5C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G6C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G7C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G1A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G2A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G3A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G4A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G5A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G6A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G7A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G1OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G2OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G3OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G4OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G5OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G6OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G7OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA+=ADC22.objects.values_list('ADC23G1O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G2O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G3O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G4O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G5O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G6O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23G7O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23E1C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23E2C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23E1A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23E2A').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23E1OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23E2OC').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23E1O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=ADC22.objects.values_list('ADC23E2O').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'       
-    data = data.replace('\n','')
-    data = data.split('^')
-    params={"data":data}
-    return render(request, 'blog/listMBO.html',params)
-
-
-def listPDI(request):
-    object_list = User.objects.all()
-    data=''
-    for i in object_list:
-        data+=i.username
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22G1C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22G1PD').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22G1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22G2C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22G2PD').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22G2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22G3C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22G3PD').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22G3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22E1C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22E1PD').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22E1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22E2C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22E2PD').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI22E2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23G1C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23G1PD').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23G1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23G2C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23G2PD').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23G2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23G3C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23G3PD').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23G3').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23E1C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23E1PD').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23E1').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23E2C').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23E2PD').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-        AA=[]
-        AA+=PDI22.objects.values_list('PDI23E2').get(user=i.id)
-        if str(AA[0])=='':
-            AA[0]='None'
-        data+=str(AA[0])
-        data+='^'
-    data = data.replace('\n','')
-    data = data.split('^')
-    params={"data":data}
-    return render(request, 'blog/listPDI.html',params)
-
-
-def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
-
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post':post})
-
-def post_new(request):
-    form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
-
-def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'blog/post_list.html', {})
-
-def post_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
-
-
 
 def Login(request):
     # POST
@@ -1489,6 +68,34 @@ def Login(request):
 
 
 def homeA(request):
+
+    AA=''
+    BB=[]
+    CC=''
+    DD=[]
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
     result = ''
     result2 = ''
     result3 = ''
@@ -1518,13 +125,275 @@ def homeA(request):
             result5+=' '
             result8+=str(result7[j])
             result8+=' '
+            ID=int(result7[j])
+
+            AA+='#'
+            AA+='^'
+            AA+=str(result4[j])
+            AA+='^'
+            AA+='#'
+            AA+='^'
+
+            try:             
+
+                DD=RHDT.objects.values_list('MBOTIME22').get(user=resultb6)
+                DD1=MBO22.objects.values_list('MBO22Q1D').get(user=ID)
+                DD2=MBO22.objects.values_list('MBO22Q2D').get(user=ID)
+                DD3=MBO22.objects.values_list('MBO22Q3D').get(user=ID)
+                DD4=MBO22.objects.values_list('MBO22Q4D').get(user=ID)
+                if int(DD[0])==1:
+                    session='(define meta e peso% de 2022)'
+                    if int(DD1[0])==0:
+                        CC+=str(result4[j])
+                        CC+='^'
+                elif int(DD[0])==2:
+                    session='(primeiro alinhamento de 2022)'
+                    if int(DD2[0])==0:
+                        CC+=str(result4[j])
+                        CC+='^'
+                elif int(DD[0])==3:
+                    session='(segundo alinhamento de 2022)'
+                    if int(DD3[0])==0:
+                        CC+=str(result4[j])
+                        CC+='^'
+                elif int(DD[0])==4:
+                    session='(avaliação final de fim do ano e pontuação de 2022)'
+                    if int(DD4[0])==0:
+                        CC+=str(result4[j])
+                        CC+='^'
+
+                BB=MBO22.objects.values_list('MBO22A1').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22AP').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22A2').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22A3').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22A4').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22AR').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22B1').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22BP').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22B2').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22B3').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22B4').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22BR').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22C1').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22CP').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22C2').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22C3').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22C4').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22CR').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22D1').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22DP').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22D2').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22D3').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22D4').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22DR').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22E1').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22EP').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22E2').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22E3').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22E4').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22ER').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22F1').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22FP').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22F2').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22F3').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22F4').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22FR').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22G1').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22GP').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22G2').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22G3').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22G4').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=MBO22.objects.values_list('MBO22GR').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+            except:
+                AA+='não tem MBO'
+                AA+='^'
     result5=result5.split()
     result8=result8.split()
-    params = {"C1":result5,"A":result4,"C3":result4,"UserID":request.user}
-#    params = {"C1":object_list}
+    AA=AA.split('^')
+    CC=CC.split('^')
+    del AA[-1]
+    params = {
+        "UserID":request.user,
+        "time":AA,
+        "C1":result5,
+        "A":result4,
+        "C3":result4,
+        "UserID":request.user,
+        "CC":CC,
+        "session":session,
+        }
     return render(request, "blog/homeA.html",params)
 
 def homeB(request):
+
+    AA=''
+    BB=[]
+    CC=''
+    DD=[]
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     result = ''
     result2 = ''
     result3 = ''
@@ -1554,13 +423,243 @@ def homeB(request):
             result5+=' '
             result8+=str(result7[j])
             result8+=' '
+            ID = int(result7[j])
+
+            AA+='#'
+            AA+='^'
+            AA+=str(result4[j])
+            AA+='^'
+            AA+='#'
+            AA+='^'
+            try:
+                DD=ADC22.objects.values_list('ADC22D').get(user=ID)
+                if int(DD[0]) == 0:
+                    CC+=str(result4[j])
+                    CC+='^'
+                BB=RHDT.objects.values_list('ADC22G1').get(user=resultb6)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G1C').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G1A').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G1OC').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G1O').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=RHDT.objects.values_list('ADC22G2').get(user=resultb6)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G2C').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G2A').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G2OC').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G2O').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=RHDT.objects.values_list('ADC22G3').get(user=resultb6)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G3C').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G3A').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G3OC').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G3O').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=RHDT.objects.values_list('ADC22G4').get(user=resultb6)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G4C').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G4A').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G4OC').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G4O').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=RHDT.objects.values_list('ADC22G5').get(user=resultb6)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G5C').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G5A').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G5OC').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G5O').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=RHDT.objects.values_list('ADC22G6').get(user=resultb6)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G6C').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G6A').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G6OC').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G6O').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=RHDT.objects.values_list('ADC22G7').get(user=resultb6)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G7C').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G7A').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G7OC').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22G7O').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22E1').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22E1C').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22E1A').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22E1OC').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22E1O').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22E2').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22E2C').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22E2A').get(user=ID)
+                AA+=str(BB[0])
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22E2OC').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=ADC22.objects.values_list('ADC22E2O').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+            except:
+                AA+='não tem avaliação de competencia'
+                AA+='^'
+    AA=AA.split('^')
+    CC=CC.split('^')
     result5=result5.split()
     result8=result8.split()
-    params = {"C1":result5,"C2":result8,"C3":result4,"UserID":request.user}
-#    params = {"C1":object_list}
+    del AA[-1]
+    params = {
+        "UserID":request.user,
+        "time":AA,
+        "C1":result5,
+        "C2":result8,
+        "C3":result4,
+        "UserID":request.user,
+        "CC":CC,
+        }
     return render(request, "blog/homeB.html",params)
 
 def homeC(request):
+
+    AA=''
+    BB=[]
+    CC=''
+    DD=[]
+
     result = ''
     result2 = ''
     result3 = ''
@@ -1590,10 +689,106 @@ def homeC(request):
             result5+=' '
             result8+=str(result7[j])
             result8+=' '
+            ID=int(result7[j])
+
+            AA+='#'
+            AA+='^'
+            AA+=str(result4[j])
+            AA+='^'
+            AA+='#'
+            AA+='^'
+            try:
+                DD=PDI22.objects.values_list('PDI22D').get(user=ID)
+                if int(DD[0]) == 0:
+                    CC+=str(result4[j])
+                    CC+='^'
+                BB=PDI22.objects.values_list('PDI22G1C').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22G1PD').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22G1').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22G2C').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22G2PD').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22G2').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22G3C').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22G3PD').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22G3').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22E1C').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22E1PD').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22E1').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22E2C').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22E2PD').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                BB=PDI22.objects.values_list('PDI22E2').get(user=ID)
+                AA+=BB[0]
+                BB=[]
+                AA+='^'
+                AA+='#'
+                AA+='^'
+            except:
+                AA+='não tem PDI'
+                AA+='^'
+    AA=AA.split('^')
+    CC=CC.split('^')
     result5=result5.split()
     result8=result8.split()
-    params = {"C1":result5,"C2":result8,"C3":result4,"UserID":request.user}
-#    params = {"C1":object_list}
+    del AA[-1]
+    params = {
+        "UserID":request.user,
+        "time":AA,
+        "C1":result5,
+        "C2":result8,
+        "C3":result4,
+        "UserID":request.user,
+        "CC":CC,
+        }
     return render(request, "blog/homeC.html",params)
 
 
@@ -1631,6 +826,15 @@ def PDI2(request, name):
     result4 = ''
     result5 = ''
     result6 = 0
+    result7 = ''
+    result8 = ''
+    result9 = ''
+    result10 = ''
+    result11 = ''
+    result12 = ''
+    result13 = ''
+    result14 = ''
+    result15 = ''
     object_list = User.objects.all()
     for i in object_list:
         result = i.username
@@ -1639,12 +843,31 @@ def PDI2(request, name):
         result3 = str(i.id)
         result4 += result3
         result4 += ' '
+        result7 = i.email
+        result8 += result7
+        result8 += ' '
+        result10 = i.first_name
+        result11 += result10
+        result11 += '^'
+        result12 = i.last_name
+        result13 += result12
+        result13 += '^'
     result2=result2.split()
     result4=result4.split()
+    result8=result8.split()
+    result11=result11.split('^')
+    result13=result13.split('^')
     k=int(len(result2))
     for j in range(k):
         if (str(result2[j])==colaborador):
             result6=int(result4[j])
+            result9=str(result8[j])
+            result14=str(result11[j])
+            result15=str(result13[j])
+    if result9 == str(request.user) :
+        reject = 0
+    else :
+        reject = 1
 #    params = {"UserID":request.user,"data1":MBO22.objects.values_list('MBO22A1','MBO22B1','MBO22C1','MBO22D1','MBO22E1','MBO22F1','MBO22G1').get(user=colaborador),"data2":MBO22.objects.values_list('MBO22AP','MBO22BP','MBO22CP','MBO22DP','MBO22EP','MBO22FP','MBO22GP').get(user=colaborador),"data3":MBO22.objects.values_list('MBO22A2','MBO22B2','MBO22C2','MBO22D2','MBO22E2','MBO22F2','MBO22G2').get(user=colaborador),"data4":MBO22.objects.values_list('MBO22A3','MBO22B3','MBO22C3','MBO22D3','MBO22E3','MBO22F3','MBO22G3').get(user=colaborador),"data5":MBO22.objects.values_list('MBO22A4','MBO22B4','MBO22C4','MBO22D4','MBO22E4','MBO22F4','MBO22G4').get(user=colaborador),"data6":MBO22.objects.values_list('MBO22AR','MBO22BR','MBO22CR','MBO22DR','MBO22ER','MBO22FR','MBO22GR').get(user=colaborador)}
 
     porta=PDI22.objects.values_list('PDI22C').get(user=result6)
@@ -1663,55 +886,28 @@ def PDI2(request, name):
     M = today.month
     D = today.day
 
-    if (request.method == 'POST'):
-        order = request.POST.get('office')
-        task = get_object_or_404(PDI22, user=result6)
-        if (order == 'aprovar'):
-            new_status = 1
-            task.PDI22A = new_status
-            task.PDI22Y = Y
-            task.PDI22M = M
-            task.PDI22D = D
-            task.save()
-            time=2
-            subject = "seu PDI foi aprovado pelo avaliador/a, parabens!"
-            message = "seu PDI foi aprovado pelo avaliador/a, parabens!"
-            from_email = 'hyuma2331@gmail.com'  # 送信
-            recipient_list = [colaborador]  # 宛先リスト
-            send_mail(subject, message, from_email, recipient_list)
-
-        if (order == 'pede corrigir'):
-            new_status = 0
-            task.PDI22C = new_status
-            task.save()
-            time=0
-            subject = "seu avaliador/a pediu te para corrigir seu PDI"
-            message = "seu avaliador/a pediu te para corrigir seu PDI, talvez tenha algo errado e tenha que corrigir, entre o sistema e corrija"
-            from_email = 'hyuma2331@gmail.com'  # 送信
-            recipient_list = [colaborador]  # 宛先リスト
-            send_mail(subject, message, from_email, recipient_list)
 
 
     Glist=[]
-    Glist+=RHDT.objects.values_list('ADC22G1').get(user=resultb6),
+    Glist.append('resultado')
     Glist+=ADC22.objects.values_list('ADC22G1C').get(user=result6),
     Glist+=ADC22.objects.values_list('ADC22G1A').get(user=result6),
-    Glist+=RHDT.objects.values_list('ADC22G2').get(user=resultb6),
+    Glist.append('cliente')
     Glist+=ADC22.objects.values_list('ADC22G2C').get(user=result6),
     Glist+=ADC22.objects.values_list('ADC22G2A').get(user=result6),
-    Glist+=RHDT.objects.values_list('ADC22G3').get(user=resultb6),
+    Glist.append('busca')
     Glist+=ADC22.objects.values_list('ADC22G3C').get(user=result6),
     Glist+=ADC22.objects.values_list('ADC22G3A').get(user=result6),
-    Glist+=RHDT.objects.values_list('ADC22G4').get(user=resultb6),
+    Glist.append('liderança')
     Glist+=ADC22.objects.values_list('ADC22G4C').get(user=result6),
     Glist+=ADC22.objects.values_list('ADC22G4A').get(user=result6),
-    Glist+=RHDT.objects.values_list('ADC22G5').get(user=resultb6),
+    Glist.append('senso')
     Glist+=ADC22.objects.values_list('ADC22G5C').get(user=result6),
     Glist+=ADC22.objects.values_list('ADC22G5A').get(user=result6),
-    Glist+=RHDT.objects.values_list('ADC22G6').get(user=resultb6),
+    Glist.append('comunicação')
     Glist+=ADC22.objects.values_list('ADC22G6C').get(user=result6),
     Glist+=ADC22.objects.values_list('ADC22G6A').get(user=result6),
-    Glist+=RHDT.objects.values_list('ADC22G7').get(user=resultb6),
+    Glist.append('relacionamento')
     Glist+=ADC22.objects.values_list('ADC22G7C').get(user=result6),
     Glist+=ADC22.objects.values_list('ADC22G7A').get(user=result6),
 
@@ -1731,13 +927,14 @@ def PDI2(request, name):
         j=i*3
         k=j+1
         l=k+1
-        if (PDI22.objects.values_list('PDI22G1C').get(user=result6)==Glist[j]):
+
+        if str(Glist[j]) in str(PDI22.objects.values_list('PDI22G1C').get(user=result6)).lower():
             G1C+=Glist[k]
             G1A+=Glist[l]
-        if (PDI22.objects.values_list('PDI22G2C').get(user=result6)==Glist[j]):
+        if str(Glist[j]) in str(PDI22.objects.values_list('PDI22G2C').get(user=result6)).lower():
             G2C+=Glist[k]
             G2A+=Glist[l]
-        if (PDI22.objects.values_list('PDI22G3C').get(user=result6)==Glist[j]):
+        if str(Glist[j]) in str(PDI22.objects.values_list('PDI22G3C').get(user=result6)).lower():
             G3C+=Glist[k]
             G3A+=Glist[l]
 
@@ -1772,6 +969,91 @@ def PDI2(request, name):
         data32=G3A[0]
 
 
+    task = get_object_or_404(PDI22, user=result6)
+    if (request.method == 'POST'):
+        if "DL" in request.POST:
+            output = io.BytesIO()
+            book = op.Workbook(output)
+            book = xlsxwriter.Workbook(output)
+            ws = book.add_worksheet('PDI dele(a)')
+            format = book.add_format({'border':1})
+            format.set_text_wrap()         
+            ws.write(1,1,'foco de competencia geral', format)
+            ws.write(1,2,'auto avaliação', format)
+            ws.write(1,3,'avaliação por avaliador', format)
+            ws.write(1,4,'ponto a desenvolver', format)
+            ws.write(1,5,'plano de desenvolvimento individual', format)
+            ws.write(2,1,task.PDI22G1C, format)
+            ws.write(2,2,data11, format)
+            ws.write(2,3,data12, format)
+            ws.write(2,4,task.PDI22G1PD, format)
+            ws.write(2,5,task.PDI22G1, format)
+            ws.write(3,1,task.PDI22G2C, format)
+            ws.write(3,2,data21, format)
+            ws.write(3,3,data22, format)
+            ws.write(3,4,task.PDI22G2PD, format)
+            ws.write(3,5,task.PDI22G2, format)
+            ws.write(4,1,task.PDI22G3C, format)
+            ws.write(4,2,data31, format)
+            ws.write(4,3,data32, format)
+            ws.write(4,4,task.PDI22G3PD, format)
+            ws.write(4,5,task.PDI22G3, format)
+            ws.write(6,1,'competencia especifica', format)
+            ws.write(6,2,'auto avaliação', format)
+            ws.write(6,3,'avaliação por avaliador', format)
+            ws.write(6,4,'ponto a desenvolver', format)
+            ws.write(6,5,'plano de desenvolvimento individual', format)
+            ws.write(7,1,result14, format)
+            ws.write(7,2,str(E1C[0]), format)
+            ws.write(7,3,str(E1A[0]), format)
+            ws.write(7,4,task.PDI22E1PD, format)
+            ws.write(7,5,task.PDI22E1, format)
+            ws.write(8,1,result15, format)
+            ws.write(8,2,str(E2C[0]), format)
+            ws.write(8,3,str(E2A[0]), format)
+            ws.write(8,4,task.PDI22E2PD, format)
+            ws.write(8,5,task.PDI22E2, format)
+            ws.set_column('B:B',20)
+            ws.set_column('C:D',11)
+            ws.set_column('E:F',40)
+            ws.set_row(2,50)
+            ws.set_row(3,50)
+            ws.set_row(4,50)
+            ws.set_row(7,50)
+            ws.set_row(8,50)
+            book.close()
+            output.seek(0)
+            filename = 'PDI dele(a).xlsx'
+            response = HttpResponse(output, content_type='aplication/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename=%s' %filename
+            return response
+
+        elif "send" in request.POST:
+            new_status = 1
+            task.PDI22A = new_status
+            task.PDI22Y = Y
+            task.PDI22M = M
+            task.PDI22D = D
+            task.save()
+            time=2
+            subject = "seu PDI foi aprovado pelo avaliador/a, parabens!"
+            message = "seu PDI foi aprovado pelo avaliador/a, parabens!"
+            from_email = 'sistema.rh@cosmotec.com.br'  # 送信
+            #from_email = 'hyuma2331@gmail.com'  # 送信
+            recipient_list = [colaborador]  # 宛先リスト
+            send_mail(subject, message, from_email, recipient_list)
+        elif "deny" in request.POST:
+            new_status = 0
+            task.PDI22C = new_status
+            task.save()
+            time=0
+            subject = "seu avaliador/a pediu te para corrigir seu PDI"
+            message = "seu avaliador/a pediu te para corrigir seu PDI, talvez tenha algo errado e tenha que corrigir, entre o sistema e corrija"
+            from_email = 'sistema.rh@cosmotec.com.br'  # 送信
+#            from_email = 'hyuma2331@gmail.com'  # 送信
+            recipient_list = [colaborador]  # 宛先リスト
+            send_mail(subject, message, from_email, recipient_list)
+
     params = {"UserID":request.user,
         "avaliado":colaborador,
         "data1":PDI22.objects.values_list('PDI22G1C','PDI22G1PD','PDI22G1').get(user=result6),
@@ -1783,13 +1065,18 @@ def PDI2(request, name):
         "data3":PDI22.objects.values_list('PDI22G3C','PDI22G3PD','PDI22G3').get(user=result6),
         "data31":data31,
         "data32":data32,
-        "data4":PDI22.objects.values_list('PDI22E1C','PDI22E1PD','PDI22E1').get(user=result6),
+#        "data40":ADC22.objects.values_list('ADC22E1').get(user=result6),
+        "data40":result14,
+        "data4":PDI22.objects.values_list('PDI22E1PD','PDI22E1').get(user=result6),
         "data41":E1C[0],
         "data42":E1A[0],
-        "data5":PDI22.objects.values_list('PDI22E2C','PDI22E2PD','PDI22E2').get(user=result6),
+#        "data50":ADC22.objects.values_list('ADC22E2').get(user=result6),
+        "data50":result15,
+        "data5":PDI22.objects.values_list('PDI22E2PD','PDI22E2').get(user=result6),
         "data51":E2C[0],
         "data52":E2A[0],
         "time":time,
+        "reject":reject,
         }
     return render(request, "blog/PDI2.html", context=params)
 
@@ -1832,6 +1119,9 @@ def Logout2(request, name):
     result4 = ''
     result5 = ''
     result6 = 0
+    result7 = ''
+    result8 = ''
+    result9 = ''
     object_list = User.objects.all()
     for i in object_list:
         result = i.username
@@ -1840,12 +1130,21 @@ def Logout2(request, name):
         result3 = str(i.id)
         result4 += result3
         result4 += ' '
+        result7 = i.email
+        result8 += result7
+        result8 += ' '
     result2=result2.split()
     result4=result4.split()
+    result8=result8.split()
     k=int(len(result2))
     for j in range(k):
         if (str(result2[j])==colaborador):
             result6=int(result4[j])
+            result9=str(result8[j])
+    if result9 == str(request.user) :
+        reject = 0
+    else :
+        reject = 1
 #    params = {"UserID":request.user,"data1":MBO22.objects.values_list('MBO22A1','MBO22B1','MBO22C1','MBO22D1','MBO22E1','MBO22F1','MBO22G1').get(user=colaborador),"data2":MBO22.objects.values_list('MBO22AP','MBO22BP','MBO22CP','MBO22DP','MBO22EP','MBO22FP','MBO22GP').get(user=colaborador),"data3":MBO22.objects.values_list('MBO22A2','MBO22B2','MBO22C2','MBO22D2','MBO22E2','MBO22F2','MBO22G2').get(user=colaborador),"data4":MBO22.objects.values_list('MBO22A3','MBO22B3','MBO22C3','MBO22D3','MBO22E3','MBO22F3','MBO22G3').get(user=colaborador),"data5":MBO22.objects.values_list('MBO22A4','MBO22B4','MBO22C4','MBO22D4','MBO22E4','MBO22F4','MBO22G4').get(user=colaborador),"data6":MBO22.objects.values_list('MBO22AR','MBO22BR','MBO22CR','MBO22DR','MBO22ER','MBO22FR','MBO22GR').get(user=colaborador)}
 
 
@@ -1854,10 +1153,9 @@ def Logout2(request, name):
     M = today.month
     D = today.day
 
+    task = get_object_or_404(MBO22, user=result6)
     if (request.method == 'POST'):
-        order = request.POST.get('office')
-        if (order == 'aprovar'):
-            task = get_object_or_404(MBO22, user=result6)
+        if "send" in request.POST:        
             new_status = 1
             if (MBO22TIME==1):
                 task.MBO22Q1A = new_status
@@ -1885,11 +1183,10 @@ def Logout2(request, name):
                 task.save()
             subject = "seu MBO foi aprovado pelo avaliador/a, parabens!"
             message = "seu MBO foi aprovado pelo avaliador/a, parabens!"
-            from_email = 'hyuma2331@gmail.com'  # 送信
+            from_email = 'sistema.rh@cosmotec.com.br'  # 送信            
             recipient_list = [colaborador]  # 宛先リスト
             send_mail(subject, message, from_email, recipient_list)
-        if (order == 'pede corrigir'):
-            task = get_object_or_404(MBO22, user=result6)
+        elif "deny" in request.POST:
             new_status = 0
             if (MBO22TIME==1):
                 task.MBO22Q1 = new_status
@@ -1905,11 +1202,85 @@ def Logout2(request, name):
                 task.save()
             subject = "seu avaliador/a pediu te para corrigir seu MBO"
             message = "seu avaliador/a pediu te para corrigir seu MBO, talvez tenha algo errado e tenha que corrigir, entre o sistema e corrija"
-            from_email = 'hyuma2331@gmail.com'  # 送信
+#            from_email = 'hyuma2331@gmail.com'  # 送信
+            from_email = 'sistema.rh@cosmotec.com.br'  # 送信
             recipient_list = [colaborador]  # 宛先リスト
             send_mail(subject, message, from_email, recipient_list)
+        elif "DL" in request.POST:
+            output = io.BytesIO()
+            book = op.Workbook(output)
+            book = xlsxwriter.Workbook(output)
+            ws = book.add_worksheet('MBO dele(a)')
+            format = book.add_format({'border':1})
+            format.set_text_wrap()         
+            ws.write(1,1,'descrição de meta', format)
+            ws.write(1,2,'peso%', format)
+            ws.write(1,3,'primeiro alinhamento', format)
+            ws.write(1,4,'segundo alinhamento', format)
+            ws.write(1,5,'avalaição de fim do ano', format)
+            ws.write(1,6,'pontuação', format)
+            ws.write(2,1,task.MBO22A1, format)
+            ws.write(2,2,task.MBO22AP, format)
+            ws.write(2,3,task.MBO22A2, format)
+            ws.write(2,4,task.MBO22A3, format)
+            ws.write(2,5,task.MBO22A4, format)
+            ws.write(2,6,task.MBO22AR, format)
+            ws.write(3,1,task.MBO22B1, format)
+            ws.write(3,2,task.MBO22BP, format)
+            ws.write(3,3,task.MBO22B2, format)
+            ws.write(3,4,task.MBO22B3, format)
+            ws.write(3,5,task.MBO22B4, format)
+            ws.write(3,6,task.MBO22BR, format)
+            ws.write(4,1,task.MBO22C1, format)
+            ws.write(4,2,task.MBO22CP, format)
+            ws.write(4,3,task.MBO22C2, format)
+            ws.write(4,4,task.MBO22C3, format)
+            ws.write(4,5,task.MBO22C4, format)
+            ws.write(4,6,task.MBO22CR, format)
+            ws.write(5,1,task.MBO22D1, format)
+            ws.write(5,2,task.MBO22DP, format)
+            ws.write(5,3,task.MBO22D2, format)
+            ws.write(5,4,task.MBO22D3, format)
+            ws.write(5,5,task.MBO22D4, format)
+            ws.write(5,6,task.MBO22DR, format)
+            ws.write(6,1,task.MBO22E1, format)
+            ws.write(6,2,task.MBO22EP, format)
+            ws.write(6,3,task.MBO22E2, format)
+            ws.write(6,4,task.MBO22E3, format)
+            ws.write(6,5,task.MBO22E4, format)
+            ws.write(6,6,task.MBO22ER, format)
+            ws.write(7,1,task.MBO22F1, format)
+            ws.write(7,2,task.MBO22FP, format)
+            ws.write(7,3,task.MBO22F2, format)
+            ws.write(7,4,task.MBO22F3, format)
+            ws.write(7,5,task.MBO22F4, format)
+            ws.write(7,6,task.MBO22FR, format)
+            ws.write(8,1,task.MBO22G1, format)
+            ws.write(8,2,task.MBO22GP, format)
+            ws.write(8,3,task.MBO22G2, format)
+            ws.write(8,4,task.MBO22G3, format)
+            ws.write(8,5,task.MBO22G4, format)
+            ws.write(8,6,task.MBO22GR, format)
+            ws.set_column('B:B',33)
+            ws.set_column('C:C',11)
+            ws.set_column('D:E',33)
+            ws.set_column('F:F',11)
+            ws.set_column('G:G',33)
+            ws.set_row(2,50)
+            ws.set_row(3,50)
+            ws.set_row(4,50)
+            ws.set_row(5,50)
+            ws.set_row(6,50)
+            ws.set_row(7,50)
+            ws.set_row(8,50)
+            book.close()
+            output.seek(0)
+            filename = 'MBO dele(a).xlsx'
+            response = HttpResponse(output, content_type='aplication/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename=%s' %filename
+            return response
 
-
+    disp=0
     porta=MBO22.objects.values_list('MBO22Q1').get(user=result6)+MBO22.objects.values_list('MBO22Q2').get(user=result6)+MBO22.objects.values_list('MBO22Q3').get(user=result6)+MBO22.objects.values_list('MBO22Q4').get(user=result6)
     porta2=MBO22.objects.values_list('MBO22Q1A').get(user=result6)+MBO22.objects.values_list('MBO22Q2A').get(user=result6)+MBO22.objects.values_list('MBO22Q3A').get(user=result6)+MBO22.objects.values_list('MBO22Q4A').get(user=result6)
     if (MBO22TIME==1):
@@ -1937,6 +1308,7 @@ def Logout2(request, name):
         else :
             time=0
     if (MBO22TIME==4):
+        disp=1
         if (int(porta[3])==1):
             if (int(porta2[3])==0):
                 time=4
@@ -1955,7 +1327,7 @@ def Logout2(request, name):
         "data4":MBO22.objects.values_list('MBO22A3','MBO22B3','MBO22C3','MBO22D3','MBO22E3','MBO22F3','MBO22G3').get(user=result6),
         "data5":MBO22.objects.values_list('MBO22A4','MBO22B4','MBO22C4','MBO22D4','MBO22E4','MBO22F4','MBO22G4').get(user=result6),
         "data6":MBO22.objects.values_list('MBO22AR','MBO22BR','MBO22CR','MBO22DR','MBO22ER','MBO22FR','MBO22GR').get(user=result6),
-        "time":time,
+        "time":time,"disp":disp,"reject" : reject,"result9" : result9,
         }      
     return render(request, "blog/Logout2.html", context=params)
 
@@ -1987,11 +1359,11 @@ def Logout(request):
         if (str(resultb2[n])==colaborador2):
             resultb6=int(resultb4[n])
 
-
     MBO22TIME=[]
     MBO22TIME+=RHDT.objects.values_list('MBOTIME22').get(user=resultb6)
     MBO22TIME=int(MBO22TIME[0])
 
+    disp=0
     porta=[]
     porta+=MBO22.objects.values_list('MBO22Q1').get(user=request.user)
     porta+=MBO22.objects.values_list('MBO22Q2').get(user=request.user)
@@ -2013,370 +1385,138 @@ def Logout(request):
         else :
             time=0
     if (MBO22TIME==4):
+        disp=1
         if (int(porta[3])==0):
             time=4
         else :
             time=0
 
-
+    task = get_object_or_404(MBO22, user=request.user)
     if (request.method == 'POST'):
-        if (time==1):
-            ptotal = MBO22.objects.values_list('MBO22AP').get(user=request.user)+MBO22.objects.values_list('MBO22BP').get(user=request.user)+MBO22.objects.values_list('MBO22CP').get(user=request.user)+MBO22.objects.values_list('MBO22DP').get(user=request.user)+MBO22.objects.values_list('MBO22EP').get(user=request.user)+MBO22.objects.values_list('MBO22FP').get(user=request.user)+MBO22.objects.values_list('MBO22GP').get(user=request.user)
-            PT = int(ptotal[0])+int(ptotal[1])+int(ptotal[2])+int(ptotal[3])+int(ptotal[4])+int(ptotal[5])+int(ptotal[6])
-            if (PT==100):
+        if "DL" in request.POST:
+            output = io.BytesIO()
+            book = op.Workbook(output)
+            book = xlsxwriter.Workbook(output)
+            ws = book.add_worksheet('seu MBO')
+            format = book.add_format({'border':1})
+            format.set_text_wrap()         
+            ws.write(1,1,'descrição de metas', format)
+            ws.write(1,2,'peso%', format)
+            ws.write(1,3,'primeiro alinhamento', format)
+            ws.write(1,4,'segundo alinhamento', format)
+            ws.write(1,5,'avaliação de fim do ano', format)
+            ws.write(1,6,'pontuação', format)
+            ws.write(2,1,task.MBO22A1, format)
+            ws.write(2,2,task.MBO22AP, format)
+            ws.write(2,3,task.MBO22A2, format)
+            ws.write(2,4,task.MBO22A3, format)
+            ws.write(2,5,task.MBO22A4, format)
+            ws.write(2,6,task.MBO22AR, format)
+            ws.write(3,1,task.MBO22B1, format)
+            ws.write(3,2,task.MBO22BP, format)
+            ws.write(3,3,task.MBO22B2, format)
+            ws.write(3,4,task.MBO22B3, format)
+            ws.write(4,1,task.MBO22C1, format)
+            ws.write(4,2,task.MBO22CP, format)
+            ws.write(4,3,task.MBO22C2, format)
+            ws.write(4,4,task.MBO22C3, format)
+            ws.write(5,1,task.MBO22D1, format)
+            ws.write(5,2,task.MBO22DP, format)
+            ws.write(5,3,task.MBO22D2, format)
+            ws.write(5,4,task.MBO22D3, format)
+            ws.write(6,1,task.MBO22E1, format)
+            ws.write(6,2,task.MBO22EP, format)
+            ws.write(6,3,task.MBO22E2, format)
+            ws.write(6,4,task.MBO22E3, format)
+            ws.write(7,1,task.MBO22F1, format)
+            ws.write(7,2,task.MBO22FP, format)
+            ws.write(7,3,task.MBO22F2, format)
+            ws.write(7,4,task.MBO22F3, format)
+            ws.write(8,1,task.MBO22G1, format)
+            ws.write(8,2,task.MBO22GP, format)
+            ws.write(8,3,task.MBO22G2, format)
+            ws.write(8,4,task.MBO22G3, format)
+            ws.write(3,5,task.MBO22B4, format)
+            ws.write(3,6,task.MBO22BR, format)
+            ws.write(4,5,task.MBO22C4, format)
+            ws.write(4,6,task.MBO22CR, format)
+            ws.write(5,5,task.MBO22D4, format)
+            ws.write(5,6,task.MBO22DR, format)
+            ws.write(6,5,task.MBO22E4, format)
+            ws.write(6,6,task.MBO22ER, format)
+            ws.write(7,5,task.MBO22F4, format)
+            ws.write(7,6,task.MBO22FR, format)
+            ws.write(8,5,task.MBO22G4, format)
+            ws.write(8,6,task.MBO22GR, format)
+            ws.set_column('B:B',33)
+            ws.set_column('C:C',11)
+            ws.set_column('D:F',33)
+            ws.set_column('G:G',11)
+            ws.set_row(2,50)
+            ws.set_row(3,50)
+            ws.set_row(4,50)
+            ws.set_row(5,50)
+            ws.set_row(6,50)
+            ws.set_row(7,50)
+            ws.set_row(8,50)
+            book.close()
+            output.seek(0)
+            filename = 'seu MBO.xlsx'
+            response = HttpResponse(output, content_type='aplication/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename=%s' %filename
+            return response
+        elif "send" in request.POST:
+            if (time==1):
+                ptotal = MBO22.objects.values_list('MBO22AP').get(user=request.user)+MBO22.objects.values_list('MBO22BP').get(user=request.user)+MBO22.objects.values_list('MBO22CP').get(user=request.user)+MBO22.objects.values_list('MBO22DP').get(user=request.user)+MBO22.objects.values_list('MBO22EP').get(user=request.user)+MBO22.objects.values_list('MBO22FP').get(user=request.user)+MBO22.objects.values_list('MBO22GP').get(user=request.user)
+                PT = int(ptotal[0])+int(ptotal[1])+int(ptotal[2])+int(ptotal[3])+int(ptotal[4])+int(ptotal[5])+int(ptotal[6])
+                if (PT==100):
+                    new_status = 1
+                    task.MBO22Q1 = new_status
+                    task.save()
+                else :
+                    time = 5
+                    params = {"UserID":request.user,"data1":MBO22.objects.values_list('MBO22A1','MBO22B1','MBO22C1','MBO22D1','MBO22E1','MBO22F1','MBO22G1').get(user=request.user),"data2":MBO22.objects.values_list('MBO22AP','MBO22BP','MBO22CP','MBO22DP','MBO22EP','MBO22FP','MBO22GP').get(user=request.user),"data3":MBO22.objects.values_list('MBO22A2','MBO22B2','MBO22C2','MBO22D2','MBO22E2','MBO22F2','MBO22G2').get(user=request.user),"data4":MBO22.objects.values_list('MBO22A3','MBO22B3','MBO22C3','MBO22D3','MBO22E3','MBO22F3','MBO22G3').get(user=request.user),"data5":MBO22.objects.values_list('MBO22A4','MBO22B4','MBO22C4','MBO22D4','MBO22E4','MBO22F4','MBO22G4').get(user=request.user),"data6":MBO22.objects.values_list('MBO22AR','MBO22BR','MBO22CR','MBO22DR','MBO22ER','MBO22FR','MBO22GR').get(user=request.user),"data7":request.user.email,"time":time,"ptotal":ptotal}
+                    return render(request, "blog/Logout.html", context=params)
+            if (time==2):
                 task = get_object_or_404(MBO22, user=request.user)
                 new_status = 1
-                task.MBO22Q1 = new_status
+                task.MBO22Q2 = new_status
                 task.save()
-            else :
-                time = 5
-                params = {"UserID":request.user,"data1":MBO22.objects.values_list('MBO22A1','MBO22B1','MBO22C1','MBO22D1','MBO22E1','MBO22F1','MBO22G1').get(user=request.user),"data2":MBO22.objects.values_list('MBO22AP','MBO22BP','MBO22CP','MBO22DP','MBO22EP','MBO22FP','MBO22GP').get(user=request.user),"data3":MBO22.objects.values_list('MBO22A2','MBO22B2','MBO22C2','MBO22D2','MBO22E2','MBO22F2','MBO22G2').get(user=request.user),"data4":MBO22.objects.values_list('MBO22A3','MBO22B3','MBO22C3','MBO22D3','MBO22E3','MBO22F3','MBO22G3').get(user=request.user),"data5":MBO22.objects.values_list('MBO22A4','MBO22B4','MBO22C4','MBO22D4','MBO22E4','MBO22F4','MBO22G4').get(user=request.user),"data6":MBO22.objects.values_list('MBO22AR','MBO22BR','MBO22CR','MBO22DR','MBO22ER','MBO22FR','MBO22GR').get(user=request.user),"data7":request.user.email,"time":time,"ptotal":ptotal}
+            if (time==3):
+                task = get_object_or_404(MBO22, user=request.user)
+                new_status = 1
+                task.MBO22Q3 = new_status
+                task.save()
+            if (time==4):
+                task = get_object_or_404(MBO22, user=request.user)
+                new_status = 1
+                task.MBO22Q4 = new_status
+                task.save()
+            if (time!=5):
+                time=0
+                params = {"UserID":request.user,"data1":MBO22.objects.values_list('MBO22A1','MBO22B1','MBO22C1','MBO22D1','MBO22E1','MBO22F1','MBO22G1').get(user=request.user),"data2":MBO22.objects.values_list('MBO22AP','MBO22BP','MBO22CP','MBO22DP','MBO22EP','MBO22FP','MBO22GP').get(user=request.user),"data3":MBO22.objects.values_list('MBO22A2','MBO22B2','MBO22C2','MBO22D2','MBO22E2','MBO22F2','MBO22G2').get(user=request.user),"data4":MBO22.objects.values_list('MBO22A3','MBO22B3','MBO22C3','MBO22D3','MBO22E3','MBO22F3','MBO22G3').get(user=request.user),"data5":MBO22.objects.values_list('MBO22A4','MBO22B4','MBO22C4','MBO22D4','MBO22E4','MBO22F4','MBO22G4').get(user=request.user),"data6":MBO22.objects.values_list('MBO22AR','MBO22BR','MBO22CR','MBO22DR','MBO22ER','MBO22FR','MBO22GR').get(user=request.user),"data7":request.user.email,"time":time}
+                subject = request.user.username
+                subject += " submeteru MBO, entre o sistema e aprove ou peça corrigir"
+                message = request.user.username
+                message += " submeteru MBO, entre o sistema e aprove ou peça corrigir"
+#                from_email = 'hyuma2331@gmail.com'  # 送信
+                from_email = 'sistema.rh@cosmotec.com.br'  # 送信
+                recipient_list = [request.user.email]  # 宛先リスト
+                send_mail(subject, message, from_email, recipient_list)
                 return render(request, "blog/Logout.html", context=params)
-        if (time==2):
-            task = get_object_or_404(MBO22, user=request.user)
-            new_status = 1
-            task.MBO22Q2 = new_status
-            task.save()
-        if (time==3):
-            task = get_object_or_404(MBO22, user=request.user)
-            new_status = 1
-            task.MBO22Q3 = new_status
-            task.save()
-        if (time==4):
-            task = get_object_or_404(MBO22, user=request.user)
-            new_status = 1
-            task.MBO22Q4 = new_status
-            task.save()
-        if (time!=5):
-            time=0
-            params = {"UserID":request.user,"data1":MBO22.objects.values_list('MBO22A1','MBO22B1','MBO22C1','MBO22D1','MBO22E1','MBO22F1','MBO22G1').get(user=request.user),"data2":MBO22.objects.values_list('MBO22AP','MBO22BP','MBO22CP','MBO22DP','MBO22EP','MBO22FP','MBO22GP').get(user=request.user),"data3":MBO22.objects.values_list('MBO22A2','MBO22B2','MBO22C2','MBO22D2','MBO22E2','MBO22F2','MBO22G2').get(user=request.user),"data4":MBO22.objects.values_list('MBO22A3','MBO22B3','MBO22C3','MBO22D3','MBO22E3','MBO22F3','MBO22G3').get(user=request.user),"data5":MBO22.objects.values_list('MBO22A4','MBO22B4','MBO22C4','MBO22D4','MBO22E4','MBO22F4','MBO22G4').get(user=request.user),"data6":MBO22.objects.values_list('MBO22AR','MBO22BR','MBO22CR','MBO22DR','MBO22ER','MBO22FR','MBO22GR').get(user=request.user),"data7":request.user.email,"time":time}
-            subject = request.user.username
-            subject += " submeteru MBO, entre o sistema e aprove ou peça corrigir"
-            message = request.user.username
-            message += " submeteru MBO, entre o sistema e aprove ou peça corrigir"
-            from_email = 'hyuma2331@gmail.com'  # 送信
-            recipient_list = [request.user.email]  # 宛先リスト
-            send_mail(subject, message, from_email, recipient_list)
-            return render(request, "blog/Logout.html", context=params)
     
-    params = {"UserID":request.user,"data1":MBO22.objects.values_list('MBO22A1','MBO22B1','MBO22C1','MBO22D1','MBO22E1','MBO22F1','MBO22G1').get(user=request.user),"data2":MBO22.objects.values_list('MBO22AP','MBO22BP','MBO22CP','MBO22DP','MBO22EP','MBO22FP','MBO22GP').get(user=request.user),"data3":MBO22.objects.values_list('MBO22A2','MBO22B2','MBO22C2','MBO22D2','MBO22E2','MBO22F2','MBO22G2').get(user=request.user),"data4":MBO22.objects.values_list('MBO22A3','MBO22B3','MBO22C3','MBO22D3','MBO22E3','MBO22F3','MBO22G3').get(user=request.user),"data5":MBO22.objects.values_list('MBO22A4','MBO22B4','MBO22C4','MBO22D4','MBO22E4','MBO22F4','MBO22G4').get(user=request.user),"data6":MBO22.objects.values_list('MBO22AR','MBO22BR','MBO22CR','MBO22DR','MBO22ER','MBO22FR','MBO22GR').get(user=request.user),"data7":request.user.email,"time":time,"time2":porta}
+    params = {
+        "UserID":request.user,
+        "data1":MBO22.objects.values_list('MBO22A1','MBO22B1','MBO22C1','MBO22D1','MBO22E1','MBO22F1','MBO22G1').get(user=request.user),
+        "data2":MBO22.objects.values_list('MBO22AP','MBO22BP','MBO22CP','MBO22DP','MBO22EP','MBO22FP','MBO22GP').get(user=request.user),
+        "data3":MBO22.objects.values_list('MBO22A2','MBO22B2','MBO22C2','MBO22D2','MBO22E2','MBO22F2','MBO22G2').get(user=request.user),
+        "data4":MBO22.objects.values_list('MBO22A3','MBO22B3','MBO22C3','MBO22D3','MBO22E3','MBO22F3','MBO22G3').get(user=request.user),
+        "data5":MBO22.objects.values_list('MBO22A4','MBO22B4','MBO22C4','MBO22D4','MBO22E4','MBO22F4','MBO22G4').get(user=request.user),
+        "data6":MBO22.objects.values_list('MBO22AR','MBO22BR','MBO22CR','MBO22DR','MBO22ER','MBO22FR','MBO22GR').get(user=request.user),
+        "data7":request.user.email,
+        "time":time,"time2":porta,"disp":disp,
+        }
     return render(request, "blog/Logout.html",context=params)
-
-def E1D2(request, name):
-
-    colaborador = name
-    
-    result = ''
-    result2 = ''
-    result3 = ''
-    result4 = ''
-    result5 = ''
-    result6 = 0
-    object_list = User.objects.all()
-    for i in object_list:
-        result = i.username
-        result2 += result
-        result2 += ' '
-        result3 = str(i.id)
-        result4 += result3
-        result4 += ' '
-    result2=result2.split()
-    result4=result4.split()
-    k=int(len(result2))
-    for j in range(k):
-        if (str(result2[j])==colaborador):
-            result6=int(result4[j])
-
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-
-    Elist=[]  
-    Elist+=RHDT.objects.values_list('ADC22E1C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E1D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E2C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E2D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E3C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E3D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E4C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E4D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E5C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E5D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E6C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E6D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E7C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E7D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E8C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E8D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E9C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E9D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E10C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E10D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E11C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E11D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E12C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E12D').get(user=resultb6)
-
-
-    CE1=[]
-    CE1+=ADC22.objects.values_list('ADC22E1').get(user=result6)
-    CE2=''
-
-    for i in range(11):
-        j=i*2
-        k=j+1
-        if Elist[j]==CE1[0]:
-            CE2=Elist[k]
-
-    params = {
-        'form1': CE2,
-        'avaliado':colaborador,
-            }
-    return render(request, 'blog/E1D2.html', params)
-
-def E2D2(request, name):
-
-    colaborador = name
-    
-    result = ''
-    result2 = ''
-    result3 = ''
-    result4 = ''
-    result5 = ''
-    result6 = 0
-    object_list = User.objects.all()
-    for i in object_list:
-        result = i.username
-        result2 += result
-        result2 += ' '
-        result3 = str(i.id)
-        result4 += result3
-        result4 += ' '
-    result2=result2.split()
-    result4=result4.split()
-    k=int(len(result2))
-    for j in range(k):
-        if (str(result2[j])==colaborador):
-            result6=int(result4[j])
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-
-    CE1=[]
-    CE1+=ADC22.objects.values_list('ADC22E2').get(user=result6)
-    CE2=''
-
-    Elist=[]  
-    Elist+=RHDT.objects.values_list('ADC22E1C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E1D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E2C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E2D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E3C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E3D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E4C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E4D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E5C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E5D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E6C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E6D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E7C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E7D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E8C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E8D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E9C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E9D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E10C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E10D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E11C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E11D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E12C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E12D').get(user=resultb6)
-
-
-    for i in range(11):
-        j=i*2
-        k=j+1
-        if Elist[j]==CE1[0]:
-            CE2=Elist[k]
-
-    params = {
-        'form1': CE2,
-        'avaliado':colaborador,
-            }
-    return render(request, 'blog/E2D2.html', params)
-
-
-def E1D(request, num):
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-
-    Elist=[]  
-    Elist+=RHDT.objects.values_list('ADC22E1C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E1D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E2C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E2D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E3C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E3D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E4C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E4D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E5C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E5D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E6C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E6D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E7C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E7D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E8C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E8D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E9C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E9D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E10C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E10D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E11C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E11D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E12C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E12D').get(user=resultb6)
-    
-    CE1=request.user.first_name
-    CE2=''
-
-    for i in range(11):
-        j=i*2
-        k=j+1
-        if str(Elist[j])==CE1:
-            CE2=str(Elist[k])
-
-    params = {
-        'form1': CE2
-            }
-    return render(request, 'blog/E1D.html', params)
-
-def E2D(request, num):
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-
-    Elist=[]  
-    Elist+=RHDT.objects.values_list('ADC22E1C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E1D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E2C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E2D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E3C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E3D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E4C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E4D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E5C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E5D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E6C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E6D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E7C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E7D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E8C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E8D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E9C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E9D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E10C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E10D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E11C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E11D').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E12C').get(user=resultb6)
-    Elist+=RHDT.objects.values_list('ADC22E12D').get(user=resultb6)
-
-    
-    CE1=request.user.last_name
-    CE2=''
-
-
-    for i in range(11):
-        j=i*2
-        k=j+1
-        if str(Elist[j])==CE1:
-            CE2=str(Elist[k])
-
-    params = {
-        'form1': CE2
-            }
-    return render(request, 'blog/E2D.html', params)
 
 
 @login_required
@@ -2404,24 +1544,121 @@ def ADC(request):
         if (str(resultb2[n])==colaborador2):
             resultb6=int(resultb4[n])
 
-
     porta=[]
     porta+=ADC22.objects.values_list('ADC22C').get(user=request.user)
 
+    CG=RHDT.objects.values_list('ADC22G1').get(user=resultb6)
+    CG1=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G2').get(user=resultb6)
+    CG2=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G3').get(user=resultb6)
+    CG3=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G4').get(user=resultb6)
+    CG4=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G5').get(user=resultb6)
+    CG5=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G6').get(user=resultb6)
+    CG6=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G7').get(user=resultb6)
+    CG7=str(CG[0])
+
+    task = get_object_or_404(ADC22, user=request.user)
+
     time = int(porta[0])
     if (request.method == 'POST'):
-        task = get_object_or_404(ADC22, user=request.user)
-        new_status = 1
-        task.ADC22C = new_status
-        task.save()
-        time=1
-        subject = request.user.username
-        subject += " submeteru avaliação de competencia, entre o sistema e aprove ou peça corrigir"
-        message = request.user.username
-        message += " submeteru avaliação de competencia, entre o sistema e aprove ou peça corrigir"
-        from_email = 'hyuma2331@gmail.com'  # 送信
-        recipient_list = [request.user.email]  # 宛先リスト
-        send_mail(subject, message, from_email, recipient_list)
+        if "DL" in request.POST:
+            output = io.BytesIO()
+            book = op.Workbook(output)
+            book = xlsxwriter.Workbook(output)
+            ws = book.add_worksheet('sua ADC')
+            format = book.add_format({'border':1})
+            format.set_text_wrap()         
+            ws.write(1,1,'competencia geral', format)
+            ws.write(1,2,'auto avaliação', format)
+            ws.write(1,3,'avaliação por avaliador/a', format)
+            ws.write(1,4,'observação por colaborador/a', format)
+            ws.write(1,5,'observação por avaliador/a', format)
+            ws.write(2,1,CG1, format)
+            ws.write(3,1,CG2, format)
+            ws.write(4,1,CG3, format)
+            ws.write(5,1,CG4, format)
+            ws.write(6,1,CG5, format)
+            ws.write(7,1,CG6, format)
+            ws.write(8,1,CG7, format)
+            ws.write(2,2,task.ADC22G1C, format)
+            ws.write(3,2,task.ADC22G2C, format)
+            ws.write(4,2,task.ADC22G3C, format)
+            ws.write(5,2,task.ADC22G4C, format)
+            ws.write(6,2,task.ADC22G5C, format)
+            ws.write(7,2,task.ADC22G6C, format)
+            ws.write(8,2,task.ADC22G7C, format)
+            ws.write(2,3,task.ADC22G1A, format)
+            ws.write(3,3,task.ADC22G2A, format)
+            ws.write(4,3,task.ADC22G3A, format)
+            ws.write(5,3,task.ADC22G4A, format)
+            ws.write(6,3,task.ADC22G5A, format)
+            ws.write(7,3,task.ADC22G6A, format)
+            ws.write(8,3,task.ADC22G7A, format)
+            ws.write(2,4,task.ADC22G1OC, format)
+            ws.write(3,4,task.ADC22G2OC, format)
+            ws.write(4,4,task.ADC22G3OC, format)
+            ws.write(5,4,task.ADC22G4OC, format)
+            ws.write(6,4,task.ADC22G5OC, format)
+            ws.write(7,4,task.ADC22G6OC, format)
+            ws.write(8,4,task.ADC22G7OC, format)
+            ws.write(2,5,task.ADC22G1O, format)
+            ws.write(3,5,task.ADC22G2O, format)
+            ws.write(4,5,task.ADC22G3O, format)
+            ws.write(5,5,task.ADC22G4O, format)
+            ws.write(6,5,task.ADC22G5O, format)
+            ws.write(7,5,task.ADC22G6O, format)
+            ws.write(8,5,task.ADC22G7O, format)
+            ws.write(10,1,'competencia especifica', format)
+            ws.write(10,2,'auto avaliação', format)
+            ws.write(10,3,'avaliação por avaliador/a', format)
+            ws.write(10,4,'observação por colaborador/a', format)
+            ws.write(10,5,'observação por avaliador/a', format)
+            ws.write(11,1,task.ADC22E1, format)
+            ws.write(12,1,task.ADC22E2, format)
+            ws.write(11,2,task.ADC22E1C, format)
+            ws.write(12,2,task.ADC22E2C, format)
+            ws.write(11,3,task.ADC22E1A, format)
+            ws.write(12,3,task.ADC22E2A, format)
+            ws.write(11,4,task.ADC22E1OC, format)
+            ws.write(12,4,task.ADC22E2OC, format)
+            ws.write(11,5,task.ADC22E1O, format)
+            ws.write(12,5,task.ADC22E2O, format)
+            ws.set_column('B:B',20)
+            ws.set_column('C:D',15)
+            ws.set_column('E:F',40)
+            ws.set_row(2,30)
+            ws.set_row(3,30)
+            ws.set_row(4,30)
+            ws.set_row(5,30)
+            ws.set_row(6,30)
+            ws.set_row(7,30)
+            ws.set_row(8,30)
+            ws.set_row(11,30)
+            ws.set_row(12,30)
+            book.close()
+            output.seek(0)
+            filename = 'sua ADC.xlsx'
+            response = HttpResponse(output, content_type='aplication/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename=%s' %filename
+            return response
+        elif "send" in request.POST:
+            new_status = 1
+            task.ADC22C = new_status
+            task.save()
+            time=1
+            subject = request.user.username
+            subject += " submeteru avaliação de competencia, entre o sistema e aprove ou peça corrigir"
+            message = request.user.username
+            message += " submeteru avaliação de competencia, entre o sistema e aprove ou peça corrigir"
+#            from_email = 'hyuma2331@gmail.com'  # 送信
+            from_email = 'sistema.rh@cosmotec.com.br'  # 送信
+            recipient_list = [request.user.email]  # 宛先リスト
+            send_mail(subject, message, from_email, recipient_list)
 
 
     CE1=request.user.first_name
@@ -2484,7 +1721,8 @@ def ADC(request):
         "data9":ADC22.objects.values_list('ADC22E1C','ADC22E2C').get(user=request.user),
         "data10":ADC22.objects.values_list('ADC22E1A','ADC22E2A').get(user=request.user),
         "data11":ADC22.objects.values_list('ADC22E1O','ADC22E2O').get(user=request.user),
-        "time":time
+        "time":time,
+        "avaliador":request.user.email
         }
     return render(request, "blog/ADC.html",context=params)
 
@@ -2513,6 +1751,20 @@ def ADC2(request,name):
         if (str(resultb2[n])==colaborador2):
             resultb6=int(resultb4[n])
 
+    CG=RHDT.objects.values_list('ADC22G1').get(user=resultb6)
+    CG1=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G2').get(user=resultb6)
+    CG2=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G3').get(user=resultb6)
+    CG3=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G4').get(user=resultb6)
+    CG4=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G5').get(user=resultb6)
+    CG5=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G6').get(user=resultb6)
+    CG6=str(CG[0])
+    CG=RHDT.objects.values_list('ADC22G7').get(user=resultb6)
+    CG7=str(CG[0])
 
     colaborador = name#request.GET['name']
 
@@ -2522,6 +1774,15 @@ def ADC2(request,name):
     result4 = ''
     result5 = ''
     result6 = 0
+    result7 = ''
+    result8 = ''
+    result9 = ''
+    result10 = ''
+    result11 = ''
+    result12 = ''
+    result13 = ''
+    result14 = ''
+    result15 = ''
     object_list = User.objects.all()
     for i in object_list:
         result = i.username
@@ -2530,12 +1791,31 @@ def ADC2(request,name):
         result3 = str(i.id)
         result4 += result3
         result4 += ' '
+        result7 = i.email
+        result8 += result7
+        result8 += ' '
+        result10 = i.first_name
+        result11 += result10
+        result11 += '^'
+        result12 = i.last_name
+        result13 += result12
+        result13 += '^'
     result2=result2.split()
     result4=result4.split()
+    result8=result8.split()
+    result11=result11.split('^')
+    result13=result13.split('^')
     k=int(len(result2))
     for j in range(k):
         if (str(result2[j])==colaborador):
             result6=int(result4[j])
+            result9=str(result8[j])
+            result14=str(result11[j])
+            result15=str(result13[j])
+    if result9 == str(request.user) :
+        reject = 0
+    else :
+        reject = 1
 
     porta=[]
     porta+=ADC22.objects.values_list('ADC22C').get(user=result6)
@@ -2555,20 +1835,102 @@ def ADC2(request,name):
     M = today.month
     D = today.day
 
+    task = get_object_or_404(ADC22, user=result6)
     if (request.method == 'POST'):
-        task = get_object_or_404(ADC22, user=result6)
-        new_status = 1
-        task.ADC22A = new_status
-        task.ADC22Y = Y
-        task.ADC22M = M
-        task.ADC22D = D
-        task.save()
-        time=2
-        subject = "sua avaliação de competencia foi aprovado, parabens!"
-        message = "sua avaliação de competencia foi aprovado, parabens!"
-        from_email = 'hyuma2331@gmail.com'  # 送信
-        recipient_list = [colaborador]  # 宛先リスト
-        send_mail(subject, message, from_email, recipient_list)
+        if "send" in request.POST:
+            new_status = 1
+            task.ADC22A = new_status
+            task.ADC22Y = Y
+            task.ADC22M = M
+            task.ADC22D = D
+            task.save()
+            time=2
+            subject = "sua avaliação de competencia foi aprovado, parabens!"
+            message = "sua avaliação de competencia foi aprovado, parabens!"
+            from_email = 'sistema.rh@cosmotec.com.br'  # 送信
+            recipient_list = [colaborador]  # 宛先リスト
+            send_mail(subject, message, from_email, recipient_list)
+        elif "DL" in request.POST:
+            output = io.BytesIO()
+            book = op.Workbook(output)
+            book = xlsxwriter.Workbook(output)
+            ws = book.add_worksheet('avaliação dele(a)')
+            format = book.add_format({'border':1})
+            format.set_text_wrap()         
+            ws.write(1,1,'competencia geral', format)
+            ws.write(1,2,'auto avaliação', format)
+            ws.write(1,3,'avaliação por avaliador/a', format)
+            ws.write(1,4,'observação de colaborador/a', format)
+            ws.write(1,5,'observação de avaliador/a', format)
+            ws.write(2,1,CG1, format)
+            ws.write(3,1,CG2, format)
+            ws.write(4,1,CG3, format)
+            ws.write(5,1,CG4, format)
+            ws.write(6,1,CG5, format)
+            ws.write(7,1,CG6, format)
+            ws.write(8,1,CG7, format)
+            ws.write(2,2,task.ADC22G1C, format)
+            ws.write(3,2,task.ADC22G2C, format)
+            ws.write(4,2,task.ADC22G3C, format)
+            ws.write(5,2,task.ADC22G4C, format)
+            ws.write(6,2,task.ADC22G5C, format)
+            ws.write(7,2,task.ADC22G6C, format)
+            ws.write(8,2,task.ADC22G7C, format)
+            ws.write(2,3,task.ADC22G1A, format)
+            ws.write(3,3,task.ADC22G2A, format)
+            ws.write(4,3,task.ADC22G3A, format)
+            ws.write(5,3,task.ADC22G4A, format)
+            ws.write(6,3,task.ADC22G5A, format)
+            ws.write(7,3,task.ADC22G6A, format)
+            ws.write(8,3,task.ADC22G7A, format)
+            ws.write(2,4,task.ADC22G1OC, format)
+            ws.write(3,4,task.ADC22G2OC, format)
+            ws.write(4,4,task.ADC22G3OC, format)
+            ws.write(5,4,task.ADC22G4OC, format)
+            ws.write(6,4,task.ADC22G5OC, format)
+            ws.write(7,4,task.ADC22G6OC, format)
+            ws.write(8,4,task.ADC22G7OC, format)
+            ws.write(2,5,task.ADC22G1O, format)
+            ws.write(3,5,task.ADC22G2O, format)
+            ws.write(4,5,task.ADC22G3O, format)
+            ws.write(5,5,task.ADC22G4O, format)
+            ws.write(6,5,task.ADC22G5O, format)
+            ws.write(7,5,task.ADC22G6O, format)
+            ws.write(8,5,task.ADC22G7O, format)
+            ws.write(10,1,'competencia geral', format)
+            ws.write(10,2,'auto avaliação', format)
+            ws.write(10,3,'avaliação por avaliador/a', format)
+            ws.write(10,4,'observação de colaborador/a', format)
+            ws.write(10,5,'observação de avaliador/a', format)
+            ws.write(11,1,result14, format)
+            ws.write(12,1,result15, format)
+            ws.write(11,2,task.ADC22E1C, format)
+            ws.write(12,2,task.ADC22E2C, format)
+            ws.write(11,3,task.ADC22E1A, format)
+            ws.write(12,3,task.ADC22E2A, format)
+            ws.write(11,4,task.ADC22E1OC, format)
+            ws.write(12,4,task.ADC22E2OC, format)
+            ws.write(11,5,task.ADC22E1O, format)
+            ws.write(12,5,task.ADC22E2O, format)
+            ws.set_column('B:B',25)
+            ws.set_column('C:D',15)
+            ws.set_column('E:F',40)
+            ws.set_row(2,50)
+            ws.set_row(3,50)
+            ws.set_row(4,50)
+            ws.set_row(5,50)
+            ws.set_row(6,50)
+            ws.set_row(7,50)
+            ws.set_row(8,50)
+            ws.set_row(11,50)
+            ws.set_row(12,50)
+            book.close()
+            output.seek(0)
+            filename = 'avaliação dela(a).xlsx'
+            response = HttpResponse(output, content_type='aplication/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename=%s' %filename
+            return response
+
 
             
 
@@ -2579,11 +1941,14 @@ def ADC2(request,name):
         "data4B":ADC22.objects.values_list('ADC22G1OC','ADC22G2OC','ADC22G3OC','ADC22G4OC','ADC22G5OC','ADC22G6OC','ADC22G7OC','ADC22E1OC','ADC22E2OC').get(user=result6),
         "data4":ADC22.objects.values_list('ADC22G1O','ADC22G2O','ADC22G3O','ADC22G4O','ADC22G5O','ADC22G6O','ADC22G7O').get(user=result6),
         "data5":ADC22.objects.values_list('ADC22E1','ADC22E2').get(user=result6),
+        "data50":result14,
+        "data51":result15,
         "data6":ADC22.objects.values_list('ADC22E1C','ADC22E2C').get(user=result6),
         "data7":ADC22.objects.values_list('ADC22E1A','ADC22E2A').get(user=result6),
         "data8":ADC22.objects.values_list('ADC22E1O','ADC22E2O').get(user=result6),
         "time":time,
         "avaliado":colaborador,
+        "reject":reject,
         }
     return render(request, "blog/ADC2.html",context=params)
 
@@ -2618,25 +1983,32 @@ def PDI(request):
     time=int(porta[0])
 
     Glist=[]
-    Glist+=RHDT.objects.values_list('ADC22G1').get(user=resultb6),
+#    Glist+=RHDT.objects.values_list('ADC22G1').get(user=resultb6),
+    Glist.append('resultado')
     Glist+=ADC22.objects.values_list('ADC22G1C').get(user=request.user),
     Glist+=ADC22.objects.values_list('ADC22G1A').get(user=request.user),
-    Glist+=RHDT.objects.values_list('ADC22G2').get(user=resultb6),
+#    Glist+=RHDT.objects.values_list('ADC22G2').get(user=resultb6),
+    Glist.append('cliente')
     Glist+=ADC22.objects.values_list('ADC22G2C').get(user=request.user),
     Glist+=ADC22.objects.values_list('ADC22G2A').get(user=request.user),
-    Glist+=RHDT.objects.values_list('ADC22G3').get(user=resultb6),
+#    Glist+=RHDT.objects.values_list('ADC22G3').get(user=resultb6),
+    Glist.append('busca')
     Glist+=ADC22.objects.values_list('ADC22G3C').get(user=request.user),
     Glist+=ADC22.objects.values_list('ADC22G3A').get(user=request.user),
-    Glist+=RHDT.objects.values_list('ADC22G4').get(user=resultb6),
+#    Glist+=RHDT.objects.values_list('ADC22G4').get(user=resultb6),
+    Glist.append('liderança')
     Glist+=ADC22.objects.values_list('ADC22G4C').get(user=request.user),
     Glist+=ADC22.objects.values_list('ADC22G4A').get(user=request.user),
-    Glist+=RHDT.objects.values_list('ADC22G5').get(user=resultb6),
+#    Glist+=RHDT.objects.values_list('ADC22G5').get(user=resultb6),
+    Glist.append('senso')
     Glist+=ADC22.objects.values_list('ADC22G5C').get(user=request.user),
     Glist+=ADC22.objects.values_list('ADC22G5A').get(user=request.user),
-    Glist+=RHDT.objects.values_list('ADC22G6').get(user=resultb6),
+#    Glist+=RHDT.objects.values_list('ADC22G6').get(user=resultb6),
+    Glist.append('comunicação')
     Glist+=ADC22.objects.values_list('ADC22G6C').get(user=request.user),
     Glist+=ADC22.objects.values_list('ADC22G6A').get(user=request.user),
-    Glist+=RHDT.objects.values_list('ADC22G7').get(user=resultb6),
+#    Glist+=RHDT.objects.values_list('ADC22G7').get(user=resultb6),
+    Glist.append('relacionamento')
     Glist+=ADC22.objects.values_list('ADC22G7C').get(user=request.user),
     Glist+=ADC22.objects.values_list('ADC22G7A').get(user=request.user),
 
@@ -2660,13 +2032,13 @@ def PDI(request):
         j=i*3
         k=j+1
         l=k+1
-        if (PDI22.objects.values_list('PDI22G1C').get(user=request.user)==Glist[j]):
+        if str(Glist[j]) in str(PDI22.objects.values_list('PDI22G1C').get(user=request.user)).lower():
             G1C+=Glist[k]
             G1A+=Glist[l]
-        if (PDI22.objects.values_list('PDI22G2C').get(user=request.user)==Glist[j]):
+        if str(Glist[j]) in str(PDI22.objects.values_list('PDI22G2C').get(user=request.user)).lower():
             G2C+=Glist[k]
             G2A+=Glist[l]
-        if (PDI22.objects.values_list('PDI22G3C').get(user=request.user)==Glist[j]):
+        if str(Glist[j]) in str(PDI22.objects.values_list('PDI22G3C').get(user=request.user)).lower():
             G3C+=Glist[k]
             G3A+=Glist[l]
 
@@ -2708,20 +2080,79 @@ def PDI(request):
     else :
         data32=G3A[0]
 
+    task = get_object_or_404(PDI22, user=request.user)
     if (request.method == 'POST'):
-        task = get_object_or_404(PDI22, user=request.user)
-        new_status = 1
-        task.PDI22C = new_status
-        task.save()
-        time=1
-        subject = request.user.username
-        subject += " submeteru plano de desenvolvimento individual, entre o sistema e aprove ou peça corrigir"
-        message = request.user.username
-        message += " submeteru plano de desenvolvimento individual, entre o sistema e aprove ou peça corrigir"
-        from_email = 'hyuma2331@gmail.com'  # 送信
-        recipient_list = [request.user.email]  # 宛先リスト
-        send_mail(subject, message, from_email, recipient_list)
-
+        if "send" in request.POST:
+            new_status = 1
+            task.PDI22C = new_status
+            task.save()
+            time=1
+            subject = request.user.username
+            subject += " submeteru plano de desenvolvimento individual, entre o sistema e aprove ou peça corrigir"
+            message = request.user.username
+            message += " submeteru plano de desenvolvimento individual, entre o sistema e aprove ou peça corrigir"
+#            from_email = 'hyuma2331@gmail.com'  # 送信
+            from_email = 'sistema.rh@cosmotec.com.br'  # 送信
+            recipient_list = [request.user.email]  # 宛先リスト
+            send_mail(subject, message, from_email, recipient_list)
+        if "DL" in request.POST:
+            output = io.BytesIO()
+            book = op.Workbook(output)
+            book = xlsxwriter.Workbook(output)
+            ws = book.add_worksheet('seu PDI')
+            format = book.add_format({'border':1})
+            format.set_text_wrap()         
+            ws.write(1,1,'foco de comeptencia geral', format)
+            ws.write(1,2,'auto avaliação', format)
+            ws.write(1,3,'avaliação por avaliador/a', format)
+            ws.write(1,4,'ponto a desenvolver', format)
+            ws.write(1,5,'Plano de Desenvolvimento Individual', format)
+            ws.write(2,1,task.PDI22G1C, format)
+            ws.write(2,2,data11, format)
+            ws.write(2,3,data12, format)
+            ws.write(2,4,task.PDI22G1PD, format)
+            ws.write(2,5,task.PDI22G1, format)
+            ws.write(3,1,task.PDI22G2C, format)
+            ws.write(3,2,data21, format)
+            ws.write(3,3,data22, format)
+            ws.write(3,4,task.PDI22G2PD, format)
+            ws.write(3,5,task.PDI22G2, format)
+            ws.write(4,1,task.PDI22G3C, format)
+            ws.write(4,2,data31, format)
+            ws.write(4,3,data32, format)
+            ws.write(4,4,task.PDI22G3PD, format)
+            ws.write(4,5,task.PDI22G3, format)
+            ws.write(6,1,'comeptencia especifica', format)
+            ws.write(6,2,'auto avaliação', format)
+            ws.write(6,3,'avaliação por avaliador/a', format)
+            ws.write(6,4,'ponto a desenvolver', format)
+            ws.write(6,5,'Plano de Desenvolvimento Individual', format)
+            ws.write(7,1,task.PDI22E1C, format)
+            ws.write(7,2,str(E1C[0]), format)
+            ws.write(7,3,str(E1A[0]), format)
+            ws.write(7,4,task.PDI22E1PD, format)
+            ws.write(7,5,task.PDI22E1, format)
+            ws.write(8,1,task.PDI22E2C, format)
+            ws.write(8,2,str(E2C[0]), format)
+            ws.write(8,3,str(E2A[0]), format)
+            ws.write(8,4,task.PDI22E2PD, format)
+            ws.write(8,5,task.PDI22E2, format)
+            ws.set_column('B:B',20)
+            ws.set_column('C:D',11)
+            ws.set_column('E:F',33)
+            ws.set_row(2,50)
+            ws.set_row(3,50)
+            ws.set_row(4,50)
+            ws.set_row(5,50)
+            ws.set_row(6,50)
+            ws.set_row(7,50)
+            ws.set_row(8,50)
+            book.close()
+            output.seek(0)
+            filename = 'seu PDI.xlsx'
+            response = HttpResponse(output, content_type='aplication/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename=%s' %filename
+            return response
 
     params = {"UserID":request.user,
         "data1":PDI22.objects.values_list('PDI22G1C','PDI22G1PD','PDI22G1').get(user=request.user),
@@ -2733,15 +2164,18 @@ def PDI(request):
         "data3":PDI22.objects.values_list('PDI22G3C','PDI22G3PD','PDI22G3').get(user=request.user),
         "data31":data31,
         "data32":data32,
-        "data4":PDI22.objects.values_list('PDI22E1C','PDI22E1PD','PDI22E1').get(user=request.user),
+        "data40":ADC22.objects.values_list('ADC22E1').get(user=request.user),
+        "data4":PDI22.objects.values_list('PDI22E1PD','PDI22E1').get(user=request.user),
         "data41":E1C[0],
         "data42":E1A[0],
-        "data5":PDI22.objects.values_list('PDI22E2C','PDI22E2PD','PDI22E2').get(user=request.user),
+        "data50":ADC22.objects.values_list('ADC22E2').get(user=request.user),
+        "data5":PDI22.objects.values_list('PDI22E2PD','PDI22E2').get(user=request.user),
         "data51":E2C[0],
         "data52":E2A[0],
         "time":time,
         "TC":TC,
         "TA":TA,
+        "avaliador":request.user.email
         }
     return render(request, "blog/PDI.html",context=params)
 
@@ -2815,434 +2249,6 @@ def edit4(request, num):
         }
     return render(request, 'blog/edit4.html', params)
 
-def G1D2(request, name):
-
-    colaborador=name
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G1D').get(user=resultb6),
-        'avaliado' : colaborador,
-            }
-    return render(request, 'blog/G1D2.html', params)
-
-def G2D2(request, name):
-    colaborador=name
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G2D').get(user=resultb6),
-        'avaliado' : colaborador,
-            }
-    return render(request, 'blog/G2D2.html', params)
-
-def G3D2(request, name):
-    colaborador=name
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G3D').get(user=resultb6),
-        'avaliado' : colaborador,
-            }
-    return render(request, 'blog/G3D2.html', params)
-
-def G4D2(request, name):
-    colaborador=name
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G4D').get(user=resultb6),
-        'avaliado' : colaborador,
-            }
-    return render(request, 'blog/G4D2.html', params)
-
-def G5D2(request, name):
-    colaborador=name
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G5D').get(user=resultb6),
-        'avaliado' : colaborador,
-            }
-    return render(request, 'blog/G5D2.html', params)
-
-def G6D2(request, name):
-    colaborador=name
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G6D').get(user=resultb6),
-        'avaliado' : colaborador,
-            }
-    return render(request, 'blog/G6D2.html', params)
-
-def G7D2(request, name):
-    colaborador=name
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G7D').get(user=resultb6),
-        'avaliado' : colaborador,
-            }
-    return render(request, 'blog/G7D2.html', params)
-
-
-def G1D(request, num):
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G1D').get(user=resultb6)
-            }
-    return render(request, 'blog/G1D.html', params)
-
-def G2D(request, num):
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G2D').get(user=resultb6)
-            }
-    return render(request, 'blog/G2D.html', params)
-
-def G3D(request, num):
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G3D').get(user=resultb6)
-            }
-    return render(request, 'blog/G3D.html', params)
-
-def G4D(request, num):
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G4D').get(user=resultb6)
-            }
-    return render(request, 'blog/G4D.html', params)
-
-def G5D(request, num):
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G5D').get(user=resultb6)
-            }
-    return render(request, 'blog/G5D.html', params)
-
-def G6D(request, num):
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G6D').get(user=resultb6)
-            }
-    return render(request, 'blog/G6D.html', params)
-
-def G7D(request, num):
-
-    colaborador2='hyuma.nozaki@cosmotec.com.br'
-    resultb = ''
-    resultb2 = ''
-    resultb3 = ''
-    resultb4 = ''
-    resultb5 = ''
-    resultb6 = 0
-    object_list = User.objects.all()
-    for l in object_list:
-        resultb = l.username
-        resultb2 += resultb
-        resultb2 += ' '
-        resultb3 = str(l.id)
-        resultb4 += resultb3
-        resultb4 += ' '
-    resultb2=resultb2.split()
-    resultb4=resultb4.split()
-    m=int(len(resultb2))
-    for n in range(m):
-        if (str(resultb2[n])==colaborador2):
-            resultb6=int(resultb4[n])
-
-
-    params = {
-        'form1': RHDT.objects.values_list('ADC22G7D').get(user=resultb6)
-            }
-    return render(request, 'blog/G7D.html', params)
 
 def editADC2(request, name):
 
@@ -3277,34 +2283,119 @@ def editADC2(request, name):
     result4 = ''
     result5 = ''
     result6 = 0
+    result7 = ''
+    result8 = ''
+    result9 = ''
+    result10 = ''
+    result11 = ''
+    result12 = ''
+    result13 = ''    
     object_list = User.objects.all()
     for i in object_list:
         result = i.username
         result2 += result
-        result2 += ' '
+        result2 += '^'
         result3 = str(i.id)
         result4 += result3
-        result4 += ' '
-    result2=result2.split()
-    result4=result4.split()
+        result4 += '^'
+        result7 = i.first_name
+        result8 += result7
+        result8 += '^'
+        result9 = i.last_name
+        result10 += result9
+        result10 += '^'
+        result11 = i.email
+        result12 += result11
+        result12 += '^'
+    result2=result2.split('^')
+    result4=result4.split('^')
+    result8=result8.split('^')
+    result10=result10.split('^')
+    result12=result12.split('^')
     k=int(len(result2))
     for j in range(k):
         if (str(result2[j])==colaborador):
             result6=int(result4[j])
+            CE1=str(result8[j])
+            CE3=str(result10[j])
+            result13=str(result12[j])
+    
+    if result13 == str(request.user) :
+        reject = 0
+    else :
+        reject = 1
+    
 
+
+    Elist=[]  
+    Elist+=RHDT.objects.values_list('ADC22E1C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E1D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E2C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E2D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E3C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E3D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E4C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E4D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E5C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E5D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E6C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E6D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E7C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E7D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E8C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E8D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E9C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E9D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E10C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E10D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E11C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E11D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E12C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E12D').get(user=resultb6)
+
+    CE2=''
+    CE4=''
+    for i in range(12):
+        j=i*2
+        k=j+1
+        if str(Elist[j])==CE1:
+            CE2=str(Elist[k])
+        if str(Elist[j])==CE3:
+            CE4=str(Elist[k])
+
+    time=1
     obj = ADC22.objects.get(user=result6)
     if (request.method == 'POST'):
         friend = ADC22AOForm(request.POST, instance=obj)
         friend.save()
+        params = {"UserID":request.user,
+            "data1":RHDT.objects.values_list('ADC22G1','ADC22G2','ADC22G3','ADC22G4','ADC22G5','ADC22G6','ADC22G7').get(user=resultb6),
+            "data2":ADC22.objects.values_list('ADC22G1C','ADC22G2C','ADC22G3C','ADC22G4C','ADC22G5C','ADC22G6C','ADC22G7C').get(user=result6),
+            "data3":ADC22.objects.values_list('ADC22G1A','ADC22G2A','ADC22G3A','ADC22G4A','ADC22G5A','ADC22G6A','ADC22G7A').get(user=result6),
+            "data4B":ADC22.objects.values_list('ADC22G1OC','ADC22G2OC','ADC22G3OC','ADC22G4OC','ADC22G5OC','ADC22G6OC','ADC22G7OC','ADC22E1OC','ADC22E2OC').get(user=result6),
+            "data4":ADC22.objects.values_list('ADC22G1O','ADC22G2O','ADC22G3O','ADC22G4O','ADC22G5O','ADC22G6O','ADC22G7O').get(user=result6),
+            "data5":ADC22.objects.values_list('ADC22E1','ADC22E2').get(user=result6),
+            "data6":ADC22.objects.values_list('ADC22E1C','ADC22E2C').get(user=result6),
+            "data7":ADC22.objects.values_list('ADC22E1A','ADC22E2A').get(user=result6),
+            "data8":ADC22.objects.values_list('ADC22E1O','ADC22E2O').get(user=result6),
+            "time":time,
+            "avaliado":colaborador,
+            }
+        return redirect('ADC2', name=colaborador)
 
     params = {
         'UserID':request.user,
         'form1': RHDT.objects.values_list('ADC22G1','ADC22G2','ADC22G3','ADC22G4','ADC22G5','ADC22G6','ADC22G7').get(user=resultb6),
-        'form11': ADC22.objects.values_list('ADC22E1','ADC22E2').get(user=result6),
+        'form11': RHDT.objects.values_list('ADC22G1D','ADC22G2D','ADC22G3D','ADC22G4D','ADC22G5D','ADC22G6D','ADC22G7D').get(user=resultb6),
+        'CE1' : CE1,
+        'CE2' : CE2,
+        'CE3' : CE3,
+        'CE4' : CE4,
         'form2': ADC22.objects.values_list('ADC22G1C','ADC22G2C','ADC22G3C','ADC22G4C','ADC22G5C','ADC22G6C','ADC22G7C','ADC22E1C','ADC22E2C').get(user=result6),
         'form2B': ADC22.objects.values_list('ADC22G1OC','ADC22G2OC','ADC22G3OC','ADC22G4OC','ADC22G5OC','ADC22G6OC','ADC22G7OC','ADC22E1OC','ADC22E2OC').get(user=result6),
         'form3': ADC22AOForm(instance=obj),
         'avaliado' : colaborador,
+        'reject' : reject,
     }
     return render(request, 'blog/editADC2.html', params)
 
@@ -3334,19 +2425,61 @@ def editADC(request, num):
             resultb6=int(resultb4[n])
 
 
+    Elist=[]  
+    Elist+=RHDT.objects.values_list('ADC22E1C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E1D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E2C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E2D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E3C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E3D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E4C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E4D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E5C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E5D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E6C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E6D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E7C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E7D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E8C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E8D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E9C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E9D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E10C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E10D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E11C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E11D').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E12C').get(user=resultb6)
+    Elist+=RHDT.objects.values_list('ADC22E12D').get(user=resultb6)
+
+    CE1=request.user.first_name
+    CE2=''
+    CE3=request.user.last_name
+    CE4=''
+
+    for i in range(12):
+        j=i*2
+        k=j+1
+        if str(Elist[j])==CE1:
+            CE2=str(Elist[k])
+        if str(Elist[j])==CE3:
+            CE4=str(Elist[k])
+
+
     obj = ADC22.objects.get(user=request.user)
     if (request.method == 'POST'):
         friend = ADC22CForm(request.POST, instance=obj)
         friend.save()
+        return redirect(to='/ADC')
 
     params = {
         'UserID':request.user,
         'form1': RHDT.objects.values_list('ADC22G1','ADC22G2','ADC22G3','ADC22G4','ADC22G5','ADC22G6','ADC22G7').get(user=resultb6),
-        'form51': request.user.first_name,
-        'form52': request.user.last_name,
-        #,'ADC22G1D','ADC22G2D','ADC22G3D','ADC22G4D','ADC22G5D','ADC22G6D','ADC22G7D'),
+        'form11': RHDT.objects.values_list('ADC22G1D','ADC22G2D','ADC22G3D','ADC22G4D','ADC22G5D','ADC22G6D','ADC22G7D').get(user=resultb6),
+        'form51': CE1,
+        'form52': CE2,
+        'form53': CE3,
+        'form54': CE4,
         'form2': ADC22CForm(instance=obj),
-#        'form3': ADC22.objects.values_list('ADC22G1C','ADC22G2C','ADC22G3C','ADC22G4C','ADC22G5C','ADC22G6C','ADC22G7C','ADC22E1C','ADC22E2C').get(user=request.user),
         'form3': ADC22.objects.values_list('ADC22G1A','ADC22G2A','ADC22G3A','ADC22G4A','ADC22G5A','ADC22G6A','ADC22G7A','ADC22E1A','ADC22E2A').get(user=request.user),
         'form4': ADC22.objects.values_list('ADC22G1O','ADC22G2O','ADC22G3O','ADC22G4O','ADC22G5O','ADC22G6O','ADC22G7O','ADC22E1O','ADC22E2O').get(user=request.user),
     }
@@ -3354,7 +2487,81 @@ def editADC(request, num):
 
 def editPDI(request, num):
 
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
 
+    Glist=[]
+    Glist+=RHDT.objects.values_list('ADC22G1').get(user=resultb6),
+    Glist+=ADC22.objects.values_list('ADC22G1C').get(user=request.user),
+    Glist+=ADC22.objects.values_list('ADC22G1A').get(user=request.user),
+    Glist+=RHDT.objects.values_list('ADC22G2').get(user=resultb6),
+    Glist+=ADC22.objects.values_list('ADC22G2C').get(user=request.user),
+    Glist+=ADC22.objects.values_list('ADC22G2A').get(user=request.user),
+    Glist+=RHDT.objects.values_list('ADC22G3').get(user=resultb6),
+    Glist+=ADC22.objects.values_list('ADC22G3C').get(user=request.user),
+    Glist+=ADC22.objects.values_list('ADC22G3A').get(user=request.user),
+    Glist+=RHDT.objects.values_list('ADC22G4').get(user=resultb6),
+    Glist+=ADC22.objects.values_list('ADC22G4C').get(user=request.user),
+    Glist+=ADC22.objects.values_list('ADC22G4A').get(user=request.user),
+    Glist+=RHDT.objects.values_list('ADC22G5').get(user=resultb6),
+    Glist+=ADC22.objects.values_list('ADC22G5C').get(user=request.user),
+    Glist+=ADC22.objects.values_list('ADC22G5A').get(user=request.user),
+    Glist+=RHDT.objects.values_list('ADC22G6').get(user=resultb6),
+    Glist+=ADC22.objects.values_list('ADC22G6C').get(user=request.user),
+    Glist+=ADC22.objects.values_list('ADC22G6A').get(user=request.user),
+    Glist+=RHDT.objects.values_list('ADC22G7').get(user=resultb6),
+    Glist+=ADC22.objects.values_list('ADC22G7C').get(user=request.user),
+    Glist+=ADC22.objects.values_list('ADC22G7A').get(user=request.user),
+
+    G1C=[]
+    G2C=[]
+    G3C=[]
+    G1A=[]
+    G2A=[]
+    G3A=[]
+
+    E1C=[]
+    E2C=[]
+    E1A=[]
+    E2A=[]
+
+    for i in range(7):
+        j=i*3
+        k=j+1
+        l=k+1
+        if (PDI22.objects.values_list('PDI22G1C').get(user=request.user)==Glist[j]):
+            G1C+=Glist[k]
+            G1A+=Glist[l]
+        if (PDI22.objects.values_list('PDI22G2C').get(user=request.user)==Glist[j]):
+            G2C+=Glist[k]
+            G2A+=Glist[l]
+        if (PDI22.objects.values_list('PDI22G3C').get(user=request.user)==Glist[j]):
+            G3C+=Glist[k]
+            G3A+=Glist[l]
+
+    E1C+=ADC22.objects.values_list('ADC22E1C').get(user=request.user)
+    E1A+=ADC22.objects.values_list('ADC22E1A').get(user=request.user)
+    E2C+=ADC22.objects.values_list('ADC22E2C').get(user=request.user)
+    E2A+=ADC22.objects.values_list('ADC22E2A').get(user=request.user)
 
     obj = PDI22.objects.get(user=request.user)
     if (request.method == 'POST'):
@@ -3367,6 +2574,7 @@ def editPDI(request, num):
         'form1': PDI22Form(instance=obj),
         'form2': request.user.first_name,
         'form3': request.user.last_name,
+        'G1C':G1C[0],'G2C':G2C[0],'G3C':G3C[0],'G1A':G1A[0],'G2A':G2A[0],'G3A':G3A[0],'E1C':E1C[0],'E2C':E2C[0],'E1A':E1A[0],'E2A':E2A[0],
     }
     return render(request, 'blog/editPDI.html', params)
 
@@ -3423,8 +2631,12 @@ def home(request):
     else:
         time=1
 
-
-
+    equipe = 0
+    object_list = User.objects.all()
+    for i in object_list:
+        if str(i.email) == str(request.user):
+            equipe =1
+     
     params = {
         "UserID":request.user,
         "MBO23TIME" : int(MBO23TIME[0]),
@@ -3433,6 +2645,7 @@ def home(request):
         "ADC24TIME" : int(ADC24TIME[0]),
         "time" : time,
         "dept": DeptForm(instance=obj),
+        "equipe" : equipe,
         }
     return render(request, "blog/home.html",context=params)
 
@@ -3835,6 +3048,26 @@ def MBO22RH(request):
             AA+='^'
             AA+='#'
             AA+='^'
+            peso1=MBO22.objects.values_list('MBO22AP').get(user=i.id)
+            res1=MBO22.objects.values_list('MBO22AR').get(user=i.id)
+            peso2=MBO22.objects.values_list('MBO22BP').get(user=i.id)
+            res2=MBO22.objects.values_list('MBO22BR').get(user=i.id)
+            peso3=MBO22.objects.values_list('MBO22CP').get(user=i.id)
+            res3=MBO22.objects.values_list('MBO22CR').get(user=i.id)
+            peso4=MBO22.objects.values_list('MBO22DP').get(user=i.id)
+            res4=MBO22.objects.values_list('MBO22DR').get(user=i.id)
+            peso5=MBO22.objects.values_list('MBO22EP').get(user=i.id)
+            res5=MBO22.objects.values_list('MBO22ER').get(user=i.id)
+            peso6=MBO22.objects.values_list('MBO22FP').get(user=i.id)
+            res6=MBO22.objects.values_list('MBO22FR').get(user=i.id)
+            peso7=MBO22.objects.values_list('MBO22GP').get(user=i.id)
+            res7=MBO22.objects.values_list('MBO22GR').get(user=i.id)
+            pefo=int(peso1[0])*int(res1[0])+int(peso2[0])*int(res2[0])+int(peso3[0])*int(res3[0])+int(peso4[0])*int(res4[0])+int(peso5[0])*int(res5[0])+int(peso6[0])*int(res6[0])+int(peso7[0])*int(res7[0])
+            pefo=pefo/100
+            AA+=str(pefo)
+            AA+='^'
+            AA+='#'
+            AA+='^'
         except:
             AA+='não tem MBO'
             AA+='^'
@@ -4094,7 +3327,30 @@ def ADC22RHA(request):
 
 @login_required
 def PDI22RH(request):
-    
+
+    colaborador2='hyuma.nozaki@cosmotec.com.br'
+    resultb = ''
+    resultb2 = ''
+    resultb3 = ''
+    resultb4 = ''
+    resultb5 = ''
+    resultb6 = 0
+    object_list = User.objects.all()
+    for l in object_list:
+        resultb = l.username
+        resultb2 += resultb
+        resultb2 += ' '
+        resultb3 = str(l.id)
+        resultb4 += resultb3
+        resultb4 += ' '
+    resultb2=resultb2.split()
+    resultb4=resultb4.split()
+    m=int(len(resultb2))
+    for n in range(m):
+        if (str(resultb2[n])==colaborador2):
+            resultb6=int(resultb4[n])
+
+
     object_list = User.objects.all()
     AA=''
     BB=[]
@@ -4114,11 +3370,43 @@ def PDI22RH(request):
         AA+='^'
         AA+='#'
         AA+='^'      
+
         try:
+            Glist=[]
+            Glist.append('resultado')   
+            Glist.append('cliente')   
+            Glist.append('busca')   
+            Glist.append('liderança')   
+            Glist.append('senso')   
+            Glist.append('comunicação')   
+            Glist.append('relacionamento')   
+            Glist.append(ADC22.objects.values_list('ADC22G1C').get(user=i.id)),
+            Glist+=ADC22.objects.values_list('ADC22G2C').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G3C').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G4C').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G5C').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G6C').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G7C').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G1A').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G2A').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G3A').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G4A').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G5A').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G6A').get(user=i.id),
+            Glist+=ADC22.objects.values_list('ADC22G7A').get(user=i.id),
+
             BB=PDI22.objects.values_list('PDI22G1C').get(user=i.id)
             AA+=BB[0]
             BB=[]
             AA+='^'
+            for xx in range(7):
+                yy=xx+7
+                zz=xx+14
+                if str(Glist[xx]) in str(PDI22.objects.values_list('PDI22G1C').get(user=i.id)).lower():
+                    AA+=str(Glist[yy])
+                    AA+='^'
+                    AA+=str(Glist[zz])
+                    AA+='^'
             BB=PDI22.objects.values_list('PDI22G1PD').get(user=i.id)
             AA+=BB[0]
             BB=[]
@@ -4133,6 +3421,14 @@ def PDI22RH(request):
             AA+=BB[0]
             BB=[]
             AA+='^'
+            for xx in range(7):
+                yy=xx+7
+                zz=xx+14
+                if str(Glist[xx]) in str(PDI22.objects.values_list('PDI22G2C').get(user=i.id)).lower():
+                    AA+=str(Glist[yy])
+                    AA+='^'
+                    AA+=str(Glist[zz])
+                    AA+='^'
             BB=PDI22.objects.values_list('PDI22G2PD').get(user=i.id)
             AA+=BB[0]
             BB=[]
@@ -4147,6 +3443,14 @@ def PDI22RH(request):
             AA+=BB[0]
             BB=[]
             AA+='^'
+            for xx in range(7):
+                yy=xx+7
+                zz=xx+14
+                if str(Glist[xx]) in str(PDI22.objects.values_list('PDI22G3C').get(user=i.id)).lower():
+                    AA+=str(Glist[yy])
+                    AA+='^'
+                    AA+=str(Glist[zz])
+                    AA+='^'
             BB=PDI22.objects.values_list('PDI22G3PD').get(user=i.id)
             AA+=BB[0]
             BB=[]
@@ -4157,8 +3461,16 @@ def PDI22RH(request):
             AA+='^'
             AA+='#'
             AA+='^'
-            BB=PDI22.objects.values_list('PDI22E1C').get(user=i.id)
-            AA+=BB[0]
+            #BB=PDI22.objects.values_list('PDI22E1C').get(user=i.id)
+            AA+=i.first_name#BB[0]
+            BB=[]
+            AA+='^'
+            BB=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+            AA+=str(BB[0])
+            BB=[]
+            AA+='^'
+            BB=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+            AA+=str(BB[0])
             BB=[]
             AA+='^'
             BB=PDI22.objects.values_list('PDI22E1PD').get(user=i.id)
@@ -4171,8 +3483,16 @@ def PDI22RH(request):
             AA+='^'
             AA+='#'
             AA+='^'
-            BB=PDI22.objects.values_list('PDI22E2C').get(user=i.id)
-            AA+=BB[0]
+            #BB=PDI22.objects.values_list('PDI22E2C').get(user=i.id)
+            AA+=i.last_name#BB[0]
+            BB=[]
+            AA+='^'
+            BB=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+            AA+=str(BB[0])
+            BB=[]
+            AA+='^'
+            BB=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+            AA+=str(BB[0])
             BB=[]
             AA+='^'
             BB=PDI22.objects.values_list('PDI22E2PD').get(user=i.id)
@@ -4244,13 +3564,63 @@ def MBO22DL(request):
     D10=0
     D11=0
     D12=0
-    
+
+    NA1=''
+    NA2=''
+    NA3=''
+    NA4=''
+    NA5=''
+    NA6=''
+    NA7=''
+    NA8=''
+    NA9=''
+    NA10=''
+    NA11=''
+    NA12=''
+    NB1=''
+    NB2=''
+    NB3=''
+    NB4=''
+    NB5=''
+    NB6=''
+    NB7=''
+    NB8=''
+    NB9=''
+    NB10=''
+    NB11=''
+    NB12=''
+    NC1=''
+    NC2=''
+    NC3=''
+    NC4=''
+    NC5=''
+    NC6=''
+    NC7=''
+    NC8=''
+    NC9=''
+    NC10=''
+    NC11=''
+    NC12=''
+    ND1=''
+    ND2=''
+    ND3=''
+    ND4=''
+    ND5=''
+    ND6=''
+    ND7=''
+    ND8=''
+    ND9=''
+    ND10=''
+    ND11=''
+    ND12=''
+
     test=0
     BB1=''
     BB2=''
     BB3=''
     BB4=''
     CC=''
+
     object_list = User.objects.all()
 #    for k in range(j):
     for i in object_list:
@@ -4262,28 +3632,52 @@ def MBO22DL(request):
                 BB1+=','
             if (test[0]==1):
                 A1+=1
+                NA1+=i.username
+                NA1+='\n'
             if (test[0]==2):
                 A2+=1
+                NA2+=i.username
+                NA2+='\n'
             if (test[0]==3):
                 A3+=1
+                NA3+=i.username
+                NA3+='\n'
             if (test[0]==4):
                 A4+=1
+                NA4+=i.username
+                NA4+='\n'
             if (test[0]==5):
                 A5+=1
+                NA5+=i.username
+                NA5+='\n'
             if (test[0]==6):
                 A6+=1
+                NA6+=i.username
+                NA6+='\n'
             if (test[0]==7):
                 A7+=1
+                NA7+=i.username
+                NA7+='\n'
             if (test[0]==8):
                 A8+=1
+                NA8+=i.username
+                NA8+='\n'
             if (test[0]==9):
                 A9+=1
+                NA19+=i.username
+                NA19='\n'
             if (test[0]==10):
                 A10+=1
+                NA10+=i.username
+                NA10+='\n'
             if (test[0]==11):
                 A11+=1
+                NA11+=i.username
+                NA11+='\n'
             if (test[0]==12):
                 A12+=1
+                NA12+=i.username
+                NA12+='\n'
             test=[]
             test+=MBO22.objects.values_list('MBO22Q2M').get(user=i.id)
             if (test[0]==0):
@@ -4291,84 +3685,158 @@ def MBO22DL(request):
                 BB2+=','
             if (test[0]==1):
                 B1+=1
+                NB1+=i.username
+                NB1+='\n'
             if (test[0]==2):
                 B2+=1
+                NB2+=i.username
+                NB2+='\n'
             if (test[0]==3):
                 B3+=1
+                NB3+=i.username
+                NB3+='\n'
             if (test[0]==4):
                 B4+=1
+                NB4+=i.username
+                NB4+='\n'
             if (test[0]==5):
                 B5+=1
+                NB5+=i.username
+                NB5+='\n'
             if (test[0]==6):
                 B6+=1
+                NB6+=i.username
+                NB6+='\n'
             if (test[0]==7):
                 B7+=1
+                NB7+=i.username
+                NB7+='\n'
             if (test[0]==8):
                 B8+=1
+                NB8+=i.username
+                NB8+='\n'
             if (test[0]==9):
                 B9+=1
+                NB9+=i.username
+                NB9+='\n'
             if (test[0]==10):
                 B10+=1
+                NB10+=i.username
+                NB10+='\n'
             if (test[0]==11):
                 B11+=1
+                NB11+=i.username
+                NB11+='\n'
             if (test[0]==12):
                 B12+=1
+                NB12+=i.username
+                NB12+='\n'
+            test=[]
             test+=MBO22.objects.values_list('MBO22Q3M').get(user=i.id)
             if (test[0]==0):
                 BB3+=i.username
                 BB3+=','
             if (test[0]==1):
                 C1+=1
+                NC1+=i.username
+                NC1+='\n'
             if (test[0]==2):
                 C2+=1
+                NC2+=i.username
+                NC2+='\n'
             if (test[0]==3):
                 C3+=1
+                NC3+=i.username
+                NC3+='\n'
             if (test[0]==4):
                 C4+=1
+                NC4+=i.username
+                NC4+='\n'
             if (test[0]==5):
                 C5+=1
+                NC5+=i.username
+                NC5+='\n'
             if (test[0]==6):
                 C6+=1
+                NC6+=i.username
+                NC6+='\n'
             if (test[0]==7):
                 C7+=1
+                NC7+=i.username
+                NC7+='\n'
             if (test[0]==8):
                 C8+=1
+                NC8+=i.username
+                NC8+='\n'
             if (test[0]==9):
                 C9+=1
+                NC9+=i.username
+                NC9+='\n'
             if (test[0]==10):
                 C10+=1
+                NC10+=i.username
+                NC10+='\n'
             if (test[0]==11):
                 C11+=1
+                NC11+=i.username
+                NC11+='\n'
             if (test[0]==12):
                 C12+=1
+                NC12+=i.username
+                NC12+='\n'
+            test=[]
             test+=MBO22.objects.values_list('MBO22Q4M').get(user=i.id)
             if (test[0]==0):
                 BB4+=i.username
                 BB4+=','
             if (test[0]==1):
                 D1+=1
+                ND1+=i.username
+                ND1+='\n'
             if (test[0]==2):
                 D2+=1
+                ND2+=i.username
+                ND2+='\n'
             if (test[0]==3):
                 D3+=1
+                ND3+=i.username
+                ND3+='\n'
             if (test[0]==4):
                 D4+=1
+                ND4+=i.username
+                ND4+='\n'
             if (test[0]==5):
                 D5+=1
+                ND5+=i.username
+                ND5+='\n'
             if (test[0]==6):
                 D6+=1
+                ND6+=i.username
+                ND6+='\n'
             if (test[0]==7):
                 D7+=1
+                ND7+=i.username
+                ND7+='\n'
             if (test[0]==8):
                 D8+=1
+                ND8+=i.username
+                ND8+='\n'
             if (test[0]==9):
                 D9+=1
+                ND9+=i.username
+                ND9+='\n'
             if (test[0]==10):
                 D10+=1
+                ND10+=i.username
+                ND10+='\n'
             if (test[0]==11):
                 D11+=1
+                ND11+=i.username
+                ND11+='\n'
             if (test[0]==12):
                 D12+=1
+                ND12+=i.username
+                ND12+='\n'
         except:
             CC+=i.username
             CC+=','
@@ -4383,63 +3851,17 @@ def MBO22DL(request):
     DT=D1+D2+D3+D4+D5+D6+D7+D8+D9+D10+D11+D12
     params = {
         "UserID":request.user,
-        "A1":A1,
-        "A2":A2,
-        "A3":A3,
-        "A4":A4,
-        "A5":A5,
-        "A6":A6,
-        "A7":A7,
-        "A8":A8,
-        "A9":A9,
-        "A10":A10,
-        "A11":A11,
-        "A12":A12,
-        "B1":B1,
-        "B2":B2,
-        "B3":B3,
-        "B4":B4,
-        "B5":B5,
-        "B6":B6,
-        "B7":B7,
-        "B8":B8,
-        "B9":B9,
-        "B10":B10,
-        "B11":B11,
-        "B12":B12,
-        "C1":C1,
-        "C2":C2,
-        "C3":C3,
-        "C4":C4,
-        "C5":C5,
-        "C6":C6,
-        "C7":C7,
-        "C8":C8,
-        "C9":C9,
-        "C10":C10,
-        "C11":C11,
-        "C12":C12,
-        "D1":D1,
-        "D2":D2,
-        "D3":D3,
-        "D4":D4,
-        "D5":D5,
-        "D6":D6,
-        "D7":D7,
-        "D8":D8,
-        "D9":D9,
-        "D10":D10,
-        "D11":D11,
-        "D12":D12,
-        "BB1":BB1,
-        "BB2":BB2,
-        "BB3":BB3,
-        "BB4":BB4,
+        "A1":A1,"A2":A2,"A3":A3,"A4":A4,"A5":A5,"A6":A6,"A7":A7,"A8":A8,"A9":A9,"A10":A10,"A11":A11,"A12":A12,
+        "B1":B1,"B2":B2,"B3":B3,"B4":B4,"B5":B5,"B6":B6,"B7":B7,"B8":B8,"B9":B9,"B10":B10,"B11":B11,"B12":B12,
+        "C1":C1,"C2":C2,"C3":C3,"C4":C4,"C5":C5,"C6":C6,"C7":C7,"C8":C8,"C9":C9,"C10":C10,"C11":C11,"C12":C12,
+        "D1":D1,"D2":D2,"D3":D3,"D4":D4,"D5":D5,"D6":D6,"D7":D7,"D8":D8,"D9":D9,"D10":D10,"D11":D11,"D12":D12,
+        "NA1":NA1,"NA2":NA2,"NA3":NA3,"NA4":NA4,"NA5":NA5,"NA6":NA6,"NA7":NA7,"NA8":NA8,"NA9":NA9,"NA10":NA10,"NA11":NA11,"NA12":NA12,
+        "NB1":NB1,"NB2":NB2,"NB3":NB3,"NB4":NB4,"NB5":NB5,"NB6":NB6,"NB7":NB7,"NB8":NB8,"NB9":NB9,"NB10":NB10,"NB11":NB11,"NB12":NB12,
+        "NC1":NC1,"NC2":NC2,"NC3":NC3,"NC4":NC4,"NC5":NC5,"NC6":NC6,"NC7":NC7,"NC8":NC8,"NC9":NC9,"NC10":NC10,"NC11":NC11,"NC12":NC12,
+        "ND1":ND1,"ND2":ND2,"ND3":ND3,"ND4":ND4,"ND5":ND5,"ND6":ND6,"ND7":ND7,"ND8":ND8,"ND9":ND9,"ND10":ND10,"ND11":ND11,"ND12":ND12,
+        "BB1":BB1,"BB2":BB2,"BB3":BB3,"BB4":BB4,
         "CC":CC,
-        "AT":AT,
-        "BT":BT,
-        "CT":CT,
-        "DT":DT,
+        "AT":AT,"BT":BT,"CT":CT,"DT":DT,
         }
     return render(request, "blog/MBO22DL.html",context=params)
 
@@ -4472,6 +3894,32 @@ def ADC22DL(request):
     B11=0
     B12=0
 
+    NA1=''
+    NA2=''
+    NA3=''
+    NA4=''
+    NA5=''
+    NA6=''
+    NA7=''
+    NA8=''
+    NA9=''
+    NA10=''
+    NA11=''
+    NA12=''
+
+    NB1=''
+    NB2=''
+    NB3=''
+    NB4=''
+    NB5=''
+    NB6=''
+    NB7=''
+    NB8=''
+    NB9=''
+    NB10=''
+    NB11=''
+    NB12=''
+
     test=0
     BB1=''
     BB2=''
@@ -4488,28 +3936,52 @@ def ADC22DL(request):
                 BB1+=','
             if (test[0]==1):
                 A1+=1
+                NA1+=i.username
+                NA1+='\n'
             if (test[0]==2):
                 A2+=1
+                NA2+=i.username
+                NA2+='\n'
             if (test[0]==3):
                 A3+=1
+                NA3+=i.username
+                NA3+='\n'
             if (test[0]==4):
                 A4+=1
+                NA4+=i.username
+                NA4+='\n'
             if (test[0]==5):
                 A5+=1
+                NA5+=i.username
+                NA5+='\n'
             if (test[0]==6):
                 A6+=1
+                NA6+=i.username
+                NA6+='\n'
             if (test[0]==7):
                 A7+=1
+                NA7+=i.username
+                NA7+='\n'
             if (test[0]==8):
                 A8+=1
+                NA8+=i.username
+                NA8+='\n'
             if (test[0]==9):
                 A9+=1
+                NA9+=i.username
+                NA9+='\n'
             if (test[0]==10):
                 A10+=1
+                NA10+=i.username
+                NA10+='\n'
             if (test[0]==11):
                 A11+=1
+                NA11+=i.username
+                NA11+='\n'
             if (test[0]==12):
                 A12+=1
+                NA12+=i.username
+                NA12+='\n'
         except:
             CC1+=i.username
             CC1+=','
@@ -4521,28 +3993,52 @@ def ADC22DL(request):
                 BB2+=','
             if (test[0]==1):
                 B1+=1
+                NB1+=i.username
+                NB1+='\n'
             if (test[0]==2):
                 B2+=1
+                NB2+=i.username
+                NB2+='\n'
             if (test[0]==3):
                 B3+=1
+                NB3+=i.username
+                NB3+='\n'
             if (test[0]==4):
                 B4+=1
+                NB4+=i.username
+                NB4+='\n'
             if (test[0]==5):
                 B5+=1
+                NB5+=i.username
+                NB5+='\n'
             if (test[0]==6):
                 B6+=1
+                NB6+=i.username
+                NB6+='\n'
             if (test[0]==7):
                 B7+=1
+                NB7+=i.username
+                NB7+='\n'
             if (test[0]==8):
                 B8+=1
+                NB8+=i.username
+                NB8+='\n'
             if (test[0]==9):
                 B9+=1
+                NB9+=i.username
+                NB9+='\n'
             if (test[0]==10):
                 B10+=1
+                NB10+=i.username
+                NB10+='\n'
             if (test[0]==11):
                 B11+=1
+                NB11+=i.username
+                NB11+='\n'
             if (test[0]==12):
                 B12+=1
+                NB12+=i.username
+                NB12+='\n'
         except:
             CC2+=i.username
             CC2+=','
@@ -4554,30 +4050,10 @@ def ADC22DL(request):
     BT=B1+B2+B3+B4+B5+B6+B7+B8+B9+B10+B11+B12
     params = {
         "UserID":request.user,
-        "A1":A1,
-        "A2":A2,
-        "A3":A3,
-        "A4":A4,
-        "A5":A5,
-        "A6":A6,
-        "A7":A7,
-        "A8":A8,
-        "A9":A9,
-        "A10":A10,
-        "A11":A11,
-        "A12":A12,
-        "B1":B1,
-        "B2":B2,
-        "B3":B3,
-        "B4":B4,
-        "B5":B5,
-        "B6":B6,
-        "B7":B7,
-        "B8":B8,
-        "B9":B9,
-        "B10":B10,
-        "B11":B11,
-        "B12":B12,
+        "A1":A1,"A2":A2,"A3":A3,"A4":A4,"A5":A5,"A6":A6,"A7":A7,"A8":A8,"A9":A9,"A10":A10,"A11":A11,"A12":A12,
+        "B1":B1,"B2":B2,"B3":B3,"B4":B4,"B5":B5,"B6":B6,"B7":B7,"B8":B8,"B9":B9,"B10":B10,"B11":B11,"B12":B12,
+        "NA1":NA1,"NA2":NA2,"NA3":NA3,"NA4":NA4,"NA5":NA5,"NA6":NA6,"NA7":NA7,"NA8":NA8,"NA9":NA9,"NA10":NA10,"NA11":NA11,"NA12":NA12,
+        "NB1":NB1,"NB2":NB2,"NB3":NB3,"NB4":NB4,"NB5":NB5,"NB6":NB6,"NB7":NB7,"NB8":NB8,"NB9":NB9,"NB10":NB10,"NB11":NB11,"NB12":NB12,
         "BB1":BB1,
         "BB2":BB2,
         "CC1":CC1,
@@ -5014,383 +4490,410 @@ def ADC22ESTA(request):
     E16A=0.0
 
     for i in object_list:
-        try:
-            CE1=[]
-            CE1+=ADC22.objects.values_list('ADC22E1').get(user=i.id)
-            if Elist[0]==CE1[0]:
+        checkkk = []
+        checkkk += ADC22.objects.values_list('ADC22A').get(user=i.id)
+        if int(checkkk[0] == 1):
+            try:
+                CE1=[]
+                #CE1+=ADC22.objects.values_list('ADC22E1').get(user=i.id)
+                CE1.append(i.first_name)
+                if Elist[0]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E1C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E1A+=float(AA[1])
+                    E1N+=1
+                if Elist[1]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E2C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E2A+=float(AA[1])
+                    E2N+=1
+                if Elist[2]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E3C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E3A+=float(AA[1])
+                    E3N+=1
+                if Elist[3]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E4C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E4A+=float(AA[1])
+                    E4N+=1
+                if Elist[4]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E5C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E5A+=float(AA[1])
+                    E5N+=1
+                if Elist[5]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E6C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E6A+=float(AA[1])
+                    E6N+=1
+                if Elist[6]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E7C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E7A+=float(AA[1])
+                    E7N+=1
+                if Elist[7]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E8C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E8A+=float(AA[1])
+                    E8N+=1
+                if Elist[8]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E9C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E9A+=float(AA[1])
+                    E9N+=1
+                if Elist[9]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E10C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E10A+=float(AA[1])
+                    E10N+=1
+                if Elist[10]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E11C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E11A+=float(AA[1])
+                    E11N+=1
+                if Elist[11]==CE1[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+                    E12C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+                    E12A+=float(AA[1])
+                    E12N+=1
+                CE2=[]
+#            CE2+=ADC22.objects.values_list('ADC22E2').get(user=i.id)
+                CE2.append(i.last_name)
+                if Elist[0]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E1C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E1A+=float(AA[1])
+                    E1N+=1
+                if Elist[1]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E2C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E2A+=float(AA[1])
+                    E2N+=1
+                if Elist[2]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E3C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E3A+=float(AA[1])
+                    E3N+=1
+                if Elist[3]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E4C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E4A+=float(AA[1])
+                    E4N+=1
+                if Elist[4]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E5C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E5A+=float(AA[1])
+                    E5N+=1
+                if Elist[5]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E6C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E6A+=float(AA[1])
+                    E6N+=1
+                if Elist[6]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E7C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E7A+=float(AA[1])
+                    E7N+=1
+                if Elist[7]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E8C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E8A+=float(AA[1])
+                    E8N+=1
+                if Elist[8]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E9C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E9A+=float(AA[1])
+                    E9N+=1
+                if Elist[9]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E10C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E10A+=float(AA[1])
+                    E10N+=1
+                if Elist[10]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E11C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E11A+=float(AA[1])
+                    E11N+=1
+                if Elist[11]==CE2[0]:
+                    AA=[]
+                    AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+                    E12C+=float(AA[0])
+                    AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+                    E12A+=float(AA[1])
+                    E12N+=1
+            except :
                 AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E1C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E1A+=float(AA[1])
-                E1N+=1
-            if Elist[1]==CE1[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E2C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E2A+=float(AA[1])
-                E2N+=1
-            if Elist[2]==CE1[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E3C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E3A+=float(AA[1])
-                E3N+=1
-            if Elist[3]==CE1[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E4C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E4A+=float(AA[1])
-                E4N+=1
-            if Elist[4]==CE1[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E5C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E5A+=float(AA[1])
-                E5N+=1
-            if Elist[5]==CE1[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E6C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E6A+=float(AA[1])
-                E6N+=1
-            if Elist[6]==CE1[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E7C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E7A+=float(AA[1])
-                E7N+=1
-            if Elist[7]==CE1[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E8C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E8A+=float(AA[1])
-                E8N+=1
-            if Elist[8]==CE1[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E9C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E9A+=float(AA[1])
-                E9N+=1
-            if Elist[9]==CE1[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E10C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E10A+=float(AA[1])
-                E10N+=1
-            if Elist[10]==CE1[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E11C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E11A+=float(AA[1])
-                E11N+=1
-            if Elist[11]==CE1[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
-                E12C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
-                E12A+=float(AA[1])
-                E12N+=1
-            CE2=[]
-            CE2+=ADC22.objects.values_list('ADC22E2').get(user=i.id)
-            if Elist[0]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E1C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E1A+=float(AA[1])
-                E1N+=1
-            if Elist[1]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E2C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E2A+=float(AA[1])
-                E2N+=1
-            if Elist[2]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E3C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E3A+=float(AA[1])
-                E3N+=1
-            if Elist[3]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E4C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E4A+=float(AA[1])
-                E4N+=1
-            if Elist[4]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E5C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E5A+=float(AA[1])
-                E5N+=1
-            if Elist[5]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E6C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E6A+=float(AA[1])
-                E6N+=1
-            if Elist[6]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E7C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E7A+=float(AA[1])
-                E7N+=1
-            if Elist[7]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E8C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E8A+=float(AA[1])
-                E8N+=1
-            if Elist[8]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E9C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E9A+=float(AA[1])
-                E9N+=1
-            if Elist[9]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E10C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E10A+=float(AA[1])
-                E10N+=1
-            if Elist[10]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E11C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E11A+=float(AA[1])
-                E11N+=1
-            if Elist[11]==CE2[0]:
-                AA=[]
-                AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
-                E12C+=float(AA[0])
-                AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
-                E12A+=float(AA[1])
-                E12N+=1
-        except :
-            AA=[]
-
 
     for i in object_list:
-        try:
-            
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G1C').get(user=i.id)
-            G1C+=float(AA[0])
-            G1CN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G1A').get(user=i.id)
-            G1A+=float(AA[0])
-            G1AN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G2C').get(user=i.id)
-            G2C+=float(AA[0])
-            G2CN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G2A').get(user=i.id)
-            G2A+=float(AA[0])
-            G2AN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G3C').get(user=i.id)
-            G3C+=float(AA[0])
-            G3CN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G3A').get(user=i.id)
-            G3A+=float(AA[0])
-            G3AN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G4C').get(user=i.id)
-            G4C+=float(AA[0])
-            G4CN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G4A').get(user=i.id)
-            G4A+=float(AA[0])
-            G4AN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G5C').get(user=i.id)
-            G5C+=float(AA[0])
-            G5CN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G5A').get(user=i.id)
-            G5A+=float(AA[0])
-            G5AN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G6C').get(user=i.id)
-            G6C+=float(AA[0])
-            G6CN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G6A').get(user=i.id)
-            G6A+=float(AA[0])
-            G6AN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G7C').get(user=i.id)
-            G7C+=float(AA[0])
-            G7CN+=1
-            AA=[]
-            AA+=ADC22.objects.values_list('ADC22G7A').get(user=i.id)
-            G7A+=float(AA[0])
-            G7AN+=1
-            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G1').get(user=resultb6):
+        checkkk = []
+        checkkk += ADC22.objects.values_list('ADC22A').get(user=i.id)       
+        try:            
+            if int(checkkk[0]) == 1:
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G1C').get(user=i.id)
+                G1C+=float(AA[0])
+                G1CN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G1A').get(user=i.id)
+                G1A+=float(AA[0])
+                G1AN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G2C').get(user=i.id)
+                G2C+=float(AA[0])
+                G2CN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G2A').get(user=i.id)
+                G2A+=float(AA[0])
+                G2AN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G3C').get(user=i.id)
+                G3C+=float(AA[0])
+                G3CN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G3A').get(user=i.id)
+                G3A+=float(AA[0])
+                G3AN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G4C').get(user=i.id)
+                G4C+=float(AA[0])
+                G4CN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G4A').get(user=i.id)
+                G4A+=float(AA[0])
+                G4AN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G5C').get(user=i.id)
+                G5C+=float(AA[0])
+                G5CN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G5A').get(user=i.id)
+                G5A+=float(AA[0])
+                G5AN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G6C').get(user=i.id)
+                G6C+=float(AA[0])
+                G6CN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G6A').get(user=i.id)
+                G6A+=float(AA[0])
+                G6AN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G7C').get(user=i.id)
+                G7C+=float(AA[0])
+                G7CN+=1
+                AA=[]
+                AA+=ADC22.objects.values_list('ADC22G7A').get(user=i.id)
+                G7A+=float(AA[0])
+                G7AN+=1
+            if 'resultado' in str(PDI22.objects.values_list('PDI22G1C').get(user=i.id)).lower():
+#            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G1').get(user=resultb6):
                 G1F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G1C').get(user=i.id)
                 G1FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G1A').get(user=i.id)
                 G1FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G2').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G2').get(user=resultb6):
+            if 'cliente' in str(PDI22.objects.values_list('PDI22G1C').get(user=i.id)).lower():
                 G2F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G2C').get(user=i.id)
                 G2FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G2A').get(user=i.id)
                 G2FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G3').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G3').get(user=resultb6):
+            if 'busca' in str(PDI22.objects.values_list('PDI22G1C').get(user=i.id)).lower():
                 G3F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G3C').get(user=i.id)
                 G3FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G3A').get(user=i.id)
                 G3FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G4').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G4').get(user=resultb6):
+            if 'liderança' in str(PDI22.objects.values_list('PDI22G1C').get(user=i.id)).lower():
                 G4F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G4C').get(user=i.id)
                 G4FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G4A').get(user=i.id)
                 G4FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G5').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G5').get(user=resultb6):
+            if 'senso' in str(PDI22.objects.values_list('PDI22G1C').get(user=i.id)).lower():
                 G5F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G5C').get(user=i.id)
                 G5FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G5A').get(user=i.id)
                 G5FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G6').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G6').get(user=resultb6):
+            if 'comunicação' in str(PDI22.objects.values_list('PDI22G1C').get(user=i.id)).lower():
                 G6F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G6C').get(user=i.id)
                 G6FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G6A').get(user=i.id)
                 G6FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G7').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G1C').get(user=i.id)==RHDT.objects.values_list('ADC22G7').get(user=resultb6):
+            if 'relacionamento' in str(PDI22.objects.values_list('PDI22G1C').get(user=i.id)).lower():
                 G7F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G7C').get(user=i.id)
                 G7FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G7A').get(user=i.id)
                 G7FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G1').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G1').get(user=resultb6):
+            if 'resultado' in str(PDI22.objects.values_list('PDI22G2C').get(user=i.id)).lower():
                 G1F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G1C').get(user=i.id)
                 G1FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G1A').get(user=i.id)
                 G1FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G2').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G2').get(user=resultb6):
+            if 'cliente' in str(PDI22.objects.values_list('PDI22G2C').get(user=i.id)).lower():
                 G2F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G2C').get(user=i.id)
                 G2FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G2A').get(user=i.id)
                 G2FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G3').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G3').get(user=resultb6):
+            if 'busca' in str(PDI22.objects.values_list('PDI22G2C').get(user=i.id)).lower():
                 G3F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G3C').get(user=i.id)
                 G3FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G3A').get(user=i.id)
                 G3FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G4').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G4').get(user=resultb6):
+            if 'liderança' in str(PDI22.objects.values_list('PDI22G2C').get(user=i.id)).lower():
                 G4F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G4C').get(user=i.id)
                 G4FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G4A').get(user=i.id)
                 G4FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G5').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G5').get(user=resultb6):
+            if 'senso' in str(PDI22.objects.values_list('PDI22G2C').get(user=i.id)).lower():
                 G5F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G5C').get(user=i.id)
                 G5FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G5A').get(user=i.id)
                 G5FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G6').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G6').get(user=resultb6):
+            if 'comunicação' in str(PDI22.objects.values_list('PDI22G2C').get(user=i.id)).lower():
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G6C').get(user=i.id)
                 G6FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G6A').get(user=i.id)
                 G6FA+=float(AA[1])
                 G6F+=1
-            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G7').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G2C').get(user=i.id)==RHDT.objects.values_list('ADC22G7').get(user=resultb6):
+            if 'relacionamento' in str(PDI22.objects.values_list('PDI22G2C').get(user=i.id)).lower():
                 G7F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G7C').get(user=i.id)
                 G7FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G7A').get(user=i.id)
                 G7FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G1').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G1').get(user=resultb6):
+            if 'resultado' in str(PDI22.objects.values_list('PDI22G3C').get(user=i.id)).lower():
                 G1F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G1C').get(user=i.id)
                 G1FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G1A').get(user=i.id)
                 G1FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G2').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G2').get(user=resultb6):
+            if 'cliente' in str(PDI22.objects.values_list('PDI22G3C').get(user=i.id)).lower():
                 G2F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G2C').get(user=i.id)
                 G2FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G2A').get(user=i.id)
                 G2FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G3').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G3').get(user=resultb6):
+            if 'busca' in str(PDI22.objects.values_list('PDI22G3C').get(user=i.id)).lower():
                 G3F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G3C').get(user=i.id)
                 G3FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G3A').get(user=i.id)
                 G3FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G4').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G4').get(user=resultb6):
+            if 'liderança' in str(PDI22.objects.values_list('PDI22G3C').get(user=i.id)).lower():
                 G4F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G4C').get(user=i.id)
                 G4FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G4A').get(user=i.id)
                 G4FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G5').get(user=resultb6):
+#            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G5').get(user=resultb6):
+            if 'senso' in str(PDI22.objects.values_list('PDI22G3C').get(user=i.id)).lower():
                 G5F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G5C').get(user=i.id)
-                G4FC+=float(AA[0])
+                G5FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G5A').get(user=i.id)
-                G4FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G6').get(user=resultb6):
+                G5FA+=float(AA[1])
+#            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G6').get(user=resultb6):
+            if 'comunicação' in str(PDI22.objects.values_list('PDI22G3C').get(user=i.id)).lower():
                 G6F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G6C').get(user=i.id)
-                G5FC+=float(AA[0])
+                G6FC+=float(AA[0])
                 AA+=ADC22.objects.values_list('ADC22G6A').get(user=i.id)
-                G5FA+=float(AA[1])
-            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G7').get(user=resultb6):
+                G6FA+=float(AA[1])
+#            if PDI22.objects.values_list('PDI22G3C').get(user=i.id)==RHDT.objects.values_list('ADC22G7').get(user=resultb6):
+            if 'relacionamento' in str(PDI22.objects.values_list('PDI22G3C').get(user=i.id)).lower():
                 G7F+=1
                 AA=[]
                 AA+=ADC22.objects.values_list('ADC22G7C').get(user=i.id)
@@ -6775,4 +6278,1427 @@ def ADC22ESTA(request):
         }
     return render(request, "blog/ADC22ESTA.html",context=params)
 
+
+def upload(request):
+    data='nothing'
+    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+    my_file = os.path.join(THIS_FOLDER,'psw.txt')
+    f = open(my_file,'r', encoding='UTF-8')
+    data = f.read()
+    data = data.replace('\n',',')
+    data = data.split(',')
+    BB = len(data)
+    CC = int(BB/5)
+    if request.method == 'POST':
+        for i in range(CC) :
+            j=5*i
+            k=j+1
+            l=j+2
+            m=j+3
+            n=j+4
+            AA = User()
+            AA.username = data[j]
+            AA.password = data[k]
+            AA.first_name = data[l]
+            AA.last_name = data[m]
+            AA.email = data[n]
+            AA.save()
+            AA.set_password(str(data[k]))
+            AA.save()
+        object_list = User.objects.all()
+        for o in object_list:
+            add_user = User.objects.filter(username=o.username).first()
+            if o.username != 'hyumanozaki':
+                if o.username != 'hyuma.nozaki@cosmotec.com.br':
+                    BB = MBO22()
+                    BB.user = add_user
+                    BB.save()
+                    CC = ADC22()
+                    CC.user = add_user
+                    CC.save()
+                    DD = PDI22()
+                    DD.user = add_user
+                    DD.save()                   
+
+        return redirect(to='/RH')
+    params = {"form":data,"BB":BB}
+    return render(request, 'blog/upload.html', params)
+
+def upMBO(request):
+    data='nothing'
+    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+    my_file = os.path.join(THIS_FOLDER,'upM.txt')
+    f = open(my_file,'r', encoding='UTF-8')
+    data = f.read()
+    data = data.replace('\n','^')
+    data = data.split('^')
+    BB = len(data)
+    CC = int(BB)
+    object_list = User.objects.all()
+    if request.method == 'POST':
+        for i in range(CC) :
+            k=1
+            for j in object_list:
+                if data[i] == j.username:
+                    task = get_object_or_404(MBO22, user=j.id)
+                    task.MBO22A1=data[i+1]
+                    if data[i+2] != '#':
+                        task.MBO22B1=data[i+2]
+                        k+=1
+                        if data[i+3] != '#':
+                            task.MBO22C1=data[i+3]
+                            k+=1
+                            if data[i+4] != '#':
+                                task.MBO22D1=data[i+4]
+                                k+=1
+                                if data[i+5] != '#':
+                                    task.MBO22E1=data[i+5]
+                                    k+=1
+                                    if data[i+6] != '#':
+                                        task.MBO22F1=data[i+6]
+                                        k+=1
+                                        if data[i+7] != '#':
+                                            task.MBO22G1=data[i+7]
+                                            k+=1
+                    if k==1:
+                        task.MBO22AP=data[i+2+k]
+                    if k==2:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                    if k==3:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                        task.MBO22CP=data[i+2+k+2]
+                    if k==4:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                        task.MBO22CP=data[i+2+k+2]
+                        task.MBO22DP=data[i+2+k+3]
+                    if k==5:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                        task.MBO22CP=data[i+2+k+2]
+                        task.MBO22DP=data[i+2+k+3]
+                        task.MBO22EP=data[i+2+k+4]
+                    if k==6:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                        task.MBO22CP=data[i+2+k+2]
+                        task.MBO22DP=data[i+2+k+3]
+                        task.MBO22EP=data[i+2+k+4]
+                        task.MBO22FP=data[i+2+k+5]
+                    if k==7:
+                        task.MBO22AP=data[i+2+k]
+                        task.MBO22BP=data[i+2+k+1]
+                        task.MBO22CP=data[i+2+k+2]
+                        task.MBO22DP=data[i+2+k+3]
+                        task.MBO22EP=data[i+2+k+4]
+                        task.MBO22FP=data[i+2+k+5]
+                        task.MBO22GP=data[i+2+k+6]
+                    task.save()
+                    break                  
+        return redirect(to='/RH')
+    params = {"form":data,"BB":BB}
+    return render(request, 'blog/upMBO.html', params)
+
+
+
+def upADC(request):
+
+    today = datetime.now()
+    Y = today.year
+    M = today.month
+    D = today.day
+
+    data='nothing'
+    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+    my_file = os.path.join(THIS_FOLDER,'upA.txt')
+    f = open(my_file,'r', encoding='UTF-8')
+    data = f.read()
+    data = data.replace('\n','^')
+    data = data.split('^')
+    BB = len(data)
+    CC = int(BB/28)
+    object_list = User.objects.all()    
+    if request.method == 'POST':
+        for i in range(CC) :
+            k=1
+            l=i*28
+            for j in object_list:
+                if data[l] == j.username:
+                    task = get_object_or_404(ADC22, user=j.id)
+                    for m in range(18):
+                        if data[l+m+1]=='None':
+                            data[l+1+m]=1.0
+                    task.ADC22G1C=float(data[l+1])
+                    task.ADC22G2C=float(data[l+2])
+                    task.ADC22G3C=float(data[l+3])
+                    task.ADC22G4C=float(data[l+4])
+                    task.ADC22G5C=float(data[l+5])
+                    task.ADC22G6C=float(data[l+6])
+                    task.ADC22G7C=float(data[l+7])
+                    task.ADC22E1C=float(data[l+8])
+                    task.ADC22E2C=float(data[l+9])
+                    task.ADC22G1A=float(data[l+10])
+                    task.ADC22G2A=float(data[l+11])
+                    task.ADC22G3A=float(data[l+12])
+                    task.ADC22G4A=float(data[l+13])
+                    task.ADC22G5A=float(data[l+14])
+                    task.ADC22G6A=float(data[l+15])
+                    task.ADC22G7A=float(data[l+16])
+                    task.ADC22E1A=float(data[l+17])
+                    task.ADC22E2A=float(data[l+18])
+                    task.ADC22G1O=data[l+19]
+                    task.ADC22G2O=data[l+20]
+                    task.ADC22G3O=data[l+21]
+                    task.ADC22G4O=data[l+22]
+                    task.ADC22G5O=data[l+23]
+                    task.ADC22G6O=data[l+24]
+                    task.ADC22G7O=data[l+25]
+                    task.ADC22E1O=data[l+26]
+                    task.ADC22E2O=data[l+27]
+                    task.ADC22E1=j.first_name
+                    task.ADC22E2=j.last_name
+                    task.ADC22C=1
+                    task.ADC22A=1
+                    task.ADC22Y=Y
+                    task.ADC22M=M
+                    task.ADC22D=D
+                    task.save()
+                    break                  
+        return redirect(to='/RH')
+    XX=BB/28
+    params = {"form":data,"BB":XX}
+    return render(request, 'blog/upADC.html', params)
+
+
+def upPDI(request):
+
+    today = datetime.now()
+    Y = today.year
+    M = today.month
+    D = today.day
+    
+    data='nothing'
+    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+    my_file = os.path.join(THIS_FOLDER,'upP.txt')
+    f = open(my_file,'r', encoding='UTF-8')
+    data = f.read()
+    data = data.replace('\n','^')
+    data = data.split('^')
+    BB = len(data)
+    CC = int(BB/14)
+    object_list = User.objects.all()
+    if request.method == 'POST':
+        for i in range(CC) :
+            k=1
+            l=i*14
+            for j in object_list:
+                if data[l] == j.username:
+                    task = get_object_or_404(PDI22, user=j.id)
+                    task.PDI22G1C=data[l+1]
+                    task.PDI22G2C=data[l+2]
+                    task.PDI22G3C=data[l+3]
+                    task.PDI22G1PD=data[l+4]
+                    task.PDI22G2PD=data[l+5]
+                    task.PDI22G3PD=data[l+6]
+                    task.PDI22E1PD=data[l+7]
+                    task.PDI22E2PD=data[l+8]
+                    task.PDI22G1=data[l+9]
+                    task.PDI22G2=data[l+10]
+                    task.PDI22G3=data[l+11]
+                    task.PDI22E1=data[l+12]
+                    task.PDI22E2=data[l+13]
+                    task.PDI22E1C=j.first_name
+                    task.PDI22E2C=j.last_name
+                    task.PDI22C=1
+                    task.PDI22A=1
+                    task.PDI22Y=Y
+                    task.PDI22M=M
+                    task.PDI22D=D
+                    task.save()
+                    break                  
+        return redirect(to='/RH')
+    XX=BB/14
+    params = {"form":data,"BB":XX}
+    return render(request, 'blog/upPDI.html', params)
+
+
+def upCE(request):
+    object_list = User.objects.all()
+    if request.method == 'POST':
+        for i in object_list:
+            task = get_object_or_404(ADC22, user=i.id)
+            task.ADC22E1=i.first_name
+            task.ADC22E2=i.last_name
+            task.save()
+        return redirect(to='/RH')
+    return render(request, 'blog/upCE.html')
+
+def listAE(request):
+    object_list = User.objects.all()
+    data=''
+    for i in object_list:
+        data+=i.username
+        data+='^'
+        data+=i.password
+        data+='^'
+        data+=i.first_name
+        data+='^'
+        data+=i.last_name
+        data+='^'
+        data+=i.email
+        data+='^'
+    data=data.split('^')
+    params = {"data":data,}
+    return render(request, 'blog/listAE.html',params)
+    
+
+def listMBO(request):
+    object_list = User.objects.all()
+    data=''
+    for i in object_list:
+        data+=i.username
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22A1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22B1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22C1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22D1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22E1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22F1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22G1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22AP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22BP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22CP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22DP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22EP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22FP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22GP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22A2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22B2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22C2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22D2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22E2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22F2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22G2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22A3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22B3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22C3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22D3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22E3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22F3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22G3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22A4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22B4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22C4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22D4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22E4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22F4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22G4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22AR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22BR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22CR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22DR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22ER').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22FR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO22GR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23A1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23B1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23C1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23D1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23E1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23F1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23G1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23AP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23BP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23CP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23DP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23EP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23FP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23GP').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23A2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23B2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23C2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23D2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23E2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23F2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23G2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23A3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23B3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23C3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23D3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23E3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23F3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23G3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23A4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23B4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23C4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23D4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23E4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23F4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23G4').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23AR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23BR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23CR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23DR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23ER').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23FR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=MBO22.objects.values_list('MBO23GR').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+    data = data.replace('\n','')
+    data = data.split('^')
+    params={"data":data}
+    return render(request, 'blog/listMBO.html',params)
+
+def listADC(request):
+    object_list = User.objects.all()
+    data=''
+    for i in object_list:
+        data+=i.username
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G3C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G4C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G5C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G6C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G7C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G1A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G2A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G3A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G4A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G5A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G6A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G7A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G1OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G2OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G3OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G4OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G5OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G6OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G7OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA+=ADC22.objects.values_list('ADC22G1O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G2O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G3O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G4O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G5O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G6O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22G7O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E1A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E2A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E1OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E2OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E1O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC22E2O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G3C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G4C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G5C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G6C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G7C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G1A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G2A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G3A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G4A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G5A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G6A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G7A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G1OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G2OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G3OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G4OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G5OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G6OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G7OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA+=ADC22.objects.values_list('ADC23G1O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G2O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G3O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G4O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G5O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G6O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23G7O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E1A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E2A').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E1OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E2OC').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E1O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=ADC22.objects.values_list('ADC23E2O').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'       
+    data = data.replace('\n','')
+    data = data.split('^')
+    params={"data":data}
+    return render(request, 'blog/listMBO.html',params)
+
+
+def listPDI(request):
+    object_list = User.objects.all()
+    data=''
+    for i in object_list:
+        data+=i.username
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G1PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G2PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G3C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G3PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22G3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E1PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E2PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI22E2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G1PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G2PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G3C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G3PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23G3').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E1C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E1PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E1').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E2C').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E2PD').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+        AA=[]
+        AA+=PDI22.objects.values_list('PDI23E2').get(user=i.id)
+        if str(AA[0])=='':
+            AA[0]='None'
+        data+=str(AA[0])
+        data+='^'
+    data = data.replace('\n','')
+    data = data.split('^')
+    params={"data":data}
+    return render(request, 'blog/listPDI.html',params)
 

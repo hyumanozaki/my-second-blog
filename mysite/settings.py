@@ -36,12 +36,18 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #EMAIL_BACKEND = 'sgbackend.SendGridBackend'
 #SENDGRID_API_KEY = "YOUR SENDGRID API KEY"
 
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.office365.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'hyuma2331@gmail.com'
-EMAIL_HOST_PASSWORD = 'zvuaqtvfmlsmuslq'
-#EMAIL_HOST_PASSWORD = 'wine2331'
+EMAIL_HOST_USER = 'sistema.rh@cosmotec.com.br'
+EMAIL_HOST_PASSWORD = 'rhsis2022'
 EMAIL_USE_TLS = True
+
+
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = 'hyuma2331@gmail.com'
+#EMAIL_HOST_PASSWORD = 'zvuaqtvfmlsmuslq'
+#EMAIL_USE_TLS = True
 
 # Application definition
 
@@ -53,6 +59,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
+#    'django_apscheduler',
+#    'blog.apps.JpFundamentalBlogConfig',
+
 ]
 
 MIDDLEWARE = [

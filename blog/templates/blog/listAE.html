@@ -1,0 +1,19 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+   
+</head>
+<body class="container">
+    <form action="{% url 'listAE' %}" method="post">
+    <h5><td><a href="{% url 'RH' %}">volta para sala RH</a></td></h5>
+    {% csrf_token %}
+    {% for i in data %}
+        <font size="1">{{i}}</font><br>
+    {% endfor %}
+    </form>
+</body>
+</html>

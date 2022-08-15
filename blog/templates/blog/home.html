@@ -1,120 +1,79 @@
 {% load static %}
 <html lang="ja" dir="ltr">
 <head>
-<meta charset="utf-8">
-<title></title>
-<link rel="stylesheet" href="{% static 'css/blog.css' %}">
-
+   <meta charset="utf-8">
+   <title></title>
+   <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+   <img src="static/cosmo.jpg" height = "300px" class="logo"> <div class="first"><font color="red">{{ UserID }}</font> bem vindo !!</div>       
 </head>
-<body>
 
-<h1><font color="red">{{ UserID }}</font> bem vindo !!</h1>
-<form action="{% url 'home' %}" method="post">
-{% csrf_token %}
-{% if time == 0 %}
-   primeira escolhe seu departamento
-   {{dept}}
-   <br><input type="submit" value="escolhe seu departamento" class="btn btn-primary mt-2" name="office">
-   <br>assuntos regulatorios = pesquisa e desenvolvimento
-   <br>produção = operacional
-   <br>comerical express = customer service
+{% if user.is_authenticated %}
+   <body>
+      <form action="{% url 'home' %}" method="post">
+         <div class="content">
+         {% csrf_token %}
+            {% if time == 0 %}
+               primeira escolhe seu departamento{{dept}}
+               <br>
+               <br>clique aqui<input type="submit" value="escolhe seu departamento" class="btn btn-primary mt-2" name="office"><br>
+               <br>assuntos regulatorios = pesquisa e desenvolvimento
+               <br>produção = operacional
+               <br>comerical express = customer service
+               <br>President = Diretor
+            {% else %}
+               {% if user.username != 'hyumanozaki' %}
+               <table>
+                  <td>
+                     <h3><u>menu para colaborador/a</u></h3><br>
+                     <h4>MBO</h4>
+                     <div style="float:left;" class="box"><a href="{% url 'Logout' %}">2022</a></div>
+                     <div style="float:left;" class="box">{% if MBO23TIME > 0 %}<a href="{% url 'Logout' %}">2023</a>{% else %}2023{% endif %}</div>
+                     <div style="float:left;" class="box">{% if MBO24TIME > 0 %}<a href="{% url 'Logout' %}">2024</a>{% else %}2024{% endif %}</div>
+                     <br><br>
+                     <h4>avaliação de competencia</h4>
+                     <div style="float:left;" class="box"><a href="{% url 'ADC' %}">2022</a></div>
+                     <div style="float:left;" class="box">{% if ADC23TIME > 0 %}<a href="{% url 'ADC' %}">2023</a>{% else %}2023{% endif %}</div>
+                     <div style="float:left;" class="box">{% if ADC24TIME > 0 %}<a href="{% url 'ADC' %}">2024</a>{% else %}2024{% endif %}</div>
+                     <br><br>
+                     <h4>PDI (Plano de Devenvolvimento Individual)</h4>
+                     <div style="float:left;" class="box"><a href="{% url 'PDI' %}">2022</a></div>
+                     <div style="float:left;" class="box">{% if ADC23TIME > 0 %}<a href="{% url 'PDI' %}">2023</a>{% else %}2023{% endif %}</div>
+                     <div style="float:left;" class="box">{% if ADC24TIME > 0 %}<a href="{% url 'PDI' %}">2024</a>{% else %}2024{% endif %}</div>
+                  </td>
+                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td>
+                     {% if equipe == 1 %}
+                        <h3><u>menu para avaliador/a</u></h3><br>
+                        <h4>MBO</h4>
+                        <div style="float:left;" class="box"><a href="{% url 'homeA' %}">2022</a></div>
+                        <div style="float:left;" class="box">{% if MBO23TIME > 0 %}<a href="{% url 'homeA' %}">2023</a>{% else %}2023{% endif %}</div>
+                        <div style="float:left;" class="box">{% if MBO24TIME > 0 %}<a href="{% url 'homeA' %}">2024</a>{% else %}2024{% endif %}</div>
+                        <br><br>
+                        <h4>avaliação de competencia</h4>
+                        <div style="float:left;" class="box"><a href="{% url 'homeB' %}">2022</a></div>
+                        <div style="float:left;" class="box">{% if ADC23TIME > 0 %}<a href="{% url 'homeB' %}">2023</a>{% else %}2023{% endif %}</div>
+                        <div style="float:left;" class="box">{% if ADC24TIME > 0 %}<a href="{% url 'homeB' %}">2024</a>{% else %}2024{% endif %}</div>
+                        <br><br>
+                        <h4>PDI (Plano de Devenvolvimento Individual)</h4>
+                        <div style="float:left;" class="box"><a href="{% url 'homeC' %}">2022</a></div>
+                        <div style="float:left;" class="box">{% if ADC23TIME > 0 %}<a href="{% url 'homeC' %}">2023</a>{% else %}2023{% endif %}</div>
+                        <div style="float:left;" class="box">{% if ADC24TIME > 0 %}<a href="{% url 'homeC' %}">2024</a>{% else %}2024{% endif %}</div>
+                     {% endif %}
+                  </td>
+               </table>
+               {% endif %}
+            {% endif %}            
+            {% if user.username == "hyumanozaki" %}
+               <br><p><a href="{% url 'RH' %}">sala RH</a></p>
+            {% endif %}
+            {% if user.username == "hyuma.nozaki@cosmotec.com.br" %}
+               <br><p><a href="{% url 'RH' %}">sala RH</a></p>
+            {% endif %}
+         </div>
    </form>
+   </body>
 {% else %}
-   <p> 
-   <a>MBO para colaborador</a>
-   <a href="{% url 'Logout' %}">2022</a>
-   {% if MBO23TIME > 0 %}
-      <a href="{% url 'Logout' %}">2023</a>
-   {% else %}
-      <a>2023</a>
-   {% endif %}
-   {% if MBO24TIME > 0 %}
-      <a href="{% url 'Logout' %}">2024</a>
-   {% else %}
-      <a>2024</a>
-   {% endif %}
-   </p>
-   <p> 
-   <a>avaliação de competencia para colaborador</a>
-   <a href="{% url 'ADC' %}">2022</a>
-   {% if ADC23TIME > 0 %}
-      <a href="{% url 'ADC' %}">2023</a>
-   {% else %}
-      <a>2023</a>
-   {% endif %}
-   {% if ADC24TIME > 0 %}
-      <a href="{% url 'ADC' %}">2024</a>
-   {% else %}
-      <a>2024</a>
-   {% endif %}
-   </p>
-   <p> 
-   <a>PDI (Plano de Devenvolvimento Individual) para colaborador</a>
-   <a href="{% url 'PDI' %}">2022</a>
-   {% if ADC23TIME > 0 %}
-      <a href="{% url 'PDI' %}">2023</a>
-   {% else %}
-      <a>2023</a>
-   {% endif %}
-   {% if ADC24TIME > 0 %}
-      <a href="{% url 'PDI' %}">2024</a>
-   {% else %}
-      <a>2024</a>
-   {% endif %}
-   </p>
-
- <br>
-<br>
-<p> 
-   <a>MBO para avaliador</a>
-   <a href="{% url 'homeA' %}">2022</a>
-   {% if MBO23TIME > 0 %}
-      <a href="{% url 'homeA' %}">2023</a>
-   {% else %}
-      <a>2023</a>
-   {% endif %}
-   {% if MBO24TIME > 0 %}
-      <a href="{% url 'homeA' %}">2024</a>
-   {% else %}
-      <a>2024</a>
-   {% endif %}
-  </p>
-  <p> 
-   <a>avaliação de competencia para avaliador</a>
-    <a href="{% url 'homeB' %}">2022</a>
-    {% if ADC23TIME > 0 %}
-       <a href="{% url 'homeB' %}">2023</a>
-    {% else %}
-       <a>2023</a>
-    {% endif %}
-    {% if ADC24TIME > 0 %}
-       <a href="{% url 'homeB' %}">2024</a>
-    {% else %}
-       <a>2024</a>
-    {% endif %}
-   <p> 
-      <a>PDI (Plano de Devenvolvimento Individual) para avaliador</a>
-       <a href="{% url 'homeC' %}">2022</a>
-      {% if ADC23TIME > 0 %}
-         <a href="{% url 'homeC' %}">2023</a>
-      {% else %}
-         <a>2023</a>
-      {% endif %}
-      {% if ADC24TIME > 0 %}
-         <a href="{% url 'homeC' %}">2024</a>
-      {% else %}
-         <a>2024</a>
-      {% endif %}
-    </p>
-   </form>
-{% endif %}
-<br>
-<br>
-{% if user.username == "hyuma.nozaki@cosmotec.com.br" %}
-<p>
-   <a href="{% url 'RH' %}">sala RH</a>
-</p>
+   você não tem acesso
 {% endif %}
 
-</body>
 </html>

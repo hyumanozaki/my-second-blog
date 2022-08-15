@@ -2,30 +2,28 @@
 {% load static %}
 <html lang="ja" dir="ltr">
 <head>
-<meta charset="utf-8">
-<title></title>
-<link rel="stylesheet" href="{% static 'css/blog.css' %}">
-
-
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+         
 </head>
 <body>
-<h1>Inpute Endereço de seu email e senha e clique login</h1>
-
-<div class="reg">
-  <form method="post" action="{% url 'Login' %}">
+  <img src="static/cosmo.jpg" class="logo"> <div class="first">bem vindo para sistema de RH<br>Inpute Endereço de seu email e senha e clique login</div>
+  <div class="reg">
+    <form method="post" action="{% url 'Login' %}">
     {% csrf_token %}
+      <br><br>
   
-    <table class="reg_form">
-    <tr>
-    <td><label for="userid">Endereço de seu email:</label></td>
-    <td><input type="text" name="userid"></td>
-    <td><label for="password">senha：</label></td>
-    <td><input type="password" name="password"></td>
-    </tr>
-    </table>
-  
-    <input type="submit" class="btn" value="Login">
-  </form>
-</div>
+      <table class="reg_form">
+      <tr>
+        <td><label for="userid">Endereço de seu email:</label></td>
+        <td><input type="text" name="userid"></td>
+        <td><label for="password">senha：</label></td>
+        <td><input type="password" name="password"></td>
+      </tr>
+      </table>
+      <input type="submit" class="btn" value="Login">
+    </form>
+  </div>
 </body>
 </html>

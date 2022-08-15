@@ -7,62 +7,26 @@
 
 </head>
 <body>
- <h1><font color="red">sala RH</font></h1>
- <h5><td><a href="{% url 'home' %}">volta para home</a></td></h5>
+   <h1><font color="red">sala RH</font></h1>
+   <h5><td><a href="{% url 'home' %}">volta para home</a></td></h5>
 
- <p> 
- Employee Status<a href="{% url 'ES' %}"> 2022</a> 2023<a> 2024</a>
- </p>
-
- <p> 
- MBO all employee<a href="{% url 'MBO22RH' %}"> 2022</a><a> 2023</a><a> 2024</a>
- </p>
-
- <p> 
- Avaliação de Competencia all employee <a href="{% url 'ADC22RHA' %}"> 2022</a><a> 2023</a><a> 2024</a>
- </p>
-
- <p> 
- Plano de Desenvolvimento Individual all employee <a href="{% url 'PDI22RH' %}"> 2022</a><a> 2023</a><a> 2024</a> 
- </p>
- <p> 
- MBO deadline control  <a href="{% url 'MBO22DL' %}"> 2022</a><a> 2023</a><a> 2024</a>
- </p>
-
- <p> 
- Avaliação de Competencia e Plano de Desenvolvimento Individual deadline control  <a href="{% url 'ADC22DL' %}"> 2022</a><a> 2023</a><a> 2024</a>
- </p>
-
- <p> 
-  Avaliação de Competencia estatistica <a href="{% url 'ADC22ESTA' %}"> 2022</a><a> 2023</a><a> 2024</a>
- </p>
- <p> 
-   <a href="{% url 'upload' %}"> Upload usuarios</a>
- </p>
- <p> 
-    <a href="{% url 'upMBO' %}"> Upload MBO</a>
- </p>
- <p> 
-    <a href="{% url 'upADC' %}"> Upload ADC</a>
- </p>
- <p> 
-    <a href="{% url 'upPDI' %}"> Upload PDI</a>
- </p>
- <p> 
-    <a href="{% url 'upCE' %}"> Upload CE</a>
- </p>
- <p> 
-    <a href="{% url 'listMBO' %}"> listar MBO</a>
- </p>
- <p> 
-    <a href="{% url 'listADC' %}"> listar ADC</a>
- </p>
- <p> 
-    <a href="{% url 'listPDI' %}"> listar PDI</a>
- </p>
-
-
-
-
+   <p>Employee Status<a href="{% url 'ES' %}"> 2022</a> 2023<a> 2024</a></p>
+   <p>MBO all employee<a href="{% url 'MBO22RH' %}"> 2022</a><a> 2023</a><a> 2024</a></p>
+   <p>Avaliação de Competencia all employee <a href="{% url 'ADC22RHA' %}"> 2022</a><a> 2023</a><a> 2024</a></p>
+   <p>Plano de Desenvolvimento Individual all employee <a href="{% url 'PDI22RH' %}"> 2022</a><a> 2023</a><a> 2024</a></p>
+   <p>MBO deadline control  <a href="{% url 'MBO22DL' %}"> 2022</a><a> 2023</a><a> 2024</a></p>
+   <p>Avaliação de Competencia e Plano de Desenvolvimento Individual deadline control  <a href="{% url 'ADC22DL' %}"> 2022</a><a> 2023</a><a> 2024</a></p>
+   <p>Avaliação de Competencia estatistica <a href="{% url 'ADC22ESTA' %}"> 2022</a><a> 2023</a><a> 2024</a></p>
+   {% if user.username == "hyuma.nozaki@cosmotec.com.br" %}
+      <p><a href="{% url 'upload' %}"> Upload usuarios</a></p>
+      <p><a href="{% url 'upMBO' %}"> Upload MBO</a></p>
+      <p><a href="{% url 'upADC' %}"> Upload ADC</a></p>
+      <p><a href="{% url 'upPDI' %}"> Upload PDI</a></p>
+      <p><a href="{% url 'upCE' %}"> Upload CE</a></p>
+      <p><a href="{% url 'listAE' %}"> listar all employee</a></p>
+      <p><a href="{% url 'listMBO' %}"> listar MBO</a></p>
+      <p><a href="{% url 'listADC' %}"> listar ADC</a></p>
+      <p><a href="{% url 'listPDI' %}"> listar PDI</a></p>
+   {% endif %}
 </body>
 </html>

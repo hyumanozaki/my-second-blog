@@ -12,18 +12,20 @@
     <h5><td><a href="{% url 'RH' %}">volta para sala RH</a></td></h5>
 
     {% csrf_token %}
-<table border="1">
-    <tr>
+<table border="1" cellspacing="0">
+    <tr style="background-color: #F0F8FF">
         <td><font size="1"> </font></td>
         <td style="width: 250px;"><font size="1">competencia</font></td>
+        <td style="width: 70px;"><font size="1">auto avaliação</font></td>
+        <td style="width: 70px;"><font size="1">avaliação por avaliador</font></td>
         <td style="width: 400px;"><font size="1">ponto a desenvolver</font></td>
         <td style="width: 400px;"><font size="1">Plano de Desenvolvimento Individual</font></td>
     </tr>
     {% for i in time %}
         {% if i == '#' %}
-        <tr><td  style="height:1px;"><font size="1"> </font></td>
+            <tr><td  style="height:1px;"><font size="1"> </font></td>
         {% else %}
-        <td><font size="1">{{i}}</font></td>
+            <td><font size="1">{{i}}</font></td>
         {% endif %}
     {% endfor %}
 </table>

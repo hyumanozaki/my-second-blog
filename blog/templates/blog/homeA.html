@@ -1,19 +1,45 @@
 {% load static %}
 <html lang="ja" dir="ltr">
 <head>
-<meta charset="utf-8">
-<title></title>
-<link rel="stylesheet" href="{% static 'css/blog.css' %}">
-
+   <meta charset="utf-8">
+   <title></title>
+   <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
-<body>
- <h1><font color="red">{{ UserID }}</font> colaboradores do seu equipe </h1>
-
-<p> 
-   {% for item in C1 %}
-      <td><a href="{% url 'Logout2' name=item %}">{{item}}</a></td><br>
+<body class="content">  
+   {% csrf_token %}
+   <p class="medium"><font color="blue">{{UserID}}</font>, MBO de colaboradores do seu equipe</p>
+   <p> 
+      {% for item in C1 %}
+         <td><a href="{% url 'Logout2' name=item %}">{{item}}</a></td><br>
+      {% endfor %}        
+   </p>
+   <br>
+   <u><font color="red">Quem ainda não terminou sessão atual {{session}}</font></u><br>
+   {% for check in CC %}
+      <font color="red">{{check}}</font><br>
    {% endfor %}
-</p>
-<h5><td><a href="{% url 'home' %}">volta para home</a></td></h5>
+   <h5><td><a href="{% url 'home' %}">volta para home</a></td></h5>
+
+<h3><u>one page report para gestor</u></h3>
+
+<table border="1" cellspacing="0">
+   <tr style="background-color: #F0F8FF">
+       <td><font size="1"> </font></td>
+       <td style="width: 250px;"><font size="1">meta</font></td>
+       <td><font size="1">peso%</font></td>
+       <td style="width: 250px;"><font size="1">primeiro alinhamento</font></td>
+       <td style="width: 250px;"><font size="1">segundo alinhamento</font></td>
+       <td style="width: 250px;"><font size="1">avaliação</font></td>
+       <td><font size="1">pontuação</font></td>
+   </tr>
+   {% for i in time %}
+       {% if i == '#' %}
+         <tr><td  style="height:1px;"><font size="1"> </font></td>
+       {% else %}
+         <td><font size="1">{{i}}</font></td>
+       {% endif %}
+   {% endfor %}
+</table>
+
 </body>
 </html>

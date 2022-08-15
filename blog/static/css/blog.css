@@ -1,3 +1,52 @@
+.first {
+    margin-top: 20;
+    margin-left: 100px;
+    padding: 20px 20px 20px 40px;
+    height: 50px;
+    font-size: 20px;
+}
+.logo {
+    position : absolute;
+    height : 100px;
+    width : 100px;
+    margin-left: 40px;
+    top : 2%;
+}
+
+.button {
+    font-size: 10pt;
+    position : absolute;
+    right: 120pt;
+}
+
+.button4 {
+    font-size: 10pt;
+    position : absolute;
+    right: 200pt;
+}
+
+.button2 {
+    font-size: 10pt;
+    position : absolute;
+    right: 300pt;
+}
+
+.button3 {
+    font-size: 10pt;
+}
+
+.box {
+    padding: 10px;
+    border: double; 5px; solid #333;
+    background : #F0F8FF;
+    width: 60px;
+    height: 15px;
+    display: grid;
+    place-items:center;
+    margin-right:20px; 
+    font-size: 12px;
+}
+
 .page-header {
     background-color: #C25100;
     margin-top: 0;
@@ -12,6 +61,7 @@
 
 .content {
     margin-left: 40px;
+    font-size: 15px;
 }
 
 h1, h2, h3, h4 {
@@ -49,4 +99,125 @@ h1, h2, h3, h4 {
     resize:none;
     width:10000px;
     height:100px;
+}
+
+
+.tooltip2{
+    color: #0007FF;
+    font-size: 10px;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+.tooltip2 p{
+    margin:0;
+    padding:0;
+}
+.description2 {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    font-size: 12px;
+    line-height: 1.6em;
+    color: #fff;
+    border-radius: 5px;
+    background: #000;
+    width: 1100px;
+    margin-left: 50px;
+}
+.description2:before {
+    content: "";
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    border: 15px solid transparent;
+    border-top: 15px solid #000;
+    margin-left: -15px;
+    transform: rotateZ(180deg);
+}
+.tooltip2:hover .description2{
+    display: inline-block;
+    top: 0px;
+    left: 80px;
+}
+
+
+
+
+.tooltip3{
+    color: #0007FF;
+    font-size: 10px;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+.tooltip3 p{
+    margin:0;
+    padding:0;
+}
+.description3 {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    font-size: 12px;
+    line-height: 1.6em;
+    color: #fff;
+    border-radius: 5px;
+    background: #000;
+    width: 1100px;
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+.description3:before {
+    content: "";
+    position: absolute;
+    top: 0%;
+    right: 95%;
+    border: 15px solid transparent;
+    border-top: 15px solid #000;
+    margin-left: -15px;
+}
+.tooltip3:hover .description3{
+    display: inline-block;
+    bottom: -120px;
+    left: 80px;
+}
+
+
+
+.tooltip4{
+    color: #0007FF;
+    font-size: 10px;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+.tooltip4 p{
+    margin:0;
+    padding:0;
+}
+.description4 {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    font-size: 12px;
+    line-height: 1.6em;
+    color: #fff;
+    border-radius: 5px;
+    background: #000;
+    margin-left: 0px;
+}
+.description4:before {
+    content: "";
+    position: absolute;
+    top: 0%;
+    right: -20%;
+    border: 15px solid transparent;
+    margin-left: 0px;
+    transform: rotateZ(180deg);
+}
+.tooltip4:hover .description4{
+    display: inline-block;
+    top: 0px;
+    left: 20px;
 }

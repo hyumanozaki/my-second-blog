@@ -13,8 +13,8 @@
 
 
 {% csrf_token %}
-<table border="1">
-    <tr>
+<table border="1" cellspacing="0">
+    <tr style="background-color: #F0F8FF">
         <td><font size="1"> </font></td>
         <td><font size="1">colaborador</font></td>
         <td><font size="1">departamento</font></td>
@@ -35,7 +35,11 @@
         {% if i == '#' %}
         <tr><td  style="height:1px;"><font size="1"> </font></td>
         {% else %}
-        <td><font size="1">{{i}}</font></td>
+            {% if i == "não" %}
+                <td><font size="1" color="red">{{i}}</font></td>
+            {% else %}
+                <td><font size="1">{{i}}</font></td>
+            {% endif %}
         {% endif %}
     {% endfor %}
 </table>

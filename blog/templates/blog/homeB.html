@@ -1,19 +1,43 @@
 {% load static %}
 <html lang="ja" dir="ltr">
 <head>
-<meta charset="utf-8">
-<title></title>
-<link rel="stylesheet" href="{% static 'css/blog.css' %}">
-
+   <meta charset="utf-8">
+   <title></title>
+   <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
-<body>
- <h1><font color="red">{{ UserID }}</font> colaboradores do seu equipe </h1>
-
-<p> 
+<body class="content">
+   {% csrf_token %}
+   <p class="medium"><font color="blue">{{UserID}}</font>, avaliação de competencia de colaboradores do seu equipe</p>
+   <p>  
    {% for item in C1 %}
       <td><a href="{% url 'ADC2' name=item %}">{{item}}</a></td><br>
    {% endfor %}
-</p>
-<h5><td><a href="{% url 'home' %}">volta para home</a></td></h5>
+   <br>
+   <font color="red">
+   <u>quem ainda não terminou avaliação de competencia</u><br>
+   {% for check in CC %}
+      {{check}}<br>
+   {% endfor %}
+   </font>
+   </p>
+   <h5><td><a href="{% url 'home' %}">volta para home</a></td></h5>
+   <h3><u>One Page Report para Gestor</u></h3>
+   <table border="1" cellspacing="0">
+      <tr style="background-color: #F0F8FF">
+         <td><font size="1"> </font></td>
+         <td style="width: 250px;"><font size="1">competencia</font></td>
+         <td><font size="1">auto avaliação</font></td>
+         <td><font size="1">avaliador</font></td>
+         <td style="width: 350px;"><font size="1">observação por colaborador</font></td>
+         <td style="width: 350px;"><font size="1">observação por avaliador</font></td>
+      </tr>
+      {% for i in time %}
+         {% if i == '#' %}
+            <tr><td  style="height:1px;"><font size="1"> </font></td>
+         {% else %}
+            <td><font size="1">{{i}}</font></td>
+         {% endif %}
+      {% endfor %}
+   </table>
 </body>
 </html>

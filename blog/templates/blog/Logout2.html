@@ -5,118 +5,124 @@
 <title></title>
 <link rel="stylesheet" 
 href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
-    <body class="container">  
-        <p class="small">MBO2022 de <font color="blue">{{avaliado}}</font> </p>
+    <body class="content">  
+    {% if reject == 0 %}
+        <p class="medium">MBO2022 de <font color="blue">{{avaliado}}</font></p>
         <form action="{% url 'Logout2' name=avaliado %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <table border="1" >
-            <tr>
-                <td></td>
-                <td style="width: 270px;"><font size="1">descrição de meta</font></td>
+        <table border="1" cellspacing="0">
+            <tr style="background-color: #F0F8FF">
+                <td style="width: 290px;"><font size="1">meta</font></td>
                 <td><font size="1">peso%</font></td>
-                <td style="width: 270px;"><font size="1">primeiro alinhamento</font></td>
-                <td style="width: 270px;"><font size="1">segundo alinhamento</font></td>
-                <td style="width: 270px;"><font size="1">avaliação</font></td>
+                <td style="width: 290px;"><font size="1">primeiro alinhamento</font></td>
+                <td style="width: 290px;"><font size="1">segundo alinhamento</font></td>
+                <td style="width: 290px;"><font size="1">avaliação de fim do ano</font></td>
                 <td><font size="1">pontuação</font></td>
             </tr>
             <tr>
-                <td><font size="1">meta 1</font></td>
                 <td style="height: 60px;"><font size="1">{{ data1.0 }}</font></td>
                 <td><font size="1">{{ data2.0 }}</font></td>
                 <td><font size="1">{{ data3.0 }}</font></td>
                 <td><font size="1">{{ data4.0 }}</font></td>
                 <td><font size="1">{{ data5.0 }}</font></td>
-                <td><font size="1">{{ data6.0 }}</font></td>
+                <td><font size="1">{% if data2.0 != 0 %}{% if disp == 1 %}{{ data6.0 }}{% endif %}{% endif %}</font></td>
             </tr>
             <tr>
-                <td><font size="1">meta 2</font></td>
                 <td><font size="1">{{ data1.1 }}</font></td>
-                <td style="height: 60px;"><font size="1">{{ data2.1 }}</font></td>
-                <td><font size="1">{{ data3.1 }}</font></td>
+                <td><font size="1">{% if data2.1 != 0 %}{{ data2.1 }}{% endif %}</font></td>
+                <td style="height: 60px;"><font size="1">{{ data3.1 }}</font></td>
                 <td><font size="1">{{ data4.1 }}</font></td>
                 <td><font size="1">{{ data5.1 }}</font></td>
-                <td><font size="1">{{ data6.1 }}</font></td>
+                <td><font size="1">{% if data2.1 != 0 %}{% if disp == 1 %}{{ data6.1 }}{% endif %}{% endif %}</font></td>
             </tr>
             <tr>
-                <td><font size="1">meta 3</font></td>
                 <td><font size="1">{{ data1.2 }}</font></td>
-                <td><font size="1">{{ data2.2 }}</font></td>
+                <td><font size="1">{% if data2.2 != 0 %}{{ data2.2 }}{% endif %}</font></td>
                 <td style="height: 60px;"><font size="1">{{ data3.2 }}</font></td>
                 <td><font size="1">{{ data4.2 }}</font></td>
                 <td><font size="1">{{ data5.2 }}</font></td>
-                <td><font size="1">{{ data6.2 }}</font></td>
+                <td><font size="1">{% if data2.2 != 0 %}{% if disp == 1 %}{{ data6.2 }}{% endif %}{% endif %}</font></td>
             </tr>
             <tr>
-                <td><font size="1">meta 4</font></td>
                 <td><font size="1">{{ data1.3 }}</font></td>
-                <td><font size="1">{{ data2.3 }}</font></td>
+                <td><font size="1">{% if data2.3 != 0 %}{{ data2.3 }}{% endif %}</font></td>
                 <td><font size="1">{{ data3.3 }}</font></td>
                 <td style="height: 60px;"><font size="1">{{ data4.3 }}</font></td>
                 <td><font size="1">{{ data5.3 }}</font></td>
-                <td><font size="1">{{ data6.3 }}</font></td>
+                <td><font size="1">{% if data2.3 != 0 %}{% if disp == 1 %}{{ data6.3 }}{% endif %}{% endif %}</font></td>
             </tr>
             <tr>
-                <td><font size="1">meta 5</font></td>
                 <td><font size="1">{{ data1.4 }}</font></td>
-                <td><font size="1">{{ data2.4 }}</font></td>
+                <td><font size="1">{% if data2.4 != 0 %}{{ data2.4 }}{% endif %}</font></td>
                 <td><font size="1">{{ data3.4 }}</font></td>
                 <td><font size="1">{{ data4.4 }}</font></td>
                 <td style="height: 60px;"><font size="1">{{ data5.4 }}</font></td>
-                <td><font size="1">{{ data6.4 }}</font></td>
+                <td><font size="1">{% if data2.4 != 0 %}{% if disp == 1 %}{{ data6.4 }}{% endif %}{% endif %}</font></td>
             </tr>
             <tr>
-                <td><font size="1">meta 6</font></td>
                 <td><font size="1">{{ data1.5 }}</font></td>
-                <td><font size="1">{{ data2.5 }}</font></td>
+                <td><font size="1">{% if data2.5 != 0 %}{{ data2.5 }}{% endif %}</font></td>
                 <td><font size="1">{{ data3.5 }}</font></td>
                 <td><font size="1">{{ data4.5 }}</font></td>
-                <td><font size="1">{{ data5.5 }}</font></td>
-                <td style="height: 60px;"><font size="1">{{ data6.5 }}</font></td>
+                <td style="height: 60px;"><font size="1">{{ data5.5 }}</font></td>
+                <td><font size="1">{% if data2.5 != 0 %}{% if disp == 1 %}{{ data6.5 }}{% endif %}{% endif %}</font></td>
             </tr>
             <tr>
-                <td><font size="1">meta 7</font></td>
                 <td><font size="1">{{ data1.6 }}</font></td>
-                <td><font size="1">{{ data2.6 }}</font></td>
+                <td><font size="1">{% if data2.6 != 0 %}{{ data2.6 }}{% endif %}</font></td>
                 <td><font size="1">{{ data3.6 }}</font></td>
                 <td><font size="1">{{ data4.6 }}</font></td>
-                <td><font size="1">{{ data5.6 }}</font></td>
-                <td style="height: 60px;"><font size="1">{{ data6.6 }}</font></td>
+                <td style="height: 60px;"><font size="1">{{ data5.6 }}</font></td>
+                <td><font size="1">{% if data2.6 != 0 %}{% if disp == 1 %}{{ data6.6 }}{% endif %}{% endif %}</font></td>
             </tr>
         </table>
         {% if time == 1 %}
-        <p class="small"><font color="red">{{UserID}}</font>, cheque meta e peso% e aprove ou peça ele/ela para corrigir se tiver algo errado</p>
-        <label><input type = "checkbox" name= "office" value = "aprovar">aprovar</label>
-        <label><input type = "checkbox" name= "office" value = "pede corrigir">pede corrigir</label>
-        <input type="submit" value="selecione aprovar ou pede corrigir e clique aqui">
-        {{order}}
+            <tr class="medium"><font color="red">{{UserID}}</font>, cheque meta e peso% e aprove ou peça ele/ela para corrigir se tiver algo errado</tr>
+            <br><tr><th><td>
+                <input type="submit" value="baixar" name="DL" class="button2">
+                <input type="submit" value="aprovar" name="send" class="button">
+                <input type="submit" value="pede corrigir" name="deny" class="button4">
+            </td></th></tr>   
         {% endif %}
         {% if time == 2 %}
-        <p class="small"><font color="red">{{UserID}}</font>, cheque primeiro alinhamento e aprove ou peça ele/ela para corrigir se tiver algo errado</p>
-        <label><input type = "checkbox" name= "office" value = "aprovar">aprovar</label>
-        <label><input type = "checkbox" name= "office" value = "pede corrigir">pede corrigir</label>
-        <input type="submit" value="selecione aprovar ou pede corrigir e clique aqui">
+            <tr class="medium"><font color="red">{{UserID}}</font>, cheque primeiro alinhamento e aprove ou peça ele/ela para corrigir se tiver algo errado</tr>
+            <br><tr><th><td>
+                <input type="submit" value="baixar" name="DL" class="button2">
+                <input type="submit" value="aprovar" name="send" class="button">
+                <input type="submit" value="pede corrigir" name="deny" class="button4">
+            </td></th></tr>   
         {% endif %}
         {% if time == 3 %}
-        <p class="small"><font color="red">{{UserID}}</font>, cheque segundo alinhamento e aprove ou peça ele/ela para corrigir se tiver algo errado</p>
-        <label><input type = "checkbox" name= "office" value = "aprovar">aprovar</label>
-        <label><input type = "checkbox" name= "office" value = "pede corrigir">pede corrigir</label>
-        <input type="submit" value="selecione aprovar ou pede corrigir e clique aqui">
+            <tr class="medium"><font color="red">{{UserID}}</font>, cheque segundo alinhamento e aprove ou peça ele/ela para corrigir se tiver algo errado</tr>
+            <br><tr><th><td>
+                <input type="submit" value="baixar" name="DL" class="button2">
+                <input type="submit" value="aprovar" name="send" class="button">
+                <input type="submit" value="pede corrigir" name="deny" class="button4">
+            </td></th></tr>   
         {% endif %}
         {% if time == 4 %}
-        <p class="small"><font color="red">{{UserID}}</font>, cheque avaliação e pontuação e aprove ou peça ele/ela para corrigir se tiver algo errado</p>
-        <label><input type = "checkbox" name= "office" value = "aprovar">aprovar</label>
-        <label><input type = "checkbox" name= "office" value = "pede corrigir">pede corrigir</label>
-        <input type="submit" value="selecione aprovar ou pede corrigir e clique aqui">
+            <tr class="medium"><font color="red">{{UserID}}</font>, cheque avaliação e pontuação e aprove ou peça ele/ela para corrigir se tiver algo errado</tr>
+            <br><tr><th><td>
+                <input type="submit" value="baixar" name="DL" class="button2">
+                <input type="submit" value="aprovar" name="send" class="button">
+                <input type="submit" value="pede corrigir" name="deny" class="button4">
+            </td></th></tr>   
         {% endif %}
         {% if time == 10 %}
-        <p class="small">já foi aprovado</p>
+            <tr class="small">já foi aprovado</tr>
+            <br><tr><th><td>
+                <input type="submit" value="baixar" name="DL" class="button2">
+            </td></th></tr>   
         {% endif %}
         {% if time == 0 %}
-        <p class="small">espere atê que <font color="blue">{{avaliado}}</font> submete, assim que subemter RH te avisa por e-mail</p>
+            <p class="medium"><font color="red">{{UserID}}</font>, espere atê que <font color="blue">{{avaliado}}</font> submete, assim que subemter RH te avisa por e-mail</p>
         {% endif %}
         </form>
         <br><td><a href="{% url 'home' %}"><font size="2">volta para home</font></a></td>
+    {% else %}
+        você não tem acesso
+    {% endif %}
     </body>
 </html>
