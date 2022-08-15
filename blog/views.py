@@ -1499,8 +1499,8 @@ def Logout(request):
                 subject += " submeteru MBO, entre o sistema e aprove ou peça corrigir"
                 message = request.user.username
                 message += " submeteru MBO, entre o sistema e aprove ou peça corrigir"
-#                from_email = 'hyuma2331@gmail.com'  # 送信
-                from_email = 'sistema.rh@cosmotec.com.br'  # 送信
+                from_email = 'hyuma2331@gmail.com'  # 送信
+#                from_email = 'sistema.rh@cosmotec.com.br'  # 送信
                 recipient_list = [request.user.email]  # 宛先リスト
                 send_mail(subject, message, from_email, recipient_list)
                 return render(request, "blog/Logout.html", context=params)
@@ -2532,31 +2532,31 @@ def editPDI(request, num):
     Glist+=ADC22.objects.values_list('ADC22G7C').get(user=request.user),
     Glist+=ADC22.objects.values_list('ADC22G7A').get(user=request.user),
 
-    G1C=[]
-    G2C=[]
-    G3C=[]
-    G1A=[]
-    G2A=[]
-    G3A=[]
+    G1C=['']
+    G2C=['']
+    G3C=['']
+    G1A=['']
+    G2A=['']
+    G3A=['']
 
-    E1C=[]
-    E2C=[]
-    E1A=[]
-    E2A=[]
+    E1C=['']
+    E2C=['']
+    E1A=['']
+    E2A=['']
 
     for i in range(7):
         j=i*3
         k=j+1
         l=k+1
         if (PDI22.objects.values_list('PDI22G1C').get(user=request.user)==Glist[j]):
-            G1C+=Glist[k]
-            G1A+=Glist[l]
+            G1C=Glist[k]
+            G1A=Glist[l]
         if (PDI22.objects.values_list('PDI22G2C').get(user=request.user)==Glist[j]):
-            G2C+=Glist[k]
-            G2A+=Glist[l]
+            G2C=Glist[k]
+            G2A=Glist[l]
         if (PDI22.objects.values_list('PDI22G3C').get(user=request.user)==Glist[j]):
-            G3C+=Glist[k]
-            G3A+=Glist[l]
+            G3C=Glist[k]
+            G3A=Glist[l]
 
     E1C+=ADC22.objects.values_list('ADC22E1C').get(user=request.user)
     E1A+=ADC22.objects.values_list('ADC22E1A').get(user=request.user)
